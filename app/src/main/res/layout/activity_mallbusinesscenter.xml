@@ -129,7 +129,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_un_pay" />
 
                     <TextView
@@ -186,7 +186,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -205,7 +205,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_03" />
 
                     <TextView
@@ -262,7 +262,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -281,7 +281,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_04" />
 
                     <TextView
@@ -331,7 +331,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -350,7 +350,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_05" />
 
                     <TextView
@@ -400,7 +400,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -419,7 +419,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_06" />
 
                     <TextView
@@ -469,7 +469,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -488,7 +488,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_07" />
 
                     <TextView
@@ -538,7 +538,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -557,7 +557,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_08" />
 
                     <TextView
@@ -578,7 +578,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -597,7 +597,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_09" />
 
                     <TextView
@@ -618,7 +618,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -637,7 +637,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_10" />
 
                     <TextView
@@ -658,7 +658,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
@@ -677,7 +677,7 @@
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_mall_11" />
 
                     <TextView
@@ -713,7 +713,7 @@
                         android:layout_height="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="15dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:src="@mipmap/ic_right_01" />
 
                 </LinearLayout>
