@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.base.BaseActivity;
 import com.zskjprojectj.andoubusinessside.base.BasePresenter;
@@ -37,7 +35,7 @@ public class MainActivity extends BaseActivity {
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jumpActivity(MallbusinesscenterActivity.class);
+                jumpActivity(MallBusinessCenterActivity.class);
             }
         });
         two.setOnClickListener(new View.OnClickListener() {

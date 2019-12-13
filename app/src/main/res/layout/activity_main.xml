@@ -9,16 +9,19 @@
    <Button
        android:id="@+id/btn_one"
        android:text="商城商家"
+       android:layout_weight="1"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_two"
         android:text="酒店商家"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_three"
         android:text="饭店商家"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
