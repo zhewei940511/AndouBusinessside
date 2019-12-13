@@ -1,6 +1,7 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -85,6 +86,9 @@ public class MallBusinessCenterActivity extends BaseActivity {
     @Override
     protected void initViews() {
         progressBar = findViewById(R.id.progressBar);
+        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        findViewById(R.id.unpayOrderListEntryBtn).setOnClickListener(view ->
+                startActivity(new Intent(this, OrderListActivity.class)));
         ScrollView scrollView = findViewById(R.id.scrollView);
         View actionBarBackground = findViewById(R.id.customActionBarBackground);
         final ViewTreeObserver.OnScrollChangedListener onScrollChangedListener = ()
