@@ -13,14 +13,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.willy.ratingbar.ScaleRatingBar;
-import com.zskjprojectj.andoubusinessside.MallBusinessCenterInfo;
+import com.zskjprojectj.andoubusinessside.model.MallBusinessCenterInfo;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.base.BaseActivity;
 import com.zskjprojectj.andoubusinessside.base.BasePresenter;
+import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 
-import java.text.DecimalFormat;
-
-import butterknife.BindView;
+import static com.zskjprojectj.andoubusinessside.activity.OrderListActivity.KEY_ORDER_TYPE;
 
 /**
  * 商城商家中心
@@ -76,8 +75,7 @@ public class MallBusinessCenterActivity extends BaseActivity {
         ((TextView) findViewById(R.id.sendedCount)).setText(info.getSendedCount() + "");
         ((TextView) findViewById(R.id.refundCount)).setText(info.getRefundCount() + "");
         ((TextView) findViewById(R.id.goodsCount)).setText(info.getGoodsCount() + "");
-        DecimalFormat df = new DecimalFormat("#0.00 ");
-        ((TextView) findViewById(R.id.accountCount)).setText(df.format(info.getAccountCount()) + "");
+        ((TextView) findViewById(R.id.accountCount)).setText(FormatUtil.getMoneyString(info.getAccountCount()));
         findViewById(R.id.vipImg).setVisibility(info.isVip() ? View.VISIBLE : View.GONE);
         progressBar.setVisibility(View.GONE);
     }
@@ -87,8 +85,11 @@ public class MallBusinessCenterActivity extends BaseActivity {
     protected void initViews() {
         progressBar = findViewById(R.id.progressBar);
         findViewById(R.id.backBtn).setOnClickListener(view -> finish());
-        findViewById(R.id.unpayOrderListEntryBtn).setOnClickListener(view ->
-                startActivity(new Intent(this, OrderListActivity.class)));
+        findViewById(R.id.unpayOrderListEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            intent.putExtra(KEY_ORDER_TYPE, 1);
+            startActivity(intent);
+        });
         ScrollView scrollView = findViewById(R.id.scrollView);
         View actionBarBackground = findViewById(R.id.customActionBarBackground);
         final ViewTreeObserver.OnScrollChangedListener onScrollChangedListener = ()

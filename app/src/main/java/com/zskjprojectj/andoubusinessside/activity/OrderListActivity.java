@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class OrderListActivity extends AppCompatActivity {
 
+    public static final String KEY_ORDER_TYPE = "KEY_ORDER_TYPE";
     private ArrayList<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -68,5 +69,6 @@ public class OrderListActivity extends AppCompatActivity {
 
             }
         });
+        tabLayout.setCurrentTab(getIntent().getIntExtra(KEY_ORDER_TYPE, 0));
     }
 }

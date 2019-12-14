@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside;
+package com.zskjprojectj.andoubusinessside.model;
 
 public class MallBusinessCenterInfo {
     private String avatar;
