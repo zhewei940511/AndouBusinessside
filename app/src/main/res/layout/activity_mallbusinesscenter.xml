@@ -31,6 +31,7 @@
                 android:src="@mipmap/temp1" />
 
             <LinearLayout
+                android:id="@+id/shopInfoContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/avatar"
@@ -92,6 +93,16 @@
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@id/shopInfoContainer"
+                android:layout_alignEnd="@id/shopInfoContainer"
+                android:layout_alignBottom="@id/shopInfoContainer"
+                android:padding="15dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_setting_01" />
 
             <com.willy.ratingbar.ScaleRatingBar
                 android:id="@+id/ratingBar"
@@ -550,6 +561,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/manageShopEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -590,6 +602,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/chartEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"

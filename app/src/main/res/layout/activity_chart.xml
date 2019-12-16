@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical"
+    tools:context=".activity.ChartActivity">
+
+    <include layout="@layout/layout_action_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:layout_weight="1"
+            android:background="@drawable/sp_select_01"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019年"
+                android:textColor="#ff646464"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_down_01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/sp_select_01"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9月"
+                android:textColor="#ff646464"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_down_01" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="76dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sp_chart_01"
+                    android:orientation="vertical"
+                    android:paddingStart="20dp"
+                    android:paddingTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总订单"
+                        android:textColor="#ffa0a0a0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/orderTotalTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="0"
+                        android:textColor="#ff5ed3ae"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="76dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sp_chart_01"
+                    android:orientation="vertical"
+                    android:paddingStart="20dp"
+                    android:paddingTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订单总额（元）"
+                        android:textColor="#ffa0a0a0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/saleTotalTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="89542"
+                        android:textColor="#fff97889"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="30dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="25dp">
+
+                <TextView
+                    android:id="@+id/orderChartTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单量统计"
+                    android:textColor="#ff565656"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/value5Container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/value5"
+                            android:layout_width="18dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end|bottom"
+                            android:textColor="#ffa0a0a0"
+                            android:textSize="10sp"
+                            tools:text="100" />
+
+                        <TextView
+                            android:id="@+id/value4"
+                            android:layout_width="18dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end|bottom"
+                            android:textColor="#ffa0a0a0"
+                            android:textSize="10sp"
+                            tools:text="80" />
+
+                        <TextView
+                            android:id="@+id/value3"
+                            android:layout_width="18dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end|bottom"
+                            android:textColor="#ffa0a0a0"
+                            android:textSize="10sp"
+                            tools:text="60" />
+
+                        <TextView
+                            android:id="@+id/value2"
+                            android:layout_width="18dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end|bottom"
+                            android:textColor="#ffa0a0a0"
+                            android:textSize="10sp"
+                            tools:text="40" />
+
+                        <TextView
+                            android:id="@+id/value1"
+                            android:layout_width="18dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end|bottom"
+                            android:textColor="#ffa0a0a0"
+                            android:textSize="10sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:id="@+id/value0"
+                            android:layout_width="18dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end|bottom"
+                            android:textColor="#ffa0a0a0"
+                            android:textSize="10sp"
+                            tools:text="0" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="210dp"
+                        android:background="#fff0f0f0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="192dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="#fff0f0f0" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+
+                            android:layout_marginTop="38dp"
+                            android:background="#fff0f0f0" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+
+                            android:layout_marginTop="38dp"
+                            android:background="#fff0f0f0" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+
+                            android:layout_marginTop="38dp"
+                            android:background="#fff0f0f0" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+
+                            android:layout_marginTop="38dp"
+                            android:background="#fff0f0f0" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_marginTop="38dp"
+                            android:background="#fff0f0f0" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="80dp"
+                                android:layout_marginBottom="11dp"
+                                android:background="@drawable/sp_chart_bar" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="09-01"
+                                android:textColor="#ffa0a0a0"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

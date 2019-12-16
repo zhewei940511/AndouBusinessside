@@ -8,39 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.OrderListActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-        <View
-            android:id="@+id/customActionBarBackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#5ED3AE" />
-
-        <FrameLayout
-            android:id="@+id/backBtn"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:paddingStart="15dp">
-
-            <ImageView
-                android:layout_width="8.5dp"
-                android:layout_height="15dp"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_back_01" />
-        </FrameLayout>
-
-
-        <TextView
-            android:id="@+id/titleTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="全部订单"
-            android:textColor="#ffffffff"
-            android:textSize="14sp" />
-    </FrameLayout>
+    <include layout="@layout/layout_action_bar" />
 
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tabLayout"

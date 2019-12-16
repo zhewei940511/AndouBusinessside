@@ -1,6 +1,8 @@
 package com.zskjprojectj.andoubusinessside.model;
 
-public class OrderInfo {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     private String num;
     private String state;
     private String icon;
@@ -9,6 +11,13 @@ public class OrderInfo {
     private float price;
     private int count;
     private float total;
+    private Long date;
+    private String receiver;
+    private String mobile;
+    private String addr;
+    private float score;
+    private float freight;
+
 
     public String getNum() {
         return num;
@@ -72,5 +81,53 @@ public class OrderInfo {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
+    }
+
+    public float getFreight() {
+        return freight;
+    }
+
+    public void setFreight(float freight) {
+        this.freight = freight;
     }
 }

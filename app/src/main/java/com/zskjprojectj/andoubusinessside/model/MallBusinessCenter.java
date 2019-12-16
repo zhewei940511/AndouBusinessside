@@ -1,6 +1,6 @@
 package com.zskjprojectj.andoubusinessside.model;
 
-public class MallBusinessCenterInfo {
+public class MallBusinessCenter {
     private String avatar;
     private String name;
     private int rate;

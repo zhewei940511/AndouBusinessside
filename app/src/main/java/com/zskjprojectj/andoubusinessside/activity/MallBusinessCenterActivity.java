@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.willy.ratingbar.ScaleRatingBar;
-import com.zskjprojectj.andoubusinessside.model.MallBusinessCenterInfo;
+import com.zskjprojectj.andoubusinessside.model.MallBusinessCenter;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.base.BaseActivity;
 import com.zskjprojectj.andoubusinessside.base.BasePresenter;
@@ -26,7 +26,7 @@ import static com.zskjprojectj.andoubusinessside.activity.OrderListActivity.KEY_
  */
 public class MallBusinessCenterActivity extends BaseActivity {
 
-    private MallBusinessCenterInfo info;
+    private MallBusinessCenter info;
     private View progressBar;
 
 
@@ -37,7 +37,7 @@ public class MallBusinessCenterActivity extends BaseActivity {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        info = new MallBusinessCenterInfo();
+        info = new MallBusinessCenter();
         info.setAvatar("http://img4.imgtn.bdimg.com/it/u=2843285098,2906023234&fm=26&gp=0.jpg");
         info.setName("淘淘的淘宝店");
         info.setAccountCount(789.44F);
@@ -57,7 +57,7 @@ public class MallBusinessCenterActivity extends BaseActivity {
         }, 1500);
     }
 
-    private void bindView(MallBusinessCenterInfo info) {
+    private void bindView(MallBusinessCenter info) {
         Glide.with(mAt)
                 .load(info.getAvatar())
                 .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
@@ -88,6 +88,14 @@ public class MallBusinessCenterActivity extends BaseActivity {
         findViewById(R.id.unpayOrderListEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, OrderListActivity.class);
             intent.putExtra(KEY_ORDER_TYPE, 1);
+            startActivity(intent);
+        });
+        findViewById(R.id.manageShopEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, ManageShopActivity.class);
+            startActivity(intent);
+        });
+         findViewById(R.id.chartEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, ChartActivity.class);
             startActivity(intent);
         });
         ScrollView scrollView = findViewById(R.id.scrollView);

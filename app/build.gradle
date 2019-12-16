@@ -89,4 +89,7 @@ dependencies {
     //RatingBar
     implementation 'com.github.ome450901:SimpleRatingBar:1.4.3'
 
+    //chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }
