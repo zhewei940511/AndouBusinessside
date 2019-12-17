@@ -24,7 +24,7 @@ import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import java.util.Random;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER_INFO;
+import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
 public class EditPriceActivity extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ public class EditPriceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_price);
         ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("修改价格");
         findViewById(R.id.backBtn).setOnClickListener(view -> finish());
-        Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER_INFO);
+        Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
         ((TextView) findViewById(R.id.titleTxt)).setText(info.getTitle());
         ((TextView) findViewById(R.id.countTxt)).setText(info.getCount() + "");
         ((TextView) findViewById(R.id.priceTxt)).setText(FormatUtil.getMoneyString(info.getPrice()));

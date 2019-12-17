@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    tools:context=".activity.ManageGoodsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <View
+                android:id="@+id/customActionBarBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#5ED3AE" />
+
+            <FrameLayout
+                android:id="@+id/backBtn"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:paddingStart="15dp">
+
+                <ImageView
+                    android:layout_width="8.5dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_back_01" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/actionBarTitleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="商品管理"
+                android:textColor="#ffffffff"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/goodsCategoryEntryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:text="商品分类"
+                android:textColor="#ffffffff"
+                android:textSize="14sp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/sl_check_box" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/takeOffBtn"
+                android:layout_width="60dp"
+                android:layout_height="28dp"
+                android:background="@drawable/sp_goods_detail"
+                android:gravity="center"
+                android:text="下架"
+                android:textColor="#ff5ed3ae"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/discontinueBtn"
+                android:layout_width="60dp"
+                android:layout_height="28dp"
+                android:background="@drawable/sp_goods_detail"
+                android:gravity="center"
+                android:text="上架"
+                android:textColor="#ff5ed3ae"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/deleteBtn"
+                android:layout_width="75dp"
+                android:layout_height="28dp"
+                android:background="@drawable/sp_goods_detail"
+                android:gravity="center"
+                android:text="删除商品"
+                android:textColor="#ff5ed3ae"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/newGoodsBtn"
+                android:layout_width="90dp"
+                android:layout_height="28dp"
+                android:background="@drawable/sp_btn_02"
+                android:gravity="center"
+                android:text="上传新商品"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:alpha="0.5"
+        android:background="#5ED3AE"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
+</RelativeLayout>

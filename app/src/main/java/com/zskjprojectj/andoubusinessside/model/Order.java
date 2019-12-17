@@ -1,6 +1,7 @@
 package com.zskjprojectj.andoubusinessside.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Order implements Serializable {
     private String num;
@@ -17,7 +18,60 @@ public class Order implements Serializable {
     private String addr;
     private float score;
     private float freight;
+    private String reviewName;
+    private String reviewAvatar;
+    private long reviewDate;
+    private float reviewRate;
+    private String reviewContent;
+    private ArrayList<String> reviewPics;
 
+    public String getReviewName() {
+        return reviewName;
+    }
+
+    public void setReviewName(String reviewName) {
+        this.reviewName = reviewName;
+    }
+
+    public String getReviewAvatar() {
+        return reviewAvatar;
+    }
+
+    public void setReviewAvatar(String reviewAvatar) {
+        this.reviewAvatar = reviewAvatar;
+    }
+
+    public long getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(long reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+
+    public float getReviewRate() {
+        return reviewRate;
+    }
+
+    public void setReviewRate(float reviewRate) {
+        this.reviewRate = reviewRate;
+    }
+
+    public String getReviewContent() {
+        return reviewContent;
+    }
+
+    public void setReviewContent(String reviewContent) {
+        this.reviewContent = reviewContent;
+    }
+
+    public ArrayList<String> getReviewPics() {
+        return reviewPics;
+    }
+
+    public void setReviewPics(ArrayList<String> reviewPics) {
+        this.reviewPics = reviewPics;
+    }
 
     public String getNum() {
         return num;

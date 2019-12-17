@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginTop="15dp">
+
+    <RelativeLayout
+        android:layout_width="108dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/categoryNameTxt"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/sp_bg_goods_category"
+                android:gravity="center"
+                android:lines="1"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="#ff646464"
+                android:textSize="12sp"
+                tools:text="商品分类商品分类商品分类" />
+
+            <TextView
+                android:id="@+id/newCategoryBtn"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/sp_bg_goods_category_02"
+                android:gravity="center"
+                android:text="新增分类"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/deleteBtn"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/ic_delete_01" />
+    </RelativeLayout>
+</FrameLayout>

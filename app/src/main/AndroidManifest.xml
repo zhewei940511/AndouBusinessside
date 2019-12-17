@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ReviewDetailActivity"></activity>
+        <activity android:name=".activity.NewGoodsActivity"></activity>
+        <activity android:name=".activity.GoodsCategoryActivity" />
+        <activity android:name=".activity.ManageGoodsActivity" />
+        <activity android:name=".activity.CashOutActivity" />
+        <activity android:name=".activity.WalletActivity" />
+        <activity android:name=".activity.RefundActivity" />
+        <activity android:name=".activity.RefundOrderListActivity" />
+        <activity android:name=".activity.SendActivity" />
+        <activity android:name=".activity.ReviewDetailActivity" />
         <activity android:name=".activity.ChartActivity" />
         <activity android:name=".activity.ManageShopActivity" />
         <activity android:name=".activity.EditPriceSuccessActivity" />

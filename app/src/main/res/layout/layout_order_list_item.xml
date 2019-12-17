@@ -185,16 +185,35 @@
             android:layout_marginTop="10dp"
             android:background="#F2F2F2" />
 
-        <TextView
-            android:id="@+id/orderInfoControlEntryBtn"
-            android:layout_width="76dp"
-            android:layout_height="26dp"
-            android:layout_gravity="end"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/sp_goods_detail"
-            android:gravity="center"
-            android:text="查看详情"
-            android:textColor="#ff61c29c"
-            android:textSize="11sp" />
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/orderInfoEntryBtn"
+                android:layout_width="76dp"
+                android:layout_height="26dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/sp_goods_detail02"
+                android:gravity="center"
+                android:text="订单详情"
+                android:textColor="#979797"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/orderInfoControlBtn"
+                android:layout_width="76dp"
+                android:layout_height="26dp"
+                android:layout_gravity="end"
+                android:background="@drawable/sp_goods_detail"
+                android:gravity="center"
+                android:text="查看详情"
+                android:textColor="#ff61c29c"
+                android:textSize="11sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

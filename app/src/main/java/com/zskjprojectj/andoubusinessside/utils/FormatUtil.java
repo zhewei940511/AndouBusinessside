@@ -15,4 +15,9 @@ public class FormatUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return format.format(mills);
     }
+
+    public static String getDateString2(long mills) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        return format.format(mills);
+    }
 }

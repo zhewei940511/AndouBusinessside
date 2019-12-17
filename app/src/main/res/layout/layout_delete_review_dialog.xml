@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:background="@drawable/sp_bg_dialog_01"
+    android:minHeight="210dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/sp_bg_dialog_02">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="确定删除此条评论"
+            android:textColor="#ff323232"
+            android:textSize="14sp" />
+
+        <FrameLayout
+            android:id="@+id/closeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_close_01" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/reviewContentTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:minHeight="120dp"
+            android:padding="15dp"
+            android:textColor="#ff999999"
+            android:textSize="12sp"
+            tools:text="商家物流很快，包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好包装也特别好，产品质量很好" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/sp_bg_dialog_03">
+
+        <TextView
+            android:id="@+id/cancelBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#ff5ed3ae"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#E6E6E6" />
+
+        <TextView
+            android:id="@+id/confirmBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="确定删除"
+            android:textColor="#ff5ed3ae"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

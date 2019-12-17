@@ -90,12 +90,39 @@ public class MallBusinessCenterActivity extends BaseActivity {
             intent.putExtra(KEY_ORDER_TYPE, 1);
             startActivity(intent);
         });
+        findViewById(R.id.unsendOrderEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            intent.putExtra(KEY_ORDER_TYPE, 2);
+            startActivity(intent);
+        });
+        findViewById(R.id.sendedOrderEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            intent.putExtra(KEY_ORDER_TYPE, 3);
+            startActivity(intent);
+        });
+        findViewById(R.id.finishOrderEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            intent.putExtra(KEY_ORDER_TYPE, 4);
+            startActivity(intent);
+        });
+        findViewById(R.id.refundEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, RefundOrderListActivity.class);
+            startActivity(intent);
+        });
         findViewById(R.id.manageShopEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, ManageShopActivity.class);
             startActivity(intent);
         });
-         findViewById(R.id.chartEntryBtn).setOnClickListener(view -> {
+        findViewById(R.id.chartEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, ChartActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.walletEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, WalletActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.manageGoodsEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, ManageGoodsActivity.class);
             startActivity(intent);
         });
         ScrollView scrollView = findViewById(R.id.scrollView);

@@ -285,6 +285,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/sendedOrderEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -354,6 +355,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/finishOrderEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -423,6 +425,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/refundEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -492,6 +495,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/manageGoodsEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -683,6 +687,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/walletEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -776,6 +781,7 @@
                     android:background="#D5D5D5" />
 
                 <LinearLayout
+                    android:id="@+id/unsendOrderEntryBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
