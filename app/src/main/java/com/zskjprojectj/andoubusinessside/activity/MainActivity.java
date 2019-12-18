@@ -1,19 +1,22 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.base.BaseActivity;
 import com.zskjprojectj.andoubusinessside.base.BasePresenter;
+import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.utils.UserUtil;
+
+import static com.zskjprojectj.andoubusinessside.activity.UserCenterActivity.KEY_USER;
 
 /**
  * 主页
  */
 public class MainActivity extends BaseActivity {
 
-    private Button one,two,three;
+
     @Override
     protected void setRootView() {
         setContentView(R.layout.activity_main);
@@ -26,29 +29,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        //商城商家
-        one=findViewById(R.id.btn_one);
-        //酒店商家
-        two=findViewById(R.id.btn_two);
-        //商城商家
-        three=findViewById(R.id.btn_three);
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                jumpActivity(MallBusinessCenterActivity.class);
-            }
+        UserUtil.user = new User();
+        findViewById(R.id.mallEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
+            UserUtil.user.setType(0);
+            intent.putExtra(KEY_USER, UserUtil.user);
+            startActivity(intent);
         });
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        findViewById(R.id.hotelEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
+            UserUtil.user.setType(1);
+            intent.putExtra(KEY_USER, UserUtil.user);
+            startActivity(intent);
         });
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        findViewById(R.id.restaurantEntryBtn).setOnClickListener(view -> {
 
-            }
         });
     }
 

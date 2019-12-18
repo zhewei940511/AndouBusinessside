@@ -12,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.NewGoodsActivity"></activity>
+        <activity android:name=".activity.FinishHotelOrderListActivity"></activity>
+        <activity android:name=".activity.CancelOrderListActivity" />
+        <activity android:name=".activity.NewRoomActivity" />
+        <activity android:name=".activity.HotelOrderDetailActivity" />
+        <activity android:name=".activity.UnCheckInOrderListActivity" />
+        <activity android:name=".activity.NoticeDetailActivity" />
+        <activity android:name=".activity.NoticeListActivity" />
+        <activity android:name=".activity.FindPasswordActivityActivity" />
+        <activity android:name=".activity.NewGoodsActivity" />
         <activity android:name=".activity.GoodsCategoryActivity" />
         <activity android:name=".activity.ManageGoodsActivity" />
         <activity android:name=".activity.CashOutActivity" />
@@ -42,7 +50,7 @@
             android:name="design_height_in_dp"
             android:value="667" />
 
-        <activity android:name=".activity.MallBusinessCenterActivity" />
+        <activity android:name=".activity.UserCenterActivity" />
     </application>
 
 </manifest>

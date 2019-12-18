@@ -200,12 +200,13 @@
                 android:background="@drawable/sp_goods_detail02"
                 android:gravity="center"
                 android:text="订单详情"
+                tools:visibility="visible"
                 android:textColor="#979797"
                 android:textSize="11sp"
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/orderInfoControlBtn"
+                android:id="@+id/controlBtn"
                 android:layout_width="76dp"
                 android:layout_height="26dp"
                 android:layout_gravity="end"

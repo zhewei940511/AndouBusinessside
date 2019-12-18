@@ -526,7 +526,7 @@
                             tools:text="60" />
 
                         <TextView
-                            android:id="@+id/value2"
+                            android:id="@+id/savevalue2"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_marginBottom="20dp"

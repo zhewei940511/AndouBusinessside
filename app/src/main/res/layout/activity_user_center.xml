@@ -131,12 +131,54 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/scanBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="45dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_scan_01" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="扫一扫 "
+                        android:textColor="#ff686868"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_right_01" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:id="@+id/unpayOrderListEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="45dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="15dp">
+                    android:paddingStart="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <ImageView
                         android:layout_width="19dp"
@@ -209,10 +251,13 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/unsendOrderEntryBtn2"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="15dp">
+                    android:paddingStart="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <ImageView
                         android:layout_width="19dp"
@@ -279,29 +324,26 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="#EFEFEF" />
-
                 <LinearLayout
-                    android:id="@+id/sendedOrderEntryBtn"
+                    android:id="@+id/unUseOrderEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="15dp">
+                    android:paddingStart="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <ImageView
                         android:layout_width="19dp"
                         android:layout_height="18dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/ic_mall_04" />
+                        android:src="@mipmap/ic_mall_03" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="已发货"
+                        android:text="待入住订单"
                         android:textColor="#ff686868"
                         android:textSize="12sp" />
 
@@ -313,7 +355,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="今日发货"
+                        android:text="待使用订单"
                         android:textColor="#ff686868"
                         android:textSize="12sp" />
 
@@ -325,7 +367,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/sendedCount"
+                        android:id="@+id/unUserCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -355,6 +397,84 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/sendedOrderEntryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="15dp">
+
+                        <ImageView
+                            android:layout_width="19dp"
+                            android:layout_height="18dp"
+                            android:scaleType="centerInside"
+                            android:src="@mipmap/ic_mall_04" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:text="已发货订单"
+                            android:textColor="#ff686868"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="今日发货"
+                            android:textColor="#ff686868"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="（"
+                            android:textColor="#F54029"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/sendedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#F54029"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="）"
+                            android:textColor="#F54029"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="12dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:scaleType="centerInside"
+                            android:src="@mipmap/ic_right_01" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#EFEFEF" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/finishOrderEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
@@ -371,7 +491,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="已完成"
+                        android:text="已完成订单"
                         android:textColor="#ff686868"
                         android:textSize="12sp" />
 
@@ -429,7 +549,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
-                    android:paddingStart="15dp">
+                    android:paddingStart="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <ImageView
                         android:layout_width="19dp"
@@ -459,6 +581,73 @@
 
                     <TextView
                         android:id="@+id/refundCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#F54029"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="）"
+                        android:textColor="#F54029"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="单"
+                        android:textColor="#ff686868"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_right_01" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cancelOrderEntryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="18dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_mall_06" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="已取消订单"
+                        android:textColor="#ff686868"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="（"
+                        android:textColor="#F54029"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cancelCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -647,6 +836,7 @@
                     android:background="#EFEFEF" />
 
                 <LinearLayout
+                    android:id="@+id/noticeListEntryBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:gravity="center_vertical"
@@ -752,6 +942,7 @@
                 android:gravity="center_vertical">
 
                 <LinearLayout
+                    android:id="@+id/todayOrderEntryBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -783,34 +974,85 @@
                 <LinearLayout
                     android:id="@+id/unsendOrderEntryBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
-                    <TextView
-                        android:id="@+id/unsendCount1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="#5ED3AE"
-                        android:textSize="15sp" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="待发货"
-                        android:textColor="#969696"
-                        android:textSize="13sp" />
+                        <TextView
+                            android:id="@+id/unsendCount1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#5ED3AE"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="待发货"
+                            android:textColor="#969696"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="40dp"
+                        android:background="#D5D5D5" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="40dp"
-                    android:background="#D5D5D5" />
+                <LinearLayout
+                    android:id="@+id/todayFinishEntryBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/todayFinishCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#5ED3AE"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="今日完成"
+                            android:textColor="#969696"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="40dp"
+                        android:background="#D5D5D5" />
+                </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/finishOrderEntryBtn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -877,11 +1119,12 @@
 
 
         <TextView
+            android:id="@+id/actionBarTitleTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="商城商家中心"
             android:textColor="#ffffffff"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="商城商家中心" />
     </FrameLayout>
 </RelativeLayout>

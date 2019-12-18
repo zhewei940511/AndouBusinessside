@@ -15,6 +15,7 @@ import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.model.Goods;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
+import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -45,8 +46,13 @@ public class ManageGoodsActivity extends AppCompatActivity {
                 .setOnClickListener(view ->
                         startActivity(new Intent(ManageGoodsActivity.this, GoodsCategoryActivity.class)));
         findViewById(R.id.newGoodsBtn)
-                .setOnClickListener(view ->
-                        startActivity(new Intent(ManageGoodsActivity.this, NewGoodsActivity.class)));
+                .setOnClickListener(view -> {
+                    if (UserUtil.user.getType() == 0) {
+                        startActivity(new Intent(ManageGoodsActivity.this, NewGoodsActivity.class));
+                    } else if (UserUtil.user.getType() == 1) {
+                        startActivity(new Intent(ManageGoodsActivity.this, NewRoomActivity.class));
+                    }
+                });
     }
 
     class GoodsAdapter extends BaseQuickAdapter<Goods, BaseViewHolder> {

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/titleTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="#ff3f3f3f"
+            android:textSize="14sp"
+            tools:text="通知信息标题文字通知信息标题通知信息标题文字通知信息标题通知信息标题文字通知信息标题通知信息标题文字通知信息标题" />
+
+        <TextView
+            android:id="@+id/uncheckedImg"
+            android:layout_width="40dp"
+            android:layout_height="18dp"
+            android:background="@drawable/sp_bg_unchecked_img"
+            android:gravity="center"
+            android:text="未读"
+            android:textColor="#ffffffff"
+            android:textSize="10sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/checkedImg"
+            android:layout_width="40dp"
+            android:layout_height="18dp"
+            android:background="@drawable/sp_bg_unchecked_img_2"
+            android:gravity="center"
+            android:text="已读"
+            android:textColor="#898989"
+            android:textSize="10sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dateTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="#ff969696"
+        android:textSize="11sp"
+        tools:text="2019-08-26  16:47" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="20dp"
+        android:background="#F7F7F7" />
+</LinearLayout>

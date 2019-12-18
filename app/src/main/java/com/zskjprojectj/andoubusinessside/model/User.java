@@ -1,10 +1,22 @@
 package com.zskjprojectj.andoubusinessside.model;
 
-public class MallBusinessCenter {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String avatar;
     private String name;
     private int rate;
     private int todayOrderCount;
+
+    public int getTodayfinishOrderCount() {
+        return todayfinishOrderCount;
+    }
+
+    public void setTodayfinishOrderCount(int todayfinishOrderCount) {
+        this.todayfinishOrderCount = todayfinishOrderCount;
+    }
+
+    private int todayfinishOrderCount;
     private int unSendCount;
     private int finishCount;
     private int unPayCount;
@@ -14,6 +26,33 @@ public class MallBusinessCenter {
     private float accountCount;
     private String state;
     private boolean isVip;
+    private int type;
+    private int unUseCount;
+    private int cancelCount;
+
+    public int getCancelCount() {
+        return cancelCount;
+    }
+
+    public void setCancelCount(int cancelCount) {
+        this.cancelCount = cancelCount;
+    }
+
+    public int getUnUseCount() {
+        return unUseCount;
+    }
+
+    public void setUnUseCount(int unUseCount) {
+        this.unUseCount = unUseCount;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getAvatar() {
         return avatar;

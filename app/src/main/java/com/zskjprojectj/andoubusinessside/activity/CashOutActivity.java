@@ -16,6 +16,7 @@ public class CashOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash_out);
         ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("余额提现");
+        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
         View progress = findViewById(R.id.progressBar);
         findViewById(R.id.confirmBtn).setOnClickListener(view -> {
             progress.setVisibility(View.VISIBLE);

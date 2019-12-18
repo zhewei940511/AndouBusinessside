@@ -34,7 +34,7 @@ public class OrderInfoActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("订单详情");
         findViewById(R.id.backBtn).setOnClickListener(view -> finish());
         Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
-        TextView controlBtn = findViewById(R.id.orderInfoControlBtn);
+        TextView controlBtn = findViewById(R.id.controlBtn);
         TextView payWayTxt = findViewById(R.id.payWayTxt);
         if (info.getState().equals("待付款")) {
             controlBtn.setText("修改价格");

@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import com.zskjprojectj.andoubusinessside.base.BaseActivity;
 import com.zskjprojectj.andoubusinessside.base.BasePresenter;
 import com.zskjprojectj.andoubusinessside.utils.LogUtil;
 import com.zskjprojectj.andoubusinessside.utils.PhonenumUtil;
-
 
 import io.reactivex.functions.Consumer;
 
@@ -99,7 +97,6 @@ public class LoginActivity extends BaseActivity {
         tv_forgotpwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jumpActivity(ForgotpasswordActivity.class);
                 finish();
             }
         });
