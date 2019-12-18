@@ -269,63 +269,19 @@
                     android:orientation="vertical"
                     android:paddingStart="15dp">
 
+                    <include layout="@layout/layout_spec_item" />
+
                     <LinearLayout
                         android:id="@+id/specContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="规格"
-                                    android:textColor="#ff969696"
-                                    android:textSize="12sp" />
-
-                                <EditText
-                                    android:layout_width="160dp"
-                                    android:layout_height="45dp"
-                                    android:layout_marginTop="8dp"
-                                    android:background="@drawable/sp_edit_bg_01"
-                                    android:gravity="center" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="价格"
-                                    android:textColor="#ff969696"
-                                    android:textSize="12sp" />
-
-                                <EditText
-                                    android:layout_width="160dp"
-                                    android:layout_height="45dp"
-                                    android:layout_marginTop="8dp"
-                                    android:background="@drawable/sp_edit_bg_01"
-                                    android:gravity="center" />
-                            </LinearLayout>
-                        </LinearLayout>
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/saveBtn"
+                        android:id="@+id/newSpecBtn"
                         android:layout_width="160dp"
                         android:layout_height="45dp"
                         android:layout_marginTop="16dp"
@@ -336,6 +292,118 @@
                         android:textColor="#ffffffff"
                         android:textSize="12sp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FFFFFF"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="15dp"
+                        android:text="商品属性"
+                        android:textColor="#ff555555"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="（建议尺寸750*750）"
+                        android:textColor="#ff999999"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1px"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:paddingStart="15dp"
+                    android:paddingBottom="20dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/goodsIconPicRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="最多上传5张，单张图片大小不超过1M，JPG、PNG、GIF格式"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FFFFFF"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="15dp"
+                        android:text="商品详情图"
+                        android:textColor="#ff555555"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="（建议尺寸宽度750）"
+                        android:textColor="#ff999999"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1px"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:paddingStart="15dp"
+                    android:paddingBottom="20dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/goodsDetailPicRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="最多上传5张，单张图片大小不超过1M，JPG、PNG、GIF格式"
+                        android:textColor="#ff999999"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/confirmBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/sp_bg_dialog_06"
+                    android:gravity="center"
+                    android:text="上传商品"
+                    android:textColor="#ffffffff"
+                    android:textSize="12sp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
