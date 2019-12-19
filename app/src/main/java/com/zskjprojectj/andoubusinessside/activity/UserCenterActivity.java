@@ -48,7 +48,7 @@ public class UserCenterActivity extends BaseActivity {
         info.setUnSendCount(78);
         info.setUnPayCount(18);
         info.setFinishCount(63);
-        info.setGoodsCount(123);
+        info.setItemCount(123);
         info.setRate(4);
         info.setRefundCount(12);
         info.setSendedCount(123);
@@ -58,8 +58,7 @@ public class UserCenterActivity extends BaseActivity {
         info.setUnUseCount(new Random().nextInt(99));
         info.setCancelCount(new Random().nextInt(99));
         info.setVip(true);
-
-        progressBar.postDelayed(() -> bindView(info), 500);
+        bindView(info);
     }
 
     private void bindView(User user) {
@@ -74,7 +73,13 @@ public class UserCenterActivity extends BaseActivity {
         ((TextView) findViewById(R.id.finishCount2)).setText(user.getFinishCount() + "");
         ((TextView) findViewById(R.id.todayOrderCount)).setText(user.getTodayOrderCount() + "");
         ((TextView) findViewById(R.id.finishCount1)).setText(user.getFinishCount() + "");
-
+        View todayFinishEntryBtn = findViewById(R.id.todayFinishEntryBtn);
+        ((TextView) findViewById(R.id.accountCount)).setText(FormatUtil.getMoneyString(user.getAccountCount()));
+        View cancelOrderEntryBtn = findViewById(R.id.cancelOrderEntryBtn);
+        TextView itemManageTxt1 = findViewById(R.id.itemManageTxt1);
+        TextView itemManageTxt2 = findViewById(R.id.itemManageTxt2);
+        TextView cancelOrderCountTxt = findViewById(R.id.cancelCount);
+        ((TextView) findViewById(R.id.itemCount)).setText(user.getItemCount() + "");
         switch (user.getType()) {
             case 0:
                 actionBarTitleTxt.setText("商城商家中心");
@@ -126,8 +131,9 @@ public class UserCenterActivity extends BaseActivity {
                 ((TextView) findViewById(R.id.unpayCount)).setText(user.getUnPayCount() + "");
                 ((TextView) findViewById(R.id.sendedCount)).setText(user.getSendedCount() + "");
                 ((TextView) findViewById(R.id.refundCount)).setText(user.getRefundCount() + "");
-                ((TextView) findViewById(R.id.goodsCount)).setText(user.getGoodsCount() + "");
-                ((TextView) findViewById(R.id.accountCount)).setText(FormatUtil.getMoneyString(user.getAccountCount()));
+                ((TextView) findViewById(R.id.itemCount)).setText(user.getItemCount() + "");
+                itemManageTxt1.setText("商品管理");
+                itemManageTxt2.setText("当前商品");
                 break;
             case 1:
                 actionBarTitleTxt.setText("酒店商家中心");
@@ -139,7 +145,6 @@ public class UserCenterActivity extends BaseActivity {
                 findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener2);
                 findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener2);
 
-                View todayFinishEntryBtn = findViewById(R.id.todayFinishEntryBtn);
                 todayFinishEntryBtn.setVisibility(View.VISIBLE);
                 todayFinishEntryBtn.setOnClickListener(finishOrderEntryListener2);
                 ((TextView) findViewById(R.id.todayFinishCount)).setText(user.getTodayfinishOrderCount() + "");
@@ -152,12 +157,36 @@ public class UserCenterActivity extends BaseActivity {
                 unUseOrderEntryBtn.setVisibility(View.VISIBLE);
                 unUseOrderEntryBtn.setOnClickListener(view ->
                         startActivity(new Intent(UserCenterActivity.this, UnCheckInOrderListActivity.class)));
-                View cancelOrderEntryBtn = findViewById(R.id.cancelOrderEntryBtn);
                 cancelOrderEntryBtn.setVisibility(View.VISIBLE);
                 cancelOrderEntryBtn.setOnClickListener(view ->
                         startActivity(new Intent(UserCenterActivity.this, CancelOrderListActivity.class)));
                 ((TextView) findViewById(R.id.unUserCount)).setText(user.getUnSendCount() + "");
-                ((TextView) findViewById(R.id.cancelCount)).setText(user.getCancelCount() + "");
+                cancelOrderCountTxt.setText(user.getCancelCount() + "");
+                itemManageTxt1.setText("房间管理");
+                itemManageTxt2.setText("当前房间");
+                break;
+            case 2:
+                actionBarTitleTxt.setText("饭店商家中心");
+                ((TextView) findViewById(R.id.todayOrderTxt)).setText("今日预约");
+                todayFinishEntryBtn.setVisibility(View.VISIBLE);
+                todayFinishEntryBtn.setOnClickListener(view ->
+                        startActivity(new Intent(UserCenterActivity.this, DishOrderListActivityActivity.class)));
+                findViewById(R.id.dateOrderEntryBtn).setVisibility(View.VISIBLE);
+                ((TextView) findViewById(R.id.dateOrderCount)).setText(user.getDateOrderCount() + "");
+                cancelOrderEntryBtn.setVisibility(View.VISIBLE);
+                itemManageTxt1.setText("菜品管理");
+                itemManageTxt2.setText("当前菜品");
+                cancelOrderCountTxt.setText(user.getCancelCount() + "");
+                cancelOrderEntryBtn.setOnClickListener(view ->
+                        startActivity(new Intent(UserCenterActivity.this, DishOrderListActivityActivity.class)));
+                View.OnClickListener finishOrderEntryListener3 = view -> {
+                    Intent intent = new Intent(this, DishOrderListActivityActivity.class);
+                    startActivity(intent);
+                };
+                findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener3);
+                findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener3);
+                findViewById(R.id.dateOrderEntryBtn).setOnClickListener(finishOrderEntryListener3);
+
                 break;
         }
         progressBar.setVisibility(View.GONE);

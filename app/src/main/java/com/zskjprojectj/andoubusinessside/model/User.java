@@ -29,6 +29,15 @@ public class User implements Serializable {
     private int type;
     private int unUseCount;
     private int cancelCount;
+    private int dateOrderCount;
+
+    public int getDateOrderCount() {
+        return dateOrderCount;
+    }
+
+    public void setDateOrderCount(int dateOrderCount) {
+        this.dateOrderCount = dateOrderCount;
+    }
 
     public int getCancelCount() {
         return cancelCount;
@@ -126,11 +135,11 @@ public class User implements Serializable {
         this.refundCount = refundCount;
     }
 
-    public int getGoodsCount() {
+    public int getItemCount() {
         return goodsCount;
     }
 
-    public void setGoodsCount(int goodsCount) {
+    public void setItemCount(int goodsCount) {
         this.goodsCount = goodsCount;
     }
 

@@ -51,6 +51,8 @@ public class ManageGoodsActivity extends AppCompatActivity {
                         startActivity(new Intent(ManageGoodsActivity.this, NewGoodsActivity.class));
                     } else if (UserUtil.user.getType() == 1) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewRoomActivity.class));
+                    } else if (UserUtil.user.getType() == 2) {
+                        startActivity(new Intent(ManageGoodsActivity.this, NewDishActivity.class));
                     }
                 });
     }

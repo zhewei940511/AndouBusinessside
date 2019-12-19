@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.FinishHotelOrderListActivity"></activity>
+        <activity android:name=".activity.DateOrderDetailActivity"></activity>
+        <activity android:name=".activity.DishOrderListActivityActivity" />
+        <activity android:name=".activity.NewDishActivity" />
+        <activity android:name=".activity.FinishHotelOrderListActivity" />
         <activity android:name=".activity.CancelOrderListActivity" />
         <activity android:name=".activity.NewRoomActivity" />
         <activity android:name=".activity.HotelOrderDetailActivity" />

@@ -43,7 +43,10 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         });
         findViewById(R.id.restaurantEntryBtn).setOnClickListener(view -> {
-
+            Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
+            UserUtil.user.setType(2);
+            intent.putExtra(KEY_USER, UserUtil.user);
+            startActivity(intent);
         });
     }
 
