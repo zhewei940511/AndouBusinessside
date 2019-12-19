@@ -51,6 +51,7 @@ public class OrderFragment extends BaseFragment {
                             startActivityForResult(intent, 666);
                             break;
                         case 4:
+                        case 10:
                             intent = new Intent(getActivity(), ReviewDetailActivity.class);
                             intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
                             startActivity(intent);
