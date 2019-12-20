@@ -92,4 +92,7 @@ dependencies {
     //chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //utils
+    implementation 'com.blankj:utilcodex:1.26.0'
+
 }

@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.base.BaseActivity;
-import com.zskjprojectj.andoubusinessside.base.BasePresenter;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
@@ -16,19 +15,9 @@ import static com.zskjprojectj.andoubusinessside.activity.UserCenterActivity.KEY
  */
 public class MainActivity extends BaseActivity {
 
-
     @Override
-    protected void setRootView() {
-        setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    protected void initData(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected void initViews() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         UserUtil.user = new User();
         findViewById(R.id.mallEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
@@ -51,12 +40,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void getDataFromServer() {
+    protected void doCreate(Bundle savedInstanceState) {
 
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected int getContentView() {
+        return R.layout.activity_main;
     }
 }

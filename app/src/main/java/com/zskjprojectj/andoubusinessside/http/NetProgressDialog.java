@@ -27,7 +27,7 @@ public class NetProgressDialog extends Dialog {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_load_view, null);
         setContentView(view, params);
-        textview_message = view.findViewById(R.id.textview_message);
+//        textview_message = view.findViewById(R.id.textview_message);
         Window win = getWindow();
         WindowManager.LayoutParams layoutParams = win.getAttributes();
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
