@@ -3,6 +3,24 @@ package com.zskjprojectj.andoubusinessside.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public int getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(int goodsCount) {
+        this.goodsCount = goodsCount;
+    }
+
     private String avatar;
     private String name;
     private int rate;

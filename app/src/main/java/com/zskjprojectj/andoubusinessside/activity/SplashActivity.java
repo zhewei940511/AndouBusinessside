@@ -1,18 +1,25 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
-import android.graphics.drawable.Animatable;
 import android.os.Bundle;
-import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
 public class SplashActivity extends BaseActivity {
 
     @Override
-    protected void doCreate(Bundle savedInstanceState) {
-        ImageView mIvLoading = findViewById(R.id.loading_process_dialog_progressBar);
-        ((Animatable)mIvLoading.getDrawable()).start();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        contentView.postDelayed(() -> {
+            if (UserUtil.getInstance().isLogin()) {
+                ActivityUtils.startActivity(MainActivity.class);
+            } else {
+                ActivityUtils.startActivity(LoginActivity.class);
+            }
+            finish();
+        }, 1000);
     }
 
     @Override

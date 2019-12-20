@@ -47,11 +47,11 @@ public class ManageGoodsActivity extends AppCompatActivity {
                         startActivity(new Intent(ManageGoodsActivity.this, GoodsCategoryActivity.class)));
         findViewById(R.id.newGoodsBtn)
                 .setOnClickListener(view -> {
-                    if (UserUtil.user.getType() == 0) {
+                    if (UserUtil.getInstance().user.getType() == 0) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewGoodsActivity.class));
-                    } else if (UserUtil.user.getType() == 1) {
+                    } else if (UserUtil.getInstance().user.getType() == 1) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewRoomActivity.class));
-                    } else if (UserUtil.user.getType() == 2) {
+                    } else if (UserUtil.getInstance().user.getType() == 2) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewDishActivity.class));
                     }
                 });

@@ -1,19 +1,14 @@
 package com.zskjprojectj.andoubusinessside.http;
 
 
-
-
-
-
 import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ApiService {
     /**
-//     * 查询
-//     */
+     * //     * 查询
+     * //
+     */
 //    @FormUrlEncoded
 //    @POST("cook/query")
 //    Observable<BaseResult <TestBean.ResultBean>> getinfo(@Field("key") String key, @Field("menu") String menu);
@@ -152,6 +147,6 @@ public interface ApiService {
 //    @FormUrlEncoded
 //    @POST("/pfminfo")
 //    Observable<BaseResult<PlatformBean>> getPlatformData(@Field("page") int page, @Field("pid") String id);
-
-
+    @POST("/andou/public/index.php/api/index/index")
+    Observable<BaseResult<Object>> test();
 }

@@ -1,7 +1,6 @@
 package com.zskjprojectj.andoubusinessside.http;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
@@ -27,16 +26,11 @@ public class ProgressDialogHandler extends Handler {
 
     private void initProgressDialog() {
         try {
-            if (pd == null ) {
+            if (pd == null) {
                 pd = new NetProgressDialog(context.get());
                 pd.setCancelable(cancelable);
                 if (cancelable) {
-                    pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialogInterface) {
-                            mProgressCancelListener.onCancelProgress();
-                        }
-                    });
+                    pd.setOnCancelListener(dialogInterface -> mProgressCancelListener.onCancelProgress());
                 }
                 if (!pd.isShowing()) {
                     pd.show();

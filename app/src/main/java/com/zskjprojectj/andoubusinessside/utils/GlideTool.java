@@ -50,7 +50,7 @@ public class GlideTool {
      * @param y
      */
     public static void glideThumbnail(Context context, String uri, ImageView view, int x, int y) {
-        glideBuilder(context, uri, true, R.mipmap.ic_ad_1, R.mipmap.ic_ad_1, NONE, NONE, null).into(view);
+        glideBuilder(context, uri, true, R.mipmap.ic_launcher, R.mipmap.ic_launcher, NONE, NONE, null).into(view);
     }
 
     /**
@@ -84,7 +84,7 @@ public class GlideTool {
     }
 
     public static void glideNoCrop(Context context, String uri, ImageView view, RequestListener<Drawable> listener) {
-        glideBuilder(context, uri, false, NONE, R.mipmap.icon_baidu, NONE, NONE, null, listener).into(view);
+        glideBuilder(context, uri, false, NONE, R.mipmap.ic_launcher, NONE, NONE, null, listener).into(view);
     }
 
     public static void glideNoCropNoDis(Context context, String uri, ImageView view) {

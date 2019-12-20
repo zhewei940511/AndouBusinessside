@@ -2,24 +2,26 @@ package com.zskjprojectj.andoubusinessside.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.activity.EditPriceActivity;
+import com.zskjprojectj.andoubusinessside.activity.HotelOrderDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity;
 import com.zskjprojectj.andoubusinessside.activity.RefundActivity;
 import com.zskjprojectj.andoubusinessside.activity.ReviewDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.SendActivity;
-import com.zskjprojectj.andoubusinessside.activity.HotelOrderDetailActivity;
 import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
-import com.zskjprojectj.andoubusinessside.base.BaseFragment;
+import com.zskjprojectj.andoubusinessside.app.BaseFragment;
 import com.zskjprojectj.andoubusinessside.model.Order;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+
+import butterknife.BindView;
 
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
@@ -27,14 +29,18 @@ public class OrderFragment extends BaseFragment {
     private int state;
     private OrderListAdapter adapter;
 
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
+
     public OrderFragment(int state) {
         this.state = state;
         adapter = new OrderListAdapter(state, R.layout.layout_order_list_item);
     }
 
     @Override
-    protected void initViews(View view, Bundle savedInstanceState) {
-        adapter.bindToRecyclerView(view.findViewById(R.id.recyclerview));
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        adapter.bindToRecyclerView(view.findViewById(R.id.recyclerView));
         adapter.setOnItemChildClickListener((adapter, view1, position) -> {
             Intent intent;
             switch (view1.getId()) {
@@ -87,6 +93,37 @@ public class OrderFragment extends BaseFragment {
                     break;
             }
         });
+        refreshLayout.setEnableLoadMore(true);
+        refreshLayout.setEnableLoadMoreWhenContentNotFull(true);
+        refreshLayout.autoLoadMore();
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
+            ArrayList<Order> orderInfos = new ArrayList<>();
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            adapter.setNewData(orderInfos);
+            refreshLayout.finishRefresh();
+        });
+        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            ArrayList<Order> orderInfos = new ArrayList<>();
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            orderInfos.add(getOrder(state));
+            adapter.addData(orderInfos);
+            refreshLayout.finishLoadMore();
+        });
     }
 
     @Override
@@ -94,31 +131,6 @@ public class OrderFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         //TODO 修改价格刷新列表项
         //TODO 发货刷新列表项
-    }
-
-    @Override
-    protected int getContentViewRes() {
-        return R.layout.fragment_order_list;
-    }
-
-    @Override
-    protected void getDataFromServer() {
-
-    }
-
-    @Override
-    protected void initData() {
-        ArrayList<Order> orderInfos = new ArrayList<>();
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        orderInfos.add(getOrder(state));
-        adapter.setNewData(orderInfos);
     }
 
     public static Order getOrder(int state) {
@@ -167,5 +179,10 @@ public class OrderFragment extends BaseFragment {
         info.setScore(new Random().nextFloat());
         info.setFreight(new Random().nextFloat());
         return info;
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_order_list;
     }
 }

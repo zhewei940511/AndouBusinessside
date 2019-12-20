@@ -11,7 +11,7 @@ android {
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         //  buildConfigField "String", "API_HOST", "\"http://lv.qingheliying.cn\""//API Host
         // buildConfigField "String", "API_HOST", "\"http://apis.juhe.cn/cook/\""
-        buildConfigField "String", "API_HOST", "\"http://apis.juhe.cn/\""
+        buildConfigField "String", "API_HOST", "\"http://192.168.0.110/\""
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -48,8 +48,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation "com.jakewharton:butterknife:10.0.0"
-    androidTestImplementation 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     implementation "com.alibaba:fastjson:1.2.54"
     implementation "com.squareup.okhttp3:okhttp:3.11.0"
@@ -95,4 +95,6 @@ dependencies {
     //utils
     implementation 'com.blankj:utilcodex:1.26.0'
 
+    //下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
 }

@@ -1,46 +1,60 @@
 package com.zskjprojectj.andoubusinessside.http;
 
-import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 
 import io.reactivex.disposables.Disposable;
 
 public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> implements ProgressCancelListener {
-    private static final String TAG = "BaseObserver";
-    private ProgressDialogHandler mProgressDialogHandler;
-    private Activity context;
+    private BaseActivity activity;
     private Disposable d;
     private BaseResult<T> mData;
+    private boolean showLoading;
+    private ViewGroup contentView;
+    private View progressBarContainer;
 
-    public BaseObserver(Activity aty) {
+    public BaseObserver(BaseActivity aty) {
         this(aty, true);
     }
 
-    public BaseObserver(Activity activity, boolean showLoading) {
-        this.context = activity;
-        if (showLoading && context != null && !context.isDestroyed()) {
-            this.mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
-        }
+    public BaseObserver(BaseActivity activity, boolean showLoading) {
+        this.activity = activity;
+        this.showLoading = showLoading;
+        this.contentView = activity.findViewById(R.id.contentView);
     }
 
-
     private void showProgressDialog() {
-        if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+        setupProgressBar();
+        ImageView progressBar = activity.findViewById(R.id.progressBar);
+        ((AnimationDrawable) progressBar.getDrawable()).start();
+    }
+
+    private void setupProgressBar() {
+        progressBarContainer = activity.findViewById(R.id.progressBarContainer);
+        if (progressBarContainer == null) {
+            progressBarContainer = LayoutInflater.from(activity).inflate(R.layout.layout_progress_bar, null);
+            contentView.addView(progressBarContainer);
         }
+        progressBarContainer.setOnClickListener(view -> {
+        });
     }
 
     private void dismissProgressDialog() {
-        if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG)
-                    .sendToTarget();
-            mProgressDialogHandler = null;
-        }
+        contentView.removeView(progressBarContainer);
     }
 
     @Override
     public void onSubscribe(Disposable d) {
         this.d = d;
-        showProgressDialog();
+        if (showLoading) {
+            showProgressDialog();
+        }
         onStart();
     }
 
@@ -53,10 +67,9 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
 //            } else {
 //                onError(new ApiException(t.getCode(), t.getMsg()));
 //            }
-            if (t.getResultcode().equals("200"))
-            {
+            if (t.getResultcode().equals("200")) {
                 onHandleSuccess(t.getResult());
-            }else {
+            } else {
                 onError(new ApiException(t.getResultcode(), t.getReason()));
             }
         } catch (Exception e) {
@@ -67,9 +80,7 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
 
     @Override
     public void onError(Throwable e) {
-        dismissProgressDialog();
         super.onError(e);
-        onFinish();
     }
 
     @Override
