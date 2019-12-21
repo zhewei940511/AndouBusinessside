@@ -81,6 +81,8 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
     @Override
     public void onError(Throwable e) {
         super.onError(e);
+        onErrorA();
+        dismissProgressDialog();
     }
 
     @Override
@@ -102,6 +104,8 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
     }
 
     public void onFinish() {
+    }
+    public void onErrorA() {
     }
 
     /**

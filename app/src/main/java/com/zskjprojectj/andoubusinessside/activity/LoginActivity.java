@@ -38,11 +38,17 @@ public class LoginActivity extends BaseActivity {
                 .subscribe(new BaseObserver<Object>(mActivity) {
                     @Override
                     public void onHandleSuccess(Object o) {
-
+                        ActivityUtils.startActivity(MainActivity.class);
+                        finish();
                     }
 
                     @Override
                     public void onFinish() {
+
+                    }
+
+                    @Override
+                    public void onErrorA() {
                         ActivityUtils.startActivity(MainActivity.class);
                         finish();
                     }

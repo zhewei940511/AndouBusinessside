@@ -96,6 +96,7 @@ public class OrderFragment extends BaseFragment {
         refreshLayout.setEnableLoadMore(true);
         refreshLayout.setEnableLoadMoreWhenContentNotFull(true);
         refreshLayout.autoLoadMore();
+        adapter.setEmptyView(R.layout.layout_empty_view);
         refreshLayout.setOnRefreshListener(refreshLayout -> {
             ArrayList<Order> orderInfos = new ArrayList<>();
             orderInfos.add(getOrder(state));

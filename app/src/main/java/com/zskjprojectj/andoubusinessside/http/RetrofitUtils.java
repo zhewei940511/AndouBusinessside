@@ -11,8 +11,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class RetrofitUtils {
     private static final String TAG = RetrofitUtils.class.getSimpleName() + "：";
-    public static final int OUT_TIME = 10;
-    public static final int READ_WRITE_TIME = 10;
+    public static final int OUT_TIME = 2;
+    public static final int READ_WRITE_TIME = 2;
 
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
