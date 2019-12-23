@@ -21,6 +21,11 @@ public class JoinActivity extends BaseActivity {
         JoinInfoUploadActivity.start(JoinInfoUploadActivity.Type.HOTEL);
     }
 
+    @OnClick(R.id.restaurantJoinEntryBtn)
+    void onRestaurantJoinEntryBtnClick() {
+        JoinInfoUploadActivity.start(JoinInfoUploadActivity.Type.RESTAURANT);
+    }
+
     @OnClick(R.id.mallJoinEntryBtn)
     void onMallJoinEntryBtnClick() {
         JoinInfoUploadActivity.start(JoinInfoUploadActivity.Type.MALL);

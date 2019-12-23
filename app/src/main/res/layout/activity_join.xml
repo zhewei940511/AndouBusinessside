@@ -104,4 +104,53 @@
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_right_02" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/restaurantJoinEntryBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="11dp"
+        android:background="@mipmap/bg_join_01"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_join_07" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="饭店商家入驻"
+                android:textColor="#ff323232"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="即可外卖也可在线预订"
+                android:textColor="#ff999999"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="9dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_right_02" />
+    </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.zskjprojectj.andoubusinessside.R;
@@ -21,6 +22,8 @@ public class JoinInfoUploadActivity extends BaseActivity {
             ActionBarUtil.setTitle(mActivity, "商城商家入驻");
         } else if (type == Type.RESTAURANT.ordinal()) {
             ActionBarUtil.setTitle(mActivity, "饭店商家入驻");
+            findViewById(R.id.restaurantTypeContainer).setVisibility(View.VISIBLE);
+            findViewById(R.id.restaurantLicenseContainer).setVisibility(View.VISIBLE);
         }
     }
 
