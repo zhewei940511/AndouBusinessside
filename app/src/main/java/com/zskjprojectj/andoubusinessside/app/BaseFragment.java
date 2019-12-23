@@ -1,5 +1,6 @@
 package com.zskjprojectj.andoubusinessside.app;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,14 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
 
     protected View view;
+    protected Activity mActivity;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getActivity() instanceof BaseActivity)
+            mActivity = getActivity();
+    }
 
     @Nullable
     @Override

@@ -1,6 +1,5 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,22 +9,21 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.base.BaseActivity;
-import com.zskjprojectj.andoubusinessside.base.BasePresenter;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 
 import java.util.Random;
 
+import butterknife.OnClick;
+
 import static com.zskjprojectj.andoubusinessside.activity.OrderListActivity.KEY_ORDER_TYPE;
 
-/**
- * 商城商家中心
- */
 public class UserCenterActivity extends BaseActivity {
 
     public static final String KEY_USER = "KEY_USER";
@@ -34,13 +32,65 @@ public class UserCenterActivity extends BaseActivity {
     private View progressBar;
     private TextView actionBarTitleTxt;
 
-    @Override
-    protected void setRootView() {
-        setContentView(R.layout.activity_user_center);
+    @OnClick(R.id.settingEntryBtn)
+    void onSettingEntryBtn() {
+        ActivityUtils.startActivity(SettingActivity.class);
     }
 
     @Override
-    protected void initData(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        progressBar = findViewById(R.id.progressBar);
+        actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);
+        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        findViewById(R.id.todayOrderEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            intent.putExtra(KEY_ORDER_TYPE, 0);
+            startActivity(intent);
+        });
+
+
+        findViewById(R.id.manageShopEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, ManageShopActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.chartEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, ChartActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.walletEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, WalletActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.manageGoodsEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, ManageGoodsActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.noticeListEntryBtn).setOnClickListener(view -> {
+            Intent intent = new Intent(this, NoticeListActivity.class);
+            startActivity(intent);
+        });
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        View actionBarBackground = findViewById(R.id.customActionBarBackground);
+        final ViewTreeObserver.OnScrollChangedListener onScrollChangedListener = ()
+                -> actionBarBackground.setAlpha((float) (scrollView.getScrollY() * 0.01));
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            private ViewTreeObserver observer;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (observer == null) {
+                    observer = scrollView.getViewTreeObserver();
+                    observer.addOnScrollChangedListener(onScrollChangedListener);
+                } else if (!observer.isAlive()) {
+                    observer.removeOnScrollChangedListener(onScrollChangedListener);
+                    observer = scrollView.getViewTreeObserver();
+                    observer.addOnScrollChangedListener(onScrollChangedListener);
+                }
+
+                return false;
+            }
+        });
         info = (User) getIntent().getSerializableExtra(KEY_USER);
         info.setAvatar("http://img4.imgtn.bdimg.com/it/u=2843285098,2906023234&fm=26&gp=0.jpg");
         info.setName("淘淘的淘宝店");
@@ -62,7 +112,7 @@ public class UserCenterActivity extends BaseActivity {
     }
 
     private void bindView(User user) {
-        Glide.with(mAt)
+        Glide.with(mActivity)
                 .load(user.getAvatar())
                 .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
                 .into((ImageView) findViewById(R.id.avatar));
@@ -150,9 +200,7 @@ public class UserCenterActivity extends BaseActivity {
                 ((TextView) findViewById(R.id.todayFinishCount)).setText(user.getTodayfinishOrderCount() + "");
                 View scanBtn = findViewById(R.id.scanBtn);
                 scanBtn.setVisibility(View.VISIBLE);
-                scanBtn.setOnClickListener(view -> {
-
-                });
+                scanBtn.setOnClickListener(view -> ActivityUtils.startActivity(QrCodeActivity.class));
                 View unUseOrderEntryBtn = findViewById(R.id.unUseOrderEntryBtn);
                 unUseOrderEntryBtn.setVisibility(View.VISIBLE);
                 unUseOrderEntryBtn.setOnClickListener(view ->
@@ -192,69 +240,8 @@ public class UserCenterActivity extends BaseActivity {
         progressBar.setVisibility(View.GONE);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void initViews() {
-        progressBar = findViewById(R.id.progressBar);
-        actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
-        findViewById(R.id.todayOrderEntryBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, OrderListActivity.class);
-            intent.putExtra(KEY_ORDER_TYPE, 0);
-            startActivity(intent);
-        });
-
-
-        findViewById(R.id.manageShopEntryBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, ManageShopActivity.class);
-            startActivity(intent);
-        });
-        findViewById(R.id.chartEntryBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, ChartActivity.class);
-            startActivity(intent);
-        });
-        findViewById(R.id.walletEntryBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, WalletActivity.class);
-            startActivity(intent);
-        });
-        findViewById(R.id.manageGoodsEntryBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, ManageGoodsActivity.class);
-            startActivity(intent);
-        });
-        findViewById(R.id.noticeListEntryBtn).setOnClickListener(view -> {
-            Intent intent = new Intent(this, NoticeListActivity.class);
-            startActivity(intent);
-        });
-        ScrollView scrollView = findViewById(R.id.scrollView);
-        View actionBarBackground = findViewById(R.id.customActionBarBackground);
-        final ViewTreeObserver.OnScrollChangedListener onScrollChangedListener = ()
-                -> actionBarBackground.setAlpha((float) (scrollView.getScrollY() * 0.01));
-        scrollView.setOnTouchListener(new View.OnTouchListener() {
-            private ViewTreeObserver observer;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (observer == null) {
-                    observer = scrollView.getViewTreeObserver();
-                    observer.addOnScrollChangedListener(onScrollChangedListener);
-                } else if (!observer.isAlive()) {
-                    observer.removeOnScrollChangedListener(onScrollChangedListener);
-                    observer = scrollView.getViewTreeObserver();
-                    observer.addOnScrollChangedListener(onScrollChangedListener);
-                }
-
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public void getDataFromServer() {
-
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected int getContentView() {
+        return R.layout.activity_user_center;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zskjprojectj.andoubusinessside.R;
@@ -14,11 +15,13 @@ import com.zskjprojectj.andoubusinessside.activity.RefundActivity;
 import com.zskjprojectj.andoubusinessside.activity.ReviewDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.SendActivity;
 import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.app.BaseFragment;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -32,6 +35,9 @@ public class OrderFragment extends BaseFragment {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     public OrderFragment(int state) {
         this.state = state;
         adapter = new OrderListAdapter(state, R.layout.layout_order_list_item);
@@ -40,7 +46,7 @@ public class OrderFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter.bindToRecyclerView(view.findViewById(R.id.recyclerView));
+        adapter.bindToRecyclerView(recyclerView);
         adapter.setOnItemChildClickListener((adapter, view1, position) -> {
             Intent intent;
             switch (view1.getId()) {
@@ -93,39 +99,10 @@ public class OrderFragment extends BaseFragment {
                     break;
             }
         });
-        refreshLayout.setEnableLoadMore(true);
-        refreshLayout.setEnableLoadMoreWhenContentNotFull(true);
-        refreshLayout.autoLoadMore();
-        adapter.setEmptyView(R.layout.layout_empty_view);
-        refreshLayout.setOnRefreshListener(refreshLayout -> {
-            ArrayList<Order> orderInfos = new ArrayList<>();
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            adapter.setNewData(orderInfos);
-            refreshLayout.finishRefresh();
-        });
-        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            ArrayList<Order> orderInfos = new ArrayList<>();
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            orderInfos.add(getOrder(state));
-            adapter.addData(orderInfos);
-            refreshLayout.finishLoadMore();
-        });
+        PageLoadUtil.get((BaseActivity) getActivity(), recyclerView, adapter, refreshLayout
+                , ApiUtils.getApiService().test()).load();
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

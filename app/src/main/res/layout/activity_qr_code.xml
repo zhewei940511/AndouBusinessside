@@ -4,14 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".activity.SplashActivity">
+    tools:context=".activity.QrCodeActivity">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/ic_launcher" />
-    
+    <include layout="@layout/zxl_capture" />
 </LinearLayout>

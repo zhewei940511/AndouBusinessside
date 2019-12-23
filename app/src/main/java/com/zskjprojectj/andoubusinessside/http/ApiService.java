@@ -1,6 +1,10 @@
 package com.zskjprojectj.andoubusinessside.http;
 
 
+import com.zskjprojectj.andoubusinessside.model.Order;
+
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.POST;
 
@@ -148,5 +152,5 @@ public interface ApiService {
 //    @POST("/pfminfo")
 //    Observable<BaseResult<PlatformBean>> getPlatformData(@Field("page") int page, @Field("pid") String id);
     @POST("/andou/public/index.php/api/index/index")
-    Observable<BaseResult<Object>> test();
+    Observable<BaseResult<List<Order>>> test();
 }

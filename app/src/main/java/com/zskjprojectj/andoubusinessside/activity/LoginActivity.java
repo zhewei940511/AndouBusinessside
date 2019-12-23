@@ -9,7 +9,11 @@ import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.BaseObserver;
+import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
+import com.zskjprojectj.andoubusinessside.model.Order;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +31,11 @@ public class LoginActivity extends BaseActivity {
         ActivityUtils.startActivity(FindPasswordActivity.class);
     }
 
+    @OnClick(R.id.joinEntryBtn)
+    void onJoinEntryBtnClick() {
+        ActivityUtils.startActivity(JoinActivity.class);
+    }
+
     @OnClick(R.id.loginBtn)
     void onLoginBtnClick() {
         KeyboardUtils.hideSoftInput(mActivity);
@@ -35,20 +44,16 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         HttpRxObservable.getObservable(ApiUtils.getApiService().test())
-                .subscribe(new BaseObserver<Object>(mActivity) {
+                .subscribe(new BaseObserver<List<Order>>(mActivity) {
+
                     @Override
-                    public void onHandleSuccess(Object o) {
+                    public void onSuccess(BaseResult<List<Order>> result) {
                         ActivityUtils.startActivity(MainActivity.class);
                         finish();
                     }
 
                     @Override
-                    public void onFinish() {
-
-                    }
-
-                    @Override
-                    public void onErrorA() {
+                    public void onFailure(String msg) {
                         ActivityUtils.startActivity(MainActivity.class);
                         finish();
                     }

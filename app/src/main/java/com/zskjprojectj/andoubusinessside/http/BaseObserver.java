@@ -10,17 +10,21 @@ import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 
 import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> implements ProgressCancelListener {
+    public final PublishSubject<Object> retrySubject = PublishSubject.create();
+
     private BaseActivity activity;
     private Disposable d;
     private BaseResult<T> mData;
     private boolean showLoading;
+    private boolean showRetry;
     private ViewGroup contentView;
     private View progressBarContainer;
 
-    public BaseObserver(BaseActivity aty) {
-        this(aty, true);
+    public BaseObserver(BaseActivity activity) {
+        this(activity, true);
     }
 
     public BaseObserver(BaseActivity activity, boolean showLoading) {
@@ -55,22 +59,16 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
         if (showLoading) {
             showProgressDialog();
         }
-        onStart();
     }
 
     @Override
-    public void onNext(BaseResult<T> t) {
-        mData = t;
+    public void onNext(BaseResult<T> result) {
+        mData = result;
         try {
-//            if (t.getCode().equals("200")) { // 请求成功
-//                onHandleSuccess(t.getData());
-//            } else {
-//                onError(new ApiException(t.getCode(), t.getMsg()));
-//            }
-            if (t.getResultcode().equals("200")) {
-                onHandleSuccess(t.getResult());
+            if (result.getCode().equals("200")) {
+                onSuccess(result);
             } else {
-                onError(new ApiException(t.getResultcode(), t.getReason()));
+                onError(new ApiException(result.getCode(), result.getMsg()));
             }
         } catch (Exception e) {
             onError(new ApiException(ApiException.TYPE_SYSTEM, e.getMessage()));
@@ -81,49 +79,19 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
     @Override
     public void onError(Throwable e) {
         super.onError(e);
-        onErrorA();
         dismissProgressDialog();
-    }
-
-    @Override
-    public void onComplete() {
-        dismissProgressDialog();
-        onFinish();
+        onFailure(e.getLocalizedMessage());
     }
 
     @Override
     public void onCancelProgress() {
-        //如果处于订阅状态，则取消订阅
         if (d != null && !d.isDisposed()) {
             d.dispose();
         }
         onHandleError(new ApiException(ApiException.TYPE_USER_CANCEL, null));
     }
 
-    public void onStart() {
-    }
+    public abstract void onSuccess(BaseResult<T> result);
 
-    public void onFinish() {
-    }
-    public void onErrorA() {
-    }
-
-    /**
-     * 成功处理
-     *
-     * @param t
-     */
-    public abstract void onHandleSuccess(T t);
-
-    public void onHandleSuccess(BaseResult<T> t) {
-    }
-
-
-    public String getMsg() {
-        if (mData != null) {
-            //return mData.getMsg();
-            return mData.getReason();
-        }
-        return null;
-    }
+    public abstract void onFailure(String msg);
 }

@@ -3,17 +3,17 @@ package com.zskjprojectj.andoubusinessside.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
 
 import java.util.ArrayList;
 
-public class OrderListActivity extends AppCompatActivity {
+public class OrderListActivity extends BaseActivity {
 
     public static final String KEY_ORDER_TYPE = "KEY_ORDER_TYPE";
     private ArrayList<Fragment> fragments = new ArrayList<>();
@@ -21,7 +21,6 @@ public class OrderListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_list);
         findViewById(R.id.backBtn).setOnClickListener(view -> finish());
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -35,6 +34,7 @@ public class OrderListActivity extends AppCompatActivity {
         tabLayout.setViewPager(viewPager
                 , new String[]{"全部", "待付款", "待发货", "已发货", "已评价"}
                 , this, fragments);
+        tabLayout.setTabSpaceEqual(true);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -68,5 +68,10 @@ public class OrderListActivity extends AppCompatActivity {
             }
         });
         tabLayout.setCurrentTab(getIntent().getIntExtra(KEY_ORDER_TYPE, 0));
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_order_list;
     }
 }

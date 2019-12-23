@@ -35,7 +35,9 @@ public abstract class BaseListActivity<D> extends BaseActivity implements BaseQu
     private int page = 1;
     private int pageSize = 5;
     private boolean isRequestListData = true;
+
     protected abstract void findView();
+
     @Override
     protected void setRootView() {
         setContentView(R.layout.activity_base_list);
@@ -140,10 +142,12 @@ public abstract class BaseListActivity<D> extends BaseActivity implements BaseQu
     public void setRequestListData(boolean requestListData) {
         isRequestListData = requestListData;
     }
+
     @Override
     public void getDataFromServer() {
 
     }
+
     /**
      * 加载更多
      */
@@ -253,8 +257,8 @@ public abstract class BaseListActivity<D> extends BaseActivity implements BaseQu
 
     protected int getJsonPage(BaseResult<JSONObject> objectBaseResult) {
         try {
-           // return objectBaseResult.getData().getInteger("pageSize");
-            return objectBaseResult.getResult().getInteger("pageSize");
+            // return objectBaseResult.getData().getInteger("pageSize");
+            return objectBaseResult.getData().getInteger("pageSize");
         } catch (Exception e) {
             e.printStackTrace();
             return pageSize;

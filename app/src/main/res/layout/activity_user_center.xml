@@ -95,6 +95,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/settingEntryBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignTop="@id/shopInfoContainer"
