@@ -11,9 +11,7 @@ import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
-import com.zskjprojectj.andoubusinessside.model.Order;
-
-import java.util.List;
+import com.zskjprojectj.andoubusinessside.model.User;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,15 +37,17 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.loginBtn)
     void onLoginBtnClick() {
         KeyboardUtils.hideSoftInput(mActivity);
-        if (mobileEdt.getText().toString().isEmpty() || passwordEdt.getText().toString().isEmpty()) {
+        String phoneStr = mobileEdt.getText().toString().trim();
+        String passwordStr = passwordEdt.getText().toString().trim();
+        if (phoneStr.isEmpty() || passwordStr.isEmpty()) {
             ToastUtils.showShort("手机号或密码不能为空!");
             return;
         }
-        HttpRxObservable.getObservable(ApiUtils.getApiService().test())
-                .subscribe(new BaseObserver<List<Order>>(mActivity) {
+        HttpRxObservable.getObservable(ApiUtils.getApiService().login(phoneStr, passwordStr))
+                .subscribe(new BaseObserver<User>(mActivity) {
 
                     @Override
-                    public void onSuccess(BaseResult<List<Order>> result) {
+                    public void onSuccess(BaseResult<User> result) {
                         ActivityUtils.startActivity(MainActivity.class);
                         finish();
                     }

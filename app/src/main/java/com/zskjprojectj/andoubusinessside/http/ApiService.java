@@ -2,10 +2,13 @@ package com.zskjprojectj.andoubusinessside.http;
 
 
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.User;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ApiService {
@@ -153,4 +156,8 @@ public interface ApiService {
 //    Observable<BaseResult<PlatformBean>> getPlatformData(@Field("page") int page, @Field("pid") String id);
     @POST("/andou/public/index.php/api/index/index")
     Observable<BaseResult<List<Order>>> test();
+
+    @POST("/andou/public/index.php/api/login/login_p")
+    @FormUrlEncoded
+    Observable<BaseResult<User>> login(@Field("phone") String phone, @Field("password") String password);
 }

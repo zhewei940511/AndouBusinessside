@@ -43,7 +43,8 @@
             android:inputType="phone"
             android:paddingStart="43dp"
             android:text="点击登录直接测试"
-            android:textColor="#b6b6b6"
+            android:textColor="#333333"
+            android:textColorHint="#b6b6b6"
             android:textSize="12sp" />
 
         <ImageView
@@ -64,14 +65,15 @@
 
         <EditText
             android:id="@+id/passwordEdt"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
             android:background="@drawable/sp_edit_bg_02"
             android:hint="请输入新密码"
             android:inputType="textPassword"
             android:paddingStart="43dp"
             android:text="点击登录直接测试"
-            android:textColor="#b6b6b6"
+            android:textColor="#333333"
+            android:textColorHint="#b6b6b6"
             android:textSize="12sp" />
 
         <ImageView
