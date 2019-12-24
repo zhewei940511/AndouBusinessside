@@ -1,10 +1,5 @@
 package com.zskjprojectj.andoubusinessside.http;
 
-/**
- * 根据返回的格式来选择
- *
- * @param <T>
- */
 public class BaseResult<T> {
 
     private String code;

@@ -100,7 +100,7 @@ public class OrderFragment extends BaseFragment {
             }
         });
         PageLoadUtil.get((BaseActivity) getActivity(), recyclerView, adapter, refreshLayout
-                , ApiUtils.getApiService().test()).load();
+                , ApiUtils.getApiService().testList()).load();
     }
 
 

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.EditInfoActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.JoinInfoUploadActivity" />
         <activity android:name=".activity.JoinActivity" />
         <activity android:name=".activity.QrCodeActivity" />
