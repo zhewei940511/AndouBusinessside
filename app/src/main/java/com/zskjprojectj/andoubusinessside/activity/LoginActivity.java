@@ -1,23 +1,21 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.RegexUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
+import com.zskjprojectj.andoubusinessside.model.Config;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
-import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,18 +58,14 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.loginBtn)
     void onLoginBtnClick() {
         KeyboardUtils.hideSoftInput(mActivity);
-        String phoneStr = mobileEdt.getText().toString();
-        String passwordStr = passwordEdt.getText().toString();
-        if (TextUtils.isEmpty(phoneStr) || TextUtils.isEmpty(passwordStr)) {
-            ToastUtils.showShort("手机号或密码不能为空!");
-            return;
-        }
-        HttpRxObservable.getObservable(ApiUtils.getApiService().login(phoneStr, passwordStr))
+        HttpRxObservable.getObservable(ApiUtils.getApiService().login(
+                mobileEdt.getText().toString(),
+                passwordEdt.getText().toString()))
                 .subscribe(new BaseObserver<User>(mActivity) {
 
                     @Override
                     public void onSuccess(BaseResult<User> result) {
-                        UserUtil.getInstance().user = result.data;
+                        Config.saveUidAndToken(result.data.id, result.data.token);
                         ActivityUtils.startActivity(MainActivity.class);
                         ToastUtil.showToast(result.getMsg());
                         finish();

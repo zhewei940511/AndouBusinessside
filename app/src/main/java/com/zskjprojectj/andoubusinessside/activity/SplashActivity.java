@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.utils.UserUtil;
+import com.zskjprojectj.andoubusinessside.model.Config;
 
 public class SplashActivity extends BaseActivity {
 
@@ -13,10 +13,10 @@ public class SplashActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         contentView.postDelayed(() -> {
-            if (UserUtil.getInstance().isLogin()) {
-                ActivityUtils.startActivity(MainActivity.class);
-            } else {
+            if (Config.getToken().isEmpty()) {
                 ActivityUtils.startActivity(LoginActivity.class);
+            } else {
+                ActivityUtils.startActivity(MainActivity.class);
             }
             finish();
         }, 1000);

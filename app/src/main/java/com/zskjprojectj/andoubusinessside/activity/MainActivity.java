@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.User;
@@ -49,5 +50,16 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.joinEntryBtn)
     void onJoinEntryBtnClick() {
         ActivityUtils.startActivity(JoinActivity.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (contentView.getTag() == null) {
+            ToastUtils.showShort("再按一次退出");
+            contentView.setTag(new Object());
+            contentView.postDelayed(() -> contentView.setTag(null), 2000);
+            return;
+        }
+        super.onBackPressed();
     }
 }
