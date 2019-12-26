@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.gson.stream.MalformedJsonException;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
@@ -83,6 +84,8 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
         dismissProgressDialog();
         if (e instanceof ApiException) {
             onFailure(((ApiException) e).getErrorCode() + " " + e.getMessage());
+        } else if (e instanceof MalformedJsonException) {
+            onFailure("500 服务器数据格式错误");
         } else {
             onFailure(e.getLocalizedMessage());
         }
