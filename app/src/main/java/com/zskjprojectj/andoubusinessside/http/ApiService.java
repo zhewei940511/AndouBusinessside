@@ -152,10 +152,10 @@ public interface ApiService {
 //    @FormUrlEncoded
 //    @POST("/pfminfo")
 //    Observable<BaseResult<PlatformBean>> getPlatformData(@Field("page") int page, @Field("pid") String id);
-    @POST("/andou/public/index.php/api/index/index")
+    @POST("api/index/index")
     Observable<BaseResult<ListData<Order>>> testList();
 
-    @POST("/andou/public/index.php/api/login/login_p")
+    @POST("api/login/login_p")
     @FormUrlEncoded
     Observable<BaseResult<User>> login(@Field("phone") String phone, @Field("password") String password);
 }

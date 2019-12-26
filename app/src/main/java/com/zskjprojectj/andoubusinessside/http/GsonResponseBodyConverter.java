@@ -20,10 +20,8 @@ public class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> 
     @Override
     public T convert(ResponseBody value) throws IOException {
         try {
-            String response = value.string();
-            T result = adapter.fromJson(response);
-            String j=result.getClass().getSimpleName();
-            return result;
+            String response = value.string().replace(",\"data\":\"\"", "");
+            return adapter.fromJson(response);
         } finally {
             value.close();
         }

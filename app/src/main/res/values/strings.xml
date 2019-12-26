@@ -65,4 +65,7 @@
     <string name="callphonenum">请输入正确的联系电话</string>
     <string name="chongzhifangshi">请选择充值方式</string>
     <string name="yinlianpay">银联支付</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_failed">加载失败,点击重试!</string>
+    <string name="load_end">没有更多数据</string>
 </resources>

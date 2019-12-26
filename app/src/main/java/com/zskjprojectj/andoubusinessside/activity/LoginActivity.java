@@ -12,6 +12,7 @@ import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,12 +50,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess(BaseResult<User> result) {
                         ActivityUtils.startActivity(MainActivity.class);
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(String msg) {
-                        ActivityUtils.startActivity(MainActivity.class);
+                        ToastUtil.showToast(result.getMsg());
                         finish();
                     }
                 });

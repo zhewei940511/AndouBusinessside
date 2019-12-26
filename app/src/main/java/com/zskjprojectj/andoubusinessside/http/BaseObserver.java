@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
@@ -80,7 +81,11 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
     public void onError(Throwable e) {
         super.onError(e);
         dismissProgressDialog();
-        onFailure(e.getLocalizedMessage());
+        if (e instanceof ApiException) {
+            onFailure(((ApiException) e).getErrorCode() + " " + e.getMessage());
+        } else {
+            onFailure(e.getLocalizedMessage());
+        }
     }
 
     @Override
@@ -93,5 +98,7 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
 
     public abstract void onSuccess(BaseResult<T> result);
 
-    public abstract void onFailure(String msg);
+    public void onFailure(String msg) {
+        ToastUtil.showToast(msg);
+    }
 }
