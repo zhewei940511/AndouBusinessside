@@ -21,7 +21,7 @@ public class OrderListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         TextView actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);

@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".activity.EditPriceSuccessActivity">
 
-    <include layout="@layout/layout_action_bar" />
+
 
     <ImageView
         android:layout_width="104dp"

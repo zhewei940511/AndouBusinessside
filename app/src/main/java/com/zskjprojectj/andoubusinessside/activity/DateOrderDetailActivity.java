@@ -5,30 +5,28 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
-public class DateOrderDetailActivity extends AppCompatActivity {
+public class DateOrderDetailActivity extends BaseActivity {
     private View progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_date_order_detail);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1500);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("订单详情");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "订单详情");
         Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
         TextView stateTxt1 = findViewById(R.id.stateTxt1);
         TextView stateTxt2 = findViewById(R.id.stateTxt2);
@@ -45,5 +43,10 @@ public class DateOrderDetailActivity extends AppCompatActivity {
                 .load(info.getIcon())
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(ScreenUtil.dp2px(this, 2))))
                 .into((ImageView) findViewById(R.id.iconImg));
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_date_order_detail;
     }
 }

@@ -2,14 +2,13 @@ package com.zskjprojectj.andoubusinessside.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Notice;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 
 import java.util.ArrayList;
@@ -17,14 +16,12 @@ import java.util.Random;
 
 import static com.zskjprojectj.andoubusinessside.activity.NoticeDetailActivity.KEY_NOTICE;
 
-public class NoticeListActivity extends AppCompatActivity {
+public class NoticeListActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice_list);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("通知信息");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "通知信息");
         NoticeAdapter adapter = new NoticeAdapter(R.layout.layout_notice_list_item);
         adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
         ArrayList<Notice> data = new ArrayList<>();
@@ -42,6 +39,11 @@ public class NoticeListActivity extends AppCompatActivity {
             intent.putExtra(KEY_NOTICE, adapter.getItem(position));
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_notice_list;
     }
 
     class NoticeAdapter extends BaseQuickAdapter<Notice, BaseViewHolder> {

@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context=".activity.CancelOrderListActivity">
 
-    <include layout="@layout/layout_action_bar" />
-
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

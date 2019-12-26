@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Goods;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
@@ -20,13 +19,12 @@ import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ManageGoodsActivity extends AppCompatActivity {
+public class ManageGoodsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_goods);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+
         GoodsAdapter adapter = new GoodsAdapter(R.layout.layout_goods_list_item);
         adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
         ArrayList<Goods> data = new ArrayList<>();
@@ -43,8 +41,7 @@ public class ManageGoodsActivity extends AppCompatActivity {
         }
         adapter.setNewData(data);
         findViewById(R.id.goodsCategoryEntryBtn)
-                .setOnClickListener(view ->
-                        startActivity(new Intent(ManageGoodsActivity.this, GoodsCategoryActivity.class)));
+                .setOnClickListener(view -> CategoryActivity.start());
         findViewById(R.id.newGoodsBtn)
                 .setOnClickListener(view -> {
                     if (UserUtil.getInstance().user.getType() == 0) {
@@ -55,6 +52,11 @@ public class ManageGoodsActivity extends AppCompatActivity {
                         startActivity(new Intent(ManageGoodsActivity.this, NewDishActivity.class));
                     }
                 });
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_manage_goods;
     }
 
     class GoodsAdapter extends BaseQuickAdapter<Goods, BaseViewHolder> {

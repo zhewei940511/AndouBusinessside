@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.UnCheckInOrderListActivity">
 
-    <include layout="@layout/layout_action_bar" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

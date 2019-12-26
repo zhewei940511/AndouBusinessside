@@ -42,7 +42,7 @@ public class UserCenterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         progressBar = findViewById(R.id.progressBar);
         actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+
         findViewById(R.id.todayOrderEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, OrderListActivity.class);
             intent.putExtra(KEY_ORDER_TYPE, 0);

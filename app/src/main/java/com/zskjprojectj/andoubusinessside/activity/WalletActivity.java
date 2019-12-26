@@ -10,17 +10,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.DealDetailListFragment;
 
 import java.util.ArrayList;
 
-public class WalletActivity extends AppCompatActivity {
+public class WalletActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wallet);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+
         View progress = findViewById(R.id.progressBar);
         progress.postDelayed(() -> progress.setVisibility(View.GONE), 1000);
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
@@ -32,5 +32,10 @@ public class WalletActivity extends AppCompatActivity {
         tabLayout.setTabSpaceEqual(true);
         tabLayout.setViewPager(viewPager, new String[]{"余额明细", "提现明细"}, this, fragments);
         findViewById(R.id.cashOutEntryBtn).setOnClickListener(view -> startActivity(new Intent(WalletActivity.this, CashOutActivity.class)));
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_wallet;
     }
 }

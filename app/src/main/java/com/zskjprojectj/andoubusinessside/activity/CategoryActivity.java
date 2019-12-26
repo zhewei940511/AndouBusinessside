@@ -1,34 +1,35 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.model.GoodsCategory;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.model.Category;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import java.util.ArrayList;
 
-public class GoodsCategoryActivity extends AppCompatActivity {
-    private View progressBar;
-    private GoodsCategoryAdapter adapter;
+import static com.zskjprojectj.andoubusinessside.activity.EditInfoActivity.KEY_INFO;
+
+public class CategoryActivity extends BaseActivity {
+    private static final String KEY_SELECTABLE = "KEY_SELECTABLE";
+    CategoryAdapter adapter = new CategoryAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goods_category);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("商品分类");
-        progressBar = findViewById(R.id.progressBar);
-        adapter = new GoodsCategoryAdapter(R.layout.layout_goods_category_list_item);
+        ActionBarUtil.setTitle(mActivity, "商品分类");
         adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
             switch (view.getId()) {
@@ -38,16 +39,29 @@ public class GoodsCategoryActivity extends AppCompatActivity {
                 case R.id.deleteBtn:
                     adapter.remove(position);
                     break;
+                case R.id.rootView:
+                    if (getIntent().getBooleanExtra(KEY_SELECTABLE, false)) {
+                        Intent intent = new Intent();
+                        intent.putExtra(KEY_INFO, adapter.getItem(position));
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
+                    }
+                    break;
             }
         });
-        ArrayList<GoodsCategory> data = new ArrayList<>();
+        ArrayList<Category> data = new ArrayList<>();
         for (int i = -1; i < 8; i++) {
-            GoodsCategory category = new GoodsCategory();
-            category.setName("商品分类" + i);
-            category.setId(i);
+            Category category = new Category();
+            category.name = "商品分类" + i;
+            category.id = i;
             data.add(category);
         }
         adapter.setNewData(data);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_category;
     }
 
     private void showNewCategoryDialog() {
@@ -60,25 +74,24 @@ public class GoodsCategoryActivity extends AppCompatActivity {
                 return;
             }
             dialog.dismiss();
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.postDelayed(() -> {
+            contentView.postDelayed(() -> {
                 ToastUtil.showToast("添加成功!");
-                GoodsCategory category = new GoodsCategory();
-                category.setName(name);
+                Category category = new Category();
+                category.name = name;
                 adapter.addData(category);
-                progressBar.setVisibility(View.GONE);
             }, 1000);
         });
     }
 
-    class GoodsCategoryAdapter extends BaseQuickAdapter<GoodsCategory, BaseViewHolder> {
-        public GoodsCategoryAdapter(int layoutResId) {
-            super(layoutResId);
+    class CategoryAdapter extends BaseQuickAdapter<Category, BaseViewHolder> {
+
+        public CategoryAdapter() {
+            super(R.layout.layout_goods_category_list_item);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, GoodsCategory item) {
-            if (item.getId() == -1) {
+        protected void convert(BaseViewHolder helper, Category item) {
+            if (item.id == -1) {
                 helper.setVisible(R.id.categoryNameTxt, false)
                         .setVisible(R.id.newCategoryBtn, true)
                         .setVisible(R.id.deleteBtn, false)
@@ -87,9 +100,20 @@ public class GoodsCategoryActivity extends AppCompatActivity {
                 helper.setVisible(R.id.categoryNameTxt, true)
                         .setVisible(R.id.newCategoryBtn, false)
                         .setVisible(R.id.deleteBtn, true)
-                        .setText(R.id.categoryNameTxt, item.getName())
-                        .addOnClickListener(R.id.deleteBtn);
+                        .setText(R.id.categoryNameTxt, item.name)
+                        .addOnClickListener(R.id.deleteBtn)
+                        .addOnClickListener(R.id.rootView);
             }
         }
+    }
+
+    public static void start(Activity activity, int requestCode) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(KEY_SELECTABLE, true);
+        ActivityUtils.startActivityForResult(bundle, activity, CategoryActivity.class, requestCode);
+    }
+
+    public static void start() {
+        ActivityUtils.startActivity(CategoryActivity.class);
     }
 }

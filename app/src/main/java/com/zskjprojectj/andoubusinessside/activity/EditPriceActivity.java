@@ -11,13 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
@@ -26,14 +27,12 @@ import java.util.Random;
 
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
-public class EditPriceActivity extends AppCompatActivity {
+public class EditPriceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_price);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("修改价格");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "修改价格");
         Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
         ((TextView) findViewById(R.id.titleTxt)).setText(info.getTitle());
         ((TextView) findViewById(R.id.countTxt)).setText(info.getCount() + "");
@@ -79,6 +78,11 @@ public class EditPriceActivity extends AppCompatActivity {
             }
         };
         editTotalTxt.addTextChangedListener(textWatcher);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_edit_price;
     }
 
     @Override

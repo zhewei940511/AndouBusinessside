@@ -4,19 +4,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Shop;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
-public class ManageShopActivity extends AppCompatActivity {
+public class ManageShopActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_shop);
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("店铺管理");
+        ActionBarUtil.setTitle(mActivity,"店铺管理");
         View progressBar = findViewById(R.id.progressBar);
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1000);
         Shop shop = new Shop();
@@ -37,5 +35,10 @@ public class ManageShopActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.returnAddrEdt)).setText(shop.getReturnAddr());
         ((TextView) findViewById(R.id.returnContactEdt)).setText(shop.getReturnCotact());
         ((TextView) findViewById(R.id.returnMobileEdt)).setText(shop.getReturnMobile());
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_manage_shop;
     }
 }

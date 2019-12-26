@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.FinishHotelOrderListActivity">
 
-    <include layout="@layout/layout_action_bar" />
+
 
     <FrameLayout
         android:id="@+id/fragmentContainer"

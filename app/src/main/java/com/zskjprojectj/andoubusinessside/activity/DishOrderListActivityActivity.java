@@ -2,26 +2,23 @@ package com.zskjprojectj.andoubusinessside.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
-public class DishOrderListActivityActivity extends AppCompatActivity {
+public class DishOrderListActivityActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cancel_dish_order_list_activity);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("取消订单");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "取消订单");
         DishOrderListAdapter adapter = new DishOrderListAdapter(R.layout.layout_dish_order_list_item);
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
             Intent intent = new Intent(DishOrderListActivityActivity.this, DateOrderDetailActivity.class);
@@ -45,6 +42,11 @@ public class DishOrderListActivityActivity extends AppCompatActivity {
         adapter.addData(OrderFragment.getOrder(11));
         adapter.addData(OrderFragment.getOrder(11));
         adapter.addData(OrderFragment.getOrder(11));
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_cancel_dish_order_list_activity;
     }
 
     class DishOrderListAdapter extends BaseQuickAdapter<Order, BaseViewHolder> {

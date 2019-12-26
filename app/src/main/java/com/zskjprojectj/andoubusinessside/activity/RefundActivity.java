@@ -6,29 +6,28 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
-public class RefundActivity extends AppCompatActivity {
+public class RefundActivity extends BaseActivity {
     private View progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_refund);
         progressBar = findViewById(R.id.progressBar);
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1000);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("退货退款");
+        ActionBarUtil.setTitle(mActivity,"退货退款");
 
         Order order = (Order) getIntent().getSerializableExtra(KEY_ORDER);
         ((TextView) findViewById(R.id.numTxt)).setText(order.getNum());
@@ -51,5 +50,10 @@ public class RefundActivity extends AppCompatActivity {
                 finish();
             }, 1000);
         });
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_refund;
     }
 }

@@ -1,20 +1,17 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
-public class ChartActivity extends AppCompatActivity {
+public class ChartActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chart);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("店铺统计");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "店铺统计");
 //        BarChart chart = findViewById(R.id.orderChart);
 //        chart.getDescription().setEnabled(false);
 //        chart.setDrawBarShadow(false);
@@ -50,5 +47,10 @@ public class ChartActivity extends AppCompatActivity {
 //        BarData data = new BarData(dataSets);
 //        chart.setData(data);
 //        data.setBarWidth(0.3f);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_chart;
     }
 }

@@ -1,19 +1,22 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
-public class NewDishActivity extends AppCompatActivity {
+public class NewDishActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_dish);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("菜品上传");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "菜品上传");
+
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_new_dish;
     }
 }

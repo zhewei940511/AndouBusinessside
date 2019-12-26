@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.RefundOrderListActivity">
 
-    <include layout="@layout/layout_action_bar" />
+
 
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tabLayout"

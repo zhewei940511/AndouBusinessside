@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.ManageShopActivity">
 
-    <include layout="@layout/layout_action_bar" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"

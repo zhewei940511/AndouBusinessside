@@ -2,21 +2,18 @@ package com.zskjprojectj.andoubusinessside.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
-public class CashOutActivity extends AppCompatActivity {
+public class CashOutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cash_out);
-        ((TextView) findViewById(R.id.actionBarTitleTxt)).setText("余额提现");
-        findViewById(R.id.backBtn).setOnClickListener(view -> finish());
+        ActionBarUtil.setTitle(mActivity, "余额提现");
         View progress = findViewById(R.id.progressBar);
         findViewById(R.id.confirmBtn).setOnClickListener(view -> {
             progress.setVisibility(View.VISIBLE);
@@ -25,5 +22,10 @@ public class CashOutActivity extends AppCompatActivity {
                 finish();
             }, 1000);
         });
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_cash_out;
     }
 }

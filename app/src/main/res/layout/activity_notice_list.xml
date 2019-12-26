@@ -13,7 +13,7 @@
         android:orientation="vertical"
         tools:context=".activity.CashOutActivity">
 
-        <include layout="@layout/layout_action_bar" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
