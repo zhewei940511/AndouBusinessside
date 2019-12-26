@@ -258,7 +258,7 @@ public abstract class BaseListActivity<D> extends BaseActivity implements BaseQu
     protected int getJsonPage(BaseResult<JSONObject> objectBaseResult) {
         try {
             // return objectBaseResult.getData().getInteger("pageSize");
-            return objectBaseResult.getData().getInteger("pageSize");
+            return objectBaseResult.data.getInteger("pageSize");
         } catch (Exception e) {
             e.printStackTrace();
             return pageSize;

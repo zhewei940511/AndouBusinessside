@@ -79,17 +79,17 @@ public class PageLoadUtil<T> {
                         adapter.setEmptyView(R.layout.layout_empty_view);
                         page += 1;
                         if (needRefresh) {
-                            if (result.getData().getDataList().size() == 0) {
+                            if (result.data.getDataList().size() == 0) {
                                 adapter.loadMoreEnd(true);
                             } else {
-                                adapter.setNewData(result.getData().getDataList());
+                                adapter.setNewData(result.data.getDataList());
                             }
                             refreshLayout.finishRefresh();
                         } else {
-                            if (result.getData().getDataList().size() == 0) {
+                            if (result.data.getDataList().size() == 0) {
                                 adapter.loadMoreEnd();
                             } else {
-                                adapter.addData(result.getData().getDataList());
+                                adapter.addData(result.data.getDataList());
                                 adapter.loadMoreComplete();
                             }
                         }

@@ -158,4 +158,15 @@ public interface ApiService {
     @POST("api/login/login_p")
     @FormUrlEncoded
     Observable<BaseResult<User>> login(@Field("phone") String phone, @Field("password") String password);
+
+    @POST("api/login/send")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> getCode(@Field("phone") String phone,
+                                                 @Field("type") String type);
+
+    @POST("api/login/forget")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> resetPassword(@Field("phone") String phone,
+                                                 @Field("verify") String code,
+                                                 @Field("new_password") String new_password);
 }

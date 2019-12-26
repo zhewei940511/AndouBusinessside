@@ -4,7 +4,7 @@ public class BaseResult<T> {
 
     private String code;
     private String msg;
-    private T data;
+    public T data;
 
     public String getCode() {
         return code;
@@ -22,11 +22,4 @@ public class BaseResult<T> {
         this.msg = msg;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }

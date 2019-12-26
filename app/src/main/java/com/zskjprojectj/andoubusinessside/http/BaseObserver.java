@@ -65,6 +65,7 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
 
     @Override
     public void onNext(BaseResult<T> result) {
+        dismissProgressDialog();
         mData = result;
         try {
             if (result.getCode().equals("200")) {

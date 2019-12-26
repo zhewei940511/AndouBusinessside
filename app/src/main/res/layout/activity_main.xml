@@ -9,14 +9,6 @@
     android:orientation="vertical"
     tools:context=".activity.NoticeListActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:text="请选择查看的内容"
-        android:textColor="#ff333333"
-        android:textSize="16sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

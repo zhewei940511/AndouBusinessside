@@ -36,7 +36,7 @@
         <activity android:name=".activity.UnCheckInOrderListActivity" />
         <activity android:name=".activity.NoticeDetailActivity" />
         <activity android:name=".activity.NoticeListActivity" />
-        <activity android:name=".activity.FindPasswordActivity" />
+        <activity android:name=".activity.ResetPasswordActivity" />
         <activity android:name=".activity.NewGoodsActivity" />
         <activity android:name=".activity.GoodsCategoryActivity" />
         <activity android:name=".activity.ManageGoodsActivity" />
