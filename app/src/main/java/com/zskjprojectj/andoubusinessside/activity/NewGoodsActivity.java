@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.adapter.SelectPicAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Category;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
@@ -25,11 +26,14 @@ public class NewGoodsActivity extends BaseActivity {
     @BindView(R.id.categoryTxt)
     TextView categoryTxt;
 
+    SelectPicAdapter goodsAdapter = new SelectPicAdapter(5);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "商品上传");
         categoryTxt.setOnClickListener(v -> CategoryActivity.start(mActivity, 666));
+        goodsAdapter.bindToRecyclerView(findViewById(R.id.goodsPicRecyclerView));
 
 
         LinearLayout specContainer = findViewById(R.id.specContainer);
@@ -45,6 +49,7 @@ public class NewGoodsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        goodsAdapter.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 666 && resultCode == Activity.RESULT_OK && data != null) {
             Category category = (Category) data.getSerializableExtra(KEY_INFO);
             categoryTxt.setText(category.name);

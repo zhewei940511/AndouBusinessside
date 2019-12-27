@@ -1,7 +1,6 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -10,6 +9,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
 
@@ -21,10 +21,9 @@ public class OrderListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ActionBarUtil.setTitle(mActivity, "全部订单");
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
-        TextView actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);
         viewPager.setOffscreenPageLimit(4);
         fragments.add(new OrderFragment(0));
         fragments.add(new OrderFragment(1));
@@ -45,19 +44,19 @@ public class OrderListActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        actionBarTitleTxt.setText("全部订单");
+                        ActionBarUtil.setTitle(mActivity, "全部订单");
                         break;
                     case 1:
-                        actionBarTitleTxt.setText("待付款订单");
+                        ActionBarUtil.setTitle(mActivity, "待付款订单");
                         break;
                     case 2:
-                        actionBarTitleTxt.setText("待发货订单");
+                        ActionBarUtil.setTitle(mActivity, "待发货订单");
                         break;
                     case 3:
-                        actionBarTitleTxt.setText("已发货订单");
+                        ActionBarUtil.setTitle(mActivity, "已发货订单");
                         break;
                     case 4:
-                        actionBarTitleTxt.setText("已评价订单");
+                        ActionBarUtil.setTitle(mActivity, "已评价订单");
                         break;
                 }
             }
