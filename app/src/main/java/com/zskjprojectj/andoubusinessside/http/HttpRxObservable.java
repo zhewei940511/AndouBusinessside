@@ -65,7 +65,7 @@ public class HttpRxObservable {
      * 传入LifecycleProvider自动管理生命周期,避免内存溢出
      * 备注:需要继承RxActivity.../RxFragment...
      */
-//    public static <T> Observable<BaseResult<T>> getObservable(Observable<BaseResult<T>> apiObservable, LifecycleProvider<ActivityEvent> lifecycle) {
+//    public static <T> Observable<BaseResult<T>> getObservable(Observable<BaseResult<T>> apiObservable, LifecycleProvider<activity android:screenOrientation="portrait"Event> lifecycle) {
 //        Observable<BaseResult<T>> observable;
 //
 //        if (lifecycle != null) {
@@ -84,10 +84,10 @@ public class HttpRxObservable {
      * 备注:网络请求Observable构建
      * data:网络请求参数
      * <h1>补充说明</h1>
-     * 传入LifecycleProvider<ActivityEvent>手动管理生命周期,避免内存溢出
+     * 传入LifecycleProvider<activity android:screenOrientation="portrait"Event>手动管理生命周期,避免内存溢出
      * 备注:需要继承RxActivity,RxAppCompatActivity,RxFragmentActivity
      */
-//    public static <T> Observable<BaseResult<T>> getObservable(Observable<BaseResult<T>> apiObservable, LifecycleProvider<ActivityEvent> lifecycle, ActivityEvent event) {
+//    public static <T> Observable<BaseResult<T>> getObservable(Observable<BaseResult<T>> apiObservable, LifecycleProvider<activity android:screenOrientation="portrait"Event> lifecycle, ActivityEvent event) {
 //        Observable<BaseResult<T>> observable;
 //        if (lifecycle != null) {
 //            observable = apiObservable

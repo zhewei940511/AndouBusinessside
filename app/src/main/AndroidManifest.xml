@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zskjprojectj.andoubusinessside">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,49 +12,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".activity.EditInfoActivity"></activity>
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.JoinInfoUploadActivity" />
-        <activity android:name=".activity.JoinActivity" />
-        <activity android:name=".activity.QrCodeActivity" />
-        <activity android:name=".app.BaseActivity" />
-        <activity android:name=".activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.DateOrderDetailActivity" />
-        <activity android:name=".activity.DishOrderListActivityActivity" />
-        <activity android:name=".activity.NewDishActivity" />
-        <activity android:name=".activity.FinishHotelOrderListActivity" />
-        <activity android:name=".activity.CancelOrderListActivity" />
-        <activity android:name=".activity.NewRoomActivity" />
-        <activity android:name=".activity.HotelOrderDetailActivity" />
-        <activity android:name=".activity.UnCheckInOrderListActivity" />
-        <activity android:name=".activity.NoticeDetailActivity" />
-        <activity android:name=".activity.NoticeListActivity" />
-        <activity android:name=".activity.ResetPasswordActivity" />
-        <activity android:name=".activity.NewGoodsActivity" />
-        <activity android:name=".activity.CategoryActivity" />
-        <activity android:name=".activity.ManageGoodsActivity" />
-        <activity android:name=".activity.CashOutActivity" />
-        <activity android:name=".activity.WalletActivity" />
-        <activity android:name=".activity.RefundActivity" />
-        <activity android:name=".activity.RefundOrderListActivity" />
-        <activity android:name=".activity.SendActivity" />
-        <activity android:name=".activity.ReviewDetailActivity" />
-        <activity android:name=".activity.ChartActivity" />
-        <activity android:name=".activity.ManageShopActivity" />
-        <activity android:name=".activity.EditPriceSuccessActivity" />
-        <activity android:name=".activity.EditPriceActivity" />
-        <activity android:name=".activity.OrderInfoActivity" />
-        <activity android:name=".activity.OrderListActivity" />
-        <activity android:name=".activity.MainActivity" />
-
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
         <meta-data
             android:name="design_width_in_dp"
             android:value="375" />
@@ -61,7 +21,119 @@
             android:name="design_height_in_dp"
             android:value="667" />
 
-        <activity android:name=".activity.UserCenterActivity" />
-    </application>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.EditInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.JoinInfoUploadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.JoinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.QrCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.BaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DateOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DishOrderListActivityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewDishActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FinishHotelOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CancelOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewRoomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HotelOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UnCheckInOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NoticeDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NoticeListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewGoodsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ManageGoodsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CashOutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RefundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RefundOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReviewDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ManageShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditPriceSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditPriceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OrderInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserCenterActivity"
+            android:screenOrientation="portrait" />
+    </application>
 </manifest>
