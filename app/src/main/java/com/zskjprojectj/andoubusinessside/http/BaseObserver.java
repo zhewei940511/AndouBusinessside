@@ -15,24 +15,29 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
 public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> implements ProgressCancelListener {
-    public final PublishSubject<Object> retrySubject = PublishSubject.create();
+    PublishSubject<Object> retryButtonClicked = PublishSubject.create();
 
     private BaseActivity activity;
     private Disposable d;
-    private BaseResult<T> mData;
     private boolean showLoading;
-    private boolean showRetry;
+    private boolean showNetworkError;
     private ViewGroup contentView;
     private View progressBarContainer;
+    private View networkErrorContainer;
 
     public BaseObserver(BaseActivity activity) {
         this(activity, true);
     }
 
     public BaseObserver(BaseActivity activity, boolean showLoading) {
+        this(activity, true, true);
+    }
+
+    public BaseObserver(BaseActivity activity, boolean showLoading, boolean showNetworkError) {
         this.activity = activity;
         this.showLoading = showLoading;
-        this.contentView = activity.findViewById(R.id.contentView);
+        this.showNetworkError = showNetworkError;
+        this.contentView = activity.findViewById(R.id.baseContentView);
     }
 
     private void showProgressDialog() {
@@ -51,6 +56,7 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
         });
     }
 
+
     private void dismissProgressDialog() {
         contentView.removeView(progressBarContainer);
     }
@@ -66,7 +72,6 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
     @Override
     public void onNext(BaseResult<T> result) {
         dismissProgressDialog();
-        mData = result;
         try {
             if (result.getCode().equals("200")) {
                 onSuccess(result);

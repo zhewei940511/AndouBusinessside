@@ -20,7 +20,7 @@ public class ActionBarUtil {
         if (actionBarContainer.getChildCount() == 0) {
             LayoutInflater.from(activity).inflate(R.layout.layout_action_bar, actionBarContainer);
         }
-        actionBarContainer.findViewById(R.id.backBtn).setOnClickListener(view -> activity.finish());
+        actionBarContainer.findViewById(R.id.backBtn).setOnClickListener(view -> activity.onBackPressed());
     }
 
     private static TextView getTitleTxt(BaseActivity activity) {

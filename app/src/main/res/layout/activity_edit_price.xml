@@ -202,18 +202,5 @@
         android:textColor="@android:color/white"
         android:textSize="13sp" />
 
-    <FrameLayout
-        android:id="@+id/progressBar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerInParent="true"
-        android:alpha="0.5"
-        android:background="#5ED3AE"
-        android:visibility="gone">
 
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center" />
-    </FrameLayout>
 </RelativeLayout>

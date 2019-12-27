@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mActivity = this;
         setContentView(R.layout.activity_base);
-        contentView = findViewById(R.id.contentView);
+        contentView = findViewById(R.id.baseContentView);
         LayoutInflater.from(mActivity).inflate(getContentView(), contentView);
         ButterKnife.bind(mActivity);
     }

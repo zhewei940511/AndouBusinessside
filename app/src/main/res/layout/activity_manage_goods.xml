@@ -61,17 +61,18 @@
             android:layout_height="50dp"
             android:background="#FFFFFF"
             android:gravity="center_vertical"
-            android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
-            <ImageView
+            <CheckBox
+                android:id="@+id/selectedAllCbx"
                 android:layout_width="19dp"
                 android:layout_height="19dp"
-                android:src="@drawable/sl_check_box" />
+                android:layout_marginStart="10dp"
+                android:button="@drawable/sl_check_box" />
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <TextView
@@ -137,18 +138,5 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/progressBar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerInParent="true"
-        android:alpha="0.5"
-        android:background="#5ED3AE"
-        android:visibility="gone">
 
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center" />
-    </FrameLayout>
 </RelativeLayout>

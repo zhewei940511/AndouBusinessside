@@ -15,12 +15,12 @@
         android:paddingEnd="15dp"
         android:paddingBottom="20dp">
 
-        <ImageView
+        <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/sl_check_box" />
+            android:button="@drawable/sl_check_box" />
 
         <ImageView
             android:id="@+id/iconImg"

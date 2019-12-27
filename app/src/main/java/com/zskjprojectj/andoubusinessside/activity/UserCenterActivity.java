@@ -15,6 +15,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
+import com.zskjprojectj.andoubusinessside.http.BaseObserver;
+import com.zskjprojectj.andoubusinessside.http.BaseResult;
+import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
+import com.zskjprojectj.andoubusinessside.http.ListData;
+import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 
@@ -42,7 +48,13 @@ public class UserCenterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         progressBar = findViewById(R.id.progressBar);
         actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);
+        HttpRxObservable.getObservable(mActivity, ApiUtils.getApiService().testList())
+                .subscribe(new BaseObserver<ListData<Order>>(mActivity) {
+                    @Override
+                    public void onSuccess(BaseResult<ListData<Order>> result) {
 
+                    }
+                });
         findViewById(R.id.todayOrderEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, OrderListActivity.class);
             intent.putExtra(KEY_ORDER_TYPE, 0);
@@ -237,7 +249,6 @@ public class UserCenterActivity extends BaseActivity {
 
                 break;
         }
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
