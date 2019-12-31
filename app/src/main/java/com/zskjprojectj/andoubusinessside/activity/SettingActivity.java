@@ -1,12 +1,14 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -17,6 +19,7 @@ import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.http.ListData;
+import com.zskjprojectj.andoubusinessside.model.LoginUtil;
 import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.GlideEngine;
@@ -33,13 +36,33 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.nickNameTxt)
     TextView nickNameTxt;
 
+    @OnClick(R.id.logoutBtn)
+    void logout() {
+        new AlertDialog.Builder(mActivity)
+                .setTitle("退出登录")
+                .setMessage("确定退出登录吗?")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定", (dialog, which) -> {
+                    LoginUtil.logout();
+                    Intent intent = new Intent(mActivity, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    ActivityUtils.startActivity(intent);
+                    finish();
+                })
+                .show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "设置");
-        nickNameTxt.setOnClickListener(v -> {
-            EditInfoActivity.start(mActivity, "修改昵称", "请输入昵称", REQUEST_CODE_CHANGE_NICK_NAME);
-        });
+        nickNameTxt.setOnClickListener(v ->
+                EditInfoActivity.start(mActivity,
+                        "修改昵称",
+                        "请输入昵称",
+                        nickNameTxt.getText().toString(),
+                        REQUEST_CODE_CHANGE_NICK_NAME));
     }
 
     @OnClick(R.id.changeAvatarBtn)

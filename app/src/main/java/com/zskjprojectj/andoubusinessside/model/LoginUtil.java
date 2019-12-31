@@ -2,7 +2,7 @@ package com.zskjprojectj.andoubusinessside.model;
 
 import com.blankj.utilcode.util.SPUtils;
 
-public class Config {
+public class LoginUtil {
     private static final String KEY_TOKEN = "KEY_TOKEN";
     private static final String KEY_UID = "KEY_UID";
 
@@ -17,5 +17,9 @@ public class Config {
     public static void saveUidAndToken(String uid, String token) {
         SPUtils.getInstance().put(KEY_TOKEN, token);
         SPUtils.getInstance().put(KEY_UID, uid);
+    }
+
+    public static void logout() {
+        saveUidAndToken("", "");
     }
 }

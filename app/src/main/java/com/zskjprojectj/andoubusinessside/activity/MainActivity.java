@@ -21,6 +21,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "查看内容");
+        ActionBarUtil.setBackEnable(mActivity, false);
         UserUtil.getInstance().user = new User();
         findViewById(R.id.mallEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);

@@ -17,7 +17,7 @@
             android:layout_height="48dp">
 
             <View
-                android:id="@+id/customActionBarBackground"
+                android:id="@+id/actionBarBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#5ED3AE" />

@@ -1,6 +1,7 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.willy.ratingbar.ScaleRatingBar;
@@ -22,6 +24,7 @@ import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.http.ListData;
 import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 
 import java.util.Random;
@@ -35,8 +38,6 @@ public class UserCenterActivity extends BaseActivity {
     public static final String KEY_USER = "KEY_USER";
 
     private User info;
-    private View progressBar;
-    private TextView actionBarTitleTxt;
 
     @OnClick(R.id.settingEntryBtn)
     void onSettingEntryBtn() {
@@ -46,8 +47,8 @@ public class UserCenterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        progressBar = findViewById(R.id.progressBar);
-        actionBarTitleTxt = findViewById(R.id.actionBarTitleTxt);
+        BarUtils.setStatusBarColor(mActivity, Color.TRANSPARENT);
+        ActionBarUtil.getBackground(mActivity, false).setAlpha(0);
         HttpRxObservable.getObservable(mActivity, ApiUtils.getApiService().testList())
                 .subscribe(new BaseObserver<ListData<Order>>(mActivity) {
                     @Override
@@ -60,8 +61,6 @@ public class UserCenterActivity extends BaseActivity {
             intent.putExtra(KEY_ORDER_TYPE, 0);
             startActivity(intent);
         });
-
-
         findViewById(R.id.manageShopEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, ManageShopActivity.class);
             startActivity(intent);
@@ -83,9 +82,8 @@ public class UserCenterActivity extends BaseActivity {
             startActivity(intent);
         });
         ScrollView scrollView = findViewById(R.id.scrollView);
-        View actionBarBackground = findViewById(R.id.customActionBarBackground);
         final ViewTreeObserver.OnScrollChangedListener onScrollChangedListener = ()
-                -> actionBarBackground.setAlpha((float) (scrollView.getScrollY() * 0.01));
+                -> ActionBarUtil.getBackground(mActivity, false).setAlpha((float) (scrollView.getScrollY() * 0.01));
         scrollView.setOnTouchListener(new View.OnTouchListener() {
             private ViewTreeObserver observer;
 
@@ -144,7 +142,7 @@ public class UserCenterActivity extends BaseActivity {
         ((TextView) findViewById(R.id.itemCount)).setText(user.getItemCount() + "");
         switch (user.getType()) {
             case 0:
-                actionBarTitleTxt.setText("商城商家中心");
+                ActionBarUtil.setTitle(mActivity, "商城商家中心", false);
                 View unsendOrderEntryBtn = findViewById(R.id.unsendOrderEntryBtn);
                 View unsendOrderEntryBtn2 = findViewById(R.id.unsendOrderEntryBtn2);
                 unsendOrderEntryBtn.setVisibility(View.VISIBLE);
@@ -198,7 +196,7 @@ public class UserCenterActivity extends BaseActivity {
                 itemManageTxt2.setText("当前商品");
                 break;
             case 1:
-                actionBarTitleTxt.setText("酒店商家中心");
+                ActionBarUtil.setTitle(mActivity, "酒店商家中心", false);
                 View.OnClickListener finishOrderEntryListener2 = view -> {
                     Intent intent = new Intent(this, FinishHotelOrderListActivity.class);
                     intent.putExtra(KEY_ORDER_TYPE, 4);
@@ -206,7 +204,6 @@ public class UserCenterActivity extends BaseActivity {
                 };
                 findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener2);
                 findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener2);
-
                 todayFinishEntryBtn.setVisibility(View.VISIBLE);
                 todayFinishEntryBtn.setOnClickListener(finishOrderEntryListener2);
                 ((TextView) findViewById(R.id.todayFinishCount)).setText(user.getTodayfinishOrderCount() + "");
@@ -226,7 +223,7 @@ public class UserCenterActivity extends BaseActivity {
                 itemManageTxt2.setText("当前房间");
                 break;
             case 2:
-                actionBarTitleTxt.setText("饭店商家中心");
+                ActionBarUtil.setTitle(mActivity, "饭店商家中心", false);
                 ((TextView) findViewById(R.id.todayOrderTxt)).setText("今日预约");
                 todayFinishEntryBtn.setVisibility(View.VISIBLE);
                 todayFinishEntryBtn.setOnClickListener(view ->
@@ -246,7 +243,6 @@ public class UserCenterActivity extends BaseActivity {
                 findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener3);
                 findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener3);
                 findViewById(R.id.dateOrderEntryBtn).setOnClickListener(finishOrderEntryListener3);
-
                 break;
         }
     }

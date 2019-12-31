@@ -1,10 +1,13 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.zskjprojectj.andoubusinessside.R;
@@ -13,7 +16,7 @@ import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
-import com.zskjprojectj.andoubusinessside.model.Config;
+import com.zskjprojectj.andoubusinessside.model.LoginUtil;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
@@ -65,7 +68,7 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResult<User> result) {
-                        Config.saveUidAndToken(result.data.id, result.data.token);
+                        LoginUtil.saveUidAndToken(result.data.id, result.data.token);
                         ActivityUtils.startActivity(MainActivity.class);
                         ToastUtil.showToast(result.getMsg());
                         finish();
@@ -76,6 +79,13 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.backBtn)
     void onBackBtnClick() {
         finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BarUtils.setStatusBarLightMode(mActivity, true);
+        BarUtils.setStatusBarColor(mActivity, Color.TRANSPARENT);
     }
 
     @Override

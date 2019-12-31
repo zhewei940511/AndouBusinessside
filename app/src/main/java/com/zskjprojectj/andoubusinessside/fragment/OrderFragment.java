@@ -21,7 +21,6 @@ import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
 
-import java.io.Serializable;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -47,60 +46,75 @@ public class OrderFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         adapter.bindToRecyclerView(recyclerView);
-        adapter.setOnItemChildClickListener((adapter, view1, position) -> {
+        adapter.setOnItemChildClickListener((adapter1, view1, position) -> {
             Intent intent;
             switch (view1.getId()) {
                 case R.id.controlBtn:
                     switch (state) {
                         case 1:
                             intent = new Intent(getActivity(), EditPriceActivity.class);
-                            intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
+                            intent.putExtra(KEY_ORDER, adapter.getItem(position));
                             startActivityForResult(intent, 666);
                             break;
                         case 2:
                             intent = new Intent(getActivity(), SendActivity.class);
-                            intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
+                            intent.putExtra(KEY_ORDER, adapter.getItem(position));
                             startActivityForResult(intent, 666);
                             break;
                         case 4:
                         case 10:
                             intent = new Intent(getActivity(), ReviewDetailActivity.class);
-                            intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
+                            intent.putExtra(KEY_ORDER, adapter.getItem(position));
                             startActivity(intent);
                             break;
                         case 5:
                             intent = new Intent(getActivity(), RefundActivity.class);
-                            intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
+                            intent.putExtra(KEY_ORDER, adapter.getItem(position));
                             startActivity(intent);
                             break;
                         case 8:
                         case 9:
                             intent = new Intent(getActivity(), HotelOrderDetailActivity.class);
-                            intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
+                            intent.putExtra(KEY_ORDER, adapter.getItem(position));
                             startActivity(intent);
                             break;
                         default:
-                            intent = new Intent(getActivity(), OrderInfoActivity.class);
-                            intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
-                            startActivityForResult(intent, 666);
+                            OrderInfoActivity.start(getActivity(), adapter.getItem(position), 666);
                             break;
                     }
                     break;
                 case R.id.orderInfoEntryBtn:
                     if (state == 10) {
                         intent = new Intent(getActivity(), HotelOrderDetailActivity.class);
-                        intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
+                        intent.putExtra(KEY_ORDER, adapter.getItem(position));
                         startActivityForResult(intent, 666);
                     } else {
-                        intent = new Intent(getActivity(), OrderInfoActivity.class);
-                        intent.putExtra(KEY_ORDER, (Serializable) adapter.getItem(position));
-                        startActivityForResult(intent, 666);
+                        OrderInfoActivity.start(getActivity(), adapter.getItem(position), 666);
                     }
                     break;
             }
         });
         PageLoadUtil.get((BaseActivity) getActivity(), recyclerView, adapter, refreshLayout
                 , ApiUtils.getApiService().testList()).load();
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
+        adapter.addData(getOrder(state));
     }
 
 

@@ -6,16 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.google.gson.stream.MalformedJsonException;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.activity.LoginActivity;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.subjects.PublishSubject;
 
 public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> implements ProgressCancelListener {
-    PublishSubject<Object> retryButtonClicked = PublishSubject.create();
 
     private BaseActivity activity;
     private Disposable d;
@@ -23,7 +23,6 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
     private boolean showNetworkError;
     private ViewGroup contentView;
     private View progressBarContainer;
-    private View networkErrorContainer;
 
     public BaseObserver(BaseActivity activity) {
         this(activity, true);
@@ -75,6 +74,8 @@ public abstract class BaseObserver<T> extends BaseHandleObserver<BaseResult<T>> 
         try {
             if (result.getCode().equals("200")) {
                 onSuccess(result);
+            } else if (result.getCode().equals("202")) {
+                ActivityUtils.startActivity(LoginActivity.class);
             } else {
                 onError(new ApiException(result.getCode(), result.getMsg()));
             }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
@@ -35,7 +36,7 @@ public class OrderInfoActivity extends BaseActivity {
         Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
         TextView controlBtn = findViewById(R.id.controlBtn);
         TextView payWayTxt = findViewById(R.id.payWayTxt);
-        if (info.getState().equals("待付款")) {
+        if ("待付款".equals(info.getState())) {
             controlBtn.setText("修改价格");
             controlBtn.setOnClickListener(view -> {
                 Intent intent = new Intent(OrderInfoActivity.this, EditPriceActivity.class);
@@ -43,7 +44,7 @@ public class OrderInfoActivity extends BaseActivity {
                 startActivityForResult(intent, 666);
             });
             payWayTxt.setText(info.getState());
-        } else if (info.getState().equals("待发货")) {
+        } else if ("待发货".equals(info.getState())) {
             findViewById(R.id.orderStateContainer).setVisibility(View.VISIBLE);
             findViewById(R.id.finalTotalContainer).setVisibility(View.VISIBLE);
             ((TextView) findViewById(R.id.stateTxt)).setText(info.getState());
@@ -56,12 +57,12 @@ public class OrderInfoActivity extends BaseActivity {
             });
             payWayTxt.setText("支付宝支付");
             payWayTxt.setTextColor(Color.parseColor("#ff1c1c1c"));
-        } else if (info.getState().equals("已发货")) {
+        } else if ("已发货".equals(info.getState())) {
             ((TextView) findViewById(R.id.stateTxt)).setText(info.getState());
             findViewById(R.id.billContainer).setVisibility(View.GONE);
             findViewById(R.id.sendContainer).setVisibility(View.VISIBLE);
             findViewById(R.id.controlBtnContainer).setVisibility(View.GONE);
-        } else if (info.getState().equals("退货退款成功")) {
+        } else if ("退货退款成功".equals(info.getState())) {
             findViewById(R.id.refundAddrContainer).setVisibility(View.VISIBLE);
             findViewById(R.id.sendContainer).setVisibility(View.VISIBLE);
             findViewById(R.id.refundContainer).setVisibility(View.VISIBLE);
@@ -103,5 +104,11 @@ public class OrderInfoActivity extends BaseActivity {
                 progressBar.setVisibility(View.GONE);
             }, 1000);
         }
+    }
+
+    public static void start(Activity baseActivity, Order info, int requestCode) {
+        Intent intent = new Intent(baseActivity, OrderInfoActivity.class);
+        intent.putExtra(KEY_ORDER, info);
+        ActivityUtils.startActivityForResult(baseActivity, intent, requestCode);
     }
 }

@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actionBarRoot"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    tools:showIn="@layout/activity_order_list">
+    android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/customActionBarBackground"
+        android:id="@+id/actionBarBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/actionBarContentView"
+        android:layout_alignParentTop="@id/actionBarContentView"
         android:background="#5ED3AE" />
 
     <FrameLayout
-        android:id="@+id/backBtn"
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:paddingStart="15dp">
+        android:id="@+id/actionBarContentView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
 
-        <ImageView
-            android:layout_width="8.5dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center_vertical"
-            android:src="@mipmap/ic_back_01" />
+        <FrameLayout
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:paddingStart="15dp">
+
+            <ImageView
+                android:layout_width="8.5dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_back_01" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/actionBarTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#ffffffff"
+            android:textSize="14sp"
+            tools:text="全部订单" />
     </FrameLayout>
-
-
-    <TextView
-        android:id="@+id/actionBarTitleTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="全部订单"
-        android:textColor="#ffffffff"
-        android:textSize="14sp" />
-</FrameLayout>
+</RelativeLayout>

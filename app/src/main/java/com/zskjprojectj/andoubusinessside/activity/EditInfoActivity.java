@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
@@ -20,6 +21,7 @@ public class EditInfoActivity extends BaseActivity {
     public static final String KEY_HINT = "KEY_HINT";
     public static final String KEY_CONFIRM_TXT = "KEY_CONFIRM_TXT";
     public static final String KEY_INFO = "KEY_INFO";
+    public static final String KEY_CONTENT = "KEY_INFO";
 
     @BindView(R.id.infoEdt)
     EditText infoEdt;
@@ -33,8 +35,11 @@ public class EditInfoActivity extends BaseActivity {
         String title = getIntent().getStringExtra(KEY_TITLE);
         String hint = getIntent().getStringExtra(KEY_HINT);
         String confirmText = getIntent().getStringExtra(KEY_CONFIRM_TXT);
+        String content = getIntent().getStringExtra(KEY_CONTENT);
         ActionBarUtil.setTitle(mActivity, title);
         infoEdt.setHint(hint);
+        infoEdt.setText(content);
+        infoEdt.setSelection(infoEdt.length());
         confirmBtn.setText(confirmText);
         confirmBtn.setOnClickListener(v -> {
             String infoStr = infoEdt.getText().toString().trim();
@@ -46,6 +51,7 @@ public class EditInfoActivity extends BaseActivity {
             intent.putExtra(KEY_INFO, infoStr);
             setResult(Activity.RESULT_OK, intent);
         });
+        KeyboardUtils.showSoftInput(mActivity);
     }
 
     @Override
@@ -53,14 +59,16 @@ public class EditInfoActivity extends BaseActivity {
         return R.layout.activity_edit_info;
     }
 
-    public static void start(Activity activity, String title, String hint, int requestCode) {
-        start(activity, title, hint, "确定", requestCode);
+    public static void start(Activity activity, String title, String hint, String content, int requestCode) {
+        start(activity, title, hint, "确定", content, requestCode);
     }
 
-    public static void start(Activity activity, String title, String hint, String confirmText, int requestCode) {
-        Intent intent = new Intent();
+    public static void start(Activity activity, String title, String hint, String confirmText
+            , String content, int requestCode) {
+        Intent intent = new Intent(activity, EditInfoActivity.class);
         intent.putExtra(KEY_TITLE, title);
         intent.putExtra(KEY_HINT, hint);
+        intent.putExtra(KEY_CONTENT, content);
         intent.putExtra(KEY_CONFIRM_TXT, confirmText);
         ActivityUtils.startActivityForResult(activity, intent, requestCode);
     }
