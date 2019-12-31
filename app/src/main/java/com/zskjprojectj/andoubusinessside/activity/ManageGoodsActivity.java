@@ -15,6 +15,7 @@ import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.adapter.BaseAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Goods;
+import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 import com.zskjprojectj.andoubusinessside.utils.UserUtil;
@@ -60,11 +61,11 @@ public class ManageGoodsActivity extends BaseActivity {
                 .setOnClickListener(view -> CategoryActivity.start());
         findViewById(R.id.newGoodsBtn)
                 .setOnClickListener(view -> {
-                    if (UserUtil.getInstance().user.getType() == 0) {
+                    if (UserUtil.getInstance().user.currentType == User.Type.MALL) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewGoodsActivity.class));
-                    } else if (UserUtil.getInstance().user.getType() == 1) {
+                    } else if (UserUtil.getInstance().user.currentType == User.Type.HOTEL) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewRoomActivity.class));
-                    } else if (UserUtil.getInstance().user.getType() == 2) {
+                    } else if (UserUtil.getInstance().user.currentType == User.Type.RESTUARANT) {
                         startActivity(new Intent(ManageGoodsActivity.this, NewDishActivity.class));
                     }
                 });

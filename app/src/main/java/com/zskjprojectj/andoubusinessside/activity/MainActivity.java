@@ -25,19 +25,19 @@ public class MainActivity extends BaseActivity {
         UserUtil.getInstance().user = new User();
         findViewById(R.id.mallEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
-            UserUtil.getInstance().user.setType(0);
+            UserUtil.getInstance().user.types.add(User.Type.MALL);
             intent.putExtra(KEY_USER, UserUtil.getInstance().user);
             startActivity(intent);
         });
         findViewById(R.id.hotelEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
-            UserUtil.getInstance().user.setType(1);
+            UserUtil.getInstance().user.types.add(User.Type.HOTEL);
             intent.putExtra(KEY_USER, UserUtil.getInstance().user);
             startActivity(intent);
         });
         findViewById(R.id.restaurantEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, UserCenterActivity.class);
-            UserUtil.getInstance().user.setType(2);
+            UserUtil.getInstance().user.types.add(User.Type.RESTUARANT);
             intent.putExtra(KEY_USER, UserUtil.getInstance().user);
             startActivity(intent);
         });
