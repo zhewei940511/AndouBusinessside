@@ -1,10 +1,11 @@
 package com.zskjprojectj.andoubusinessside.http;
 
-import com.google.gson.GsonBuilder;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -27,18 +28,21 @@ public class RetrofitUtils {
     private RetrofitUtils() {
     }
 
-    /**
-     * 设置okHttp
-     *
-     * @author ZhongDaFeng
-     */
     private static OkHttpClient okHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(OUT_TIME, TimeUnit.SECONDS)
                 .writeTimeout(READ_WRITE_TIME, TimeUnit.SECONDS)
                 .readTimeout(READ_WRITE_TIME, TimeUnit.SECONDS)
-                .addInterceptor(new HttpLoggingInterceptor(new HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY))
-                .addInterceptor(new HeaderInterceptors());
+                .addInterceptor(chain -> {
+                    Request request = chain.request()
+                            .newBuilder()
+                            .addHeader("uid", LoginInfo.getUid())
+                            .addHeader("token", LoginInfo.getToken())
+                            .build();
+                    return chain.proceed(request);
+                })
+                .addInterceptor(new HttpLoggingInterceptor(
+                        new HttpLogger()).setLevel(HttpLoggingInterceptor.Level.BODY));
         return builder.build();
     }
 
@@ -51,7 +55,7 @@ public class RetrofitUtils {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient())
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("MMM d, yyyy").create()))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 

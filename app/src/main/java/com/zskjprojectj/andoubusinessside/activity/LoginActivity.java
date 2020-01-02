@@ -9,15 +9,14 @@ import android.widget.EditText;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.RegexUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
-import com.zskjprojectj.andoubusinessside.model.LoginUtil;
-import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
+import com.zskjprojectj.andoubusinessside.model.UserT;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -40,7 +39,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.joinEntryBtn)
     void onJoinEntryBtnClick() {
-        ActivityUtils.startActivity(JoinActivity.class);
+        ToastUtil.showToast("请先登录,然后选择要入驻的商家类型!");
     }
 
     @OnTextChanged(value = R.id.passwordEdt, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -54,7 +53,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void setLoginBtnState() {
-        loginBtn.setEnabled(RegexUtils.isMobileSimple(mobileEdt.getText().toString()) &&
+        loginBtn.setEnabled(
+                //TODO 为了测试取消手机号码正确性验证
+//                RegexUtils.isMobileSimple(mobileEdt.getText().toString()) &&
                 !passwordEdt.getText().toString().isEmpty());
     }
 
@@ -64,11 +65,11 @@ public class LoginActivity extends BaseActivity {
         HttpRxObservable.getObservable(ApiUtils.getApiService().login(
                 mobileEdt.getText().toString(),
                 passwordEdt.getText().toString()))
-                .subscribe(new BaseObserver<User>(mActivity) {
+                .subscribe(new BaseObserver<UserT>(mActivity) {
 
                     @Override
-                    public void onSuccess(BaseResult<User> result) {
-                        LoginUtil.saveUidAndToken(result.data.id, result.data.token);
+                    public void onSuccess(BaseResult<UserT> result) {
+                        LoginInfo.saveUidAndToken(result.data.id, result.data.token);
                         ActivityUtils.startActivity(MainActivity.class);
                         ToastUtil.showToast(result.getMsg());
                         finish();

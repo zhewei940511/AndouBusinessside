@@ -4,13 +4,13 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.model.UserT;
 
 public class UserUtil {
     private static String KEY_USER = "KEY_USER";
 
-    public User
-            user;
+    public UserT
+            userT;
 
     private static final UserUtil ourInstance = new UserUtil();
 
@@ -19,14 +19,14 @@ public class UserUtil {
     }
 
     private UserUtil() {
-        user = GsonUtils.fromJson(SPUtils.getInstance().getString(KEY_USER), User.class);
+        userT = GsonUtils.fromJson(SPUtils.getInstance().getString(KEY_USER), UserT.class);
         //TODO
-        if (user == null) {
-            user = new User();
+        if (userT == null) {
+            userT = new UserT();
         }
     }
 
     public boolean isLogin() {
-        return !TextUtils.isEmpty(user.token);
+        return !TextUtils.isEmpty(userT.token);
     }
 }

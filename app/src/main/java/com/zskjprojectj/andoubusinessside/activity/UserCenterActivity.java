@@ -23,9 +23,10 @@ import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.http.ListData;
 import com.zskjprojectj.andoubusinessside.model.Order;
-import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.model.UserT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
+import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
 import java.util.Random;
 
@@ -36,8 +37,6 @@ import static com.zskjprojectj.andoubusinessside.activity.OrderListActivity.KEY_
 public class UserCenterActivity extends BaseActivity {
 
     public static final String KEY_USER = "KEY_USER";
-
-    private User info;
 
     @OnClick(R.id.settingEntryBtn)
     void onSettingEntryBtn() {
@@ -101,46 +100,45 @@ public class UserCenterActivity extends BaseActivity {
                 return false;
             }
         });
-        info = (User) getIntent().getSerializableExtra(KEY_USER);
-        info.avatar = ("http://img4.imgtn.bdimg.com/it/u=2843285098,2906023234&fm=26&gp=0.jpg");
-        info.name = ("淘淘的淘宝店");
-        info.accountCount = (789.44F);
-        info.unSendCount = (78);
-        info.unPayCount = (18);
-        info.finishCount = (63);
-        info.itemCount = (123);
-        info.rate = (4);
-        info.refundCount = (12);
-        info.sendedCount = (123);
-        info.state = ("营业中");
-        info.todayOrderCount = (12);
-        info.todayfinishOrderCount = (new Random().nextInt(99));
-        info.unUseCount = (new Random().nextInt(99));
-        info.cancelCount = (new Random().nextInt(99));
-        info.isVip = (true);
-        bindView(info);
+        UserUtil.getInstance().userT.avatar = ("http://img4.imgtn.bdimg.com/it/u=2843285098,2906023234&fm=26&gp=0.jpg");
+        UserUtil.getInstance().userT.name = ("淘淘的淘宝店");
+        UserUtil.getInstance().userT.accountCount = (789.44F);
+        UserUtil.getInstance().userT.unSendCount = (78);
+        UserUtil.getInstance().userT.unPayCount = (18);
+        UserUtil.getInstance().userT.finishCount = (63);
+        UserUtil.getInstance().userT.itemCount = (123);
+        UserUtil.getInstance().userT.rate = (4);
+        UserUtil.getInstance().userT.refundCount = (12);
+        UserUtil.getInstance().userT.sendedCount = (123);
+        UserUtil.getInstance().userT.state = ("营业中");
+        UserUtil.getInstance().userT.todayOrderCount = (12);
+        UserUtil.getInstance().userT.todayfinishOrderCount = (new Random().nextInt(99));
+        UserUtil.getInstance().userT.unUseCount = (new Random().nextInt(99));
+        UserUtil.getInstance().userT.cancelCount = (new Random().nextInt(99));
+        UserUtil.getInstance().userT.isVip = (true);
+        bindView(UserUtil.getInstance().userT);
     }
 
-    private void bindView(User user) {
+    private void bindView(UserT userT) {
         Glide.with(mActivity)
-                .load(user.avatar)
+                .load(userT.avatar)
                 .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
                 .into((ImageView) findViewById(R.id.avatar));
-        ((TextView) findViewById(R.id.name)).setText(user.name);
-        ((TextView) findViewById(R.id.state)).setText(user.state);
-        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(user.rate);
-        findViewById(R.id.vipImg).setVisibility(user.isVip ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.finishCount2)).setText(user.finishCount + "");
-        ((TextView) findViewById(R.id.todayOrderCount)).setText(user.todayfinishOrderCount + "");
-        ((TextView) findViewById(R.id.finishCount1)).setText(user.finishCount + "");
+        ((TextView) findViewById(R.id.name)).setText(userT.name);
+        ((TextView) findViewById(R.id.state)).setText(userT.state);
+        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(userT.rate);
+        findViewById(R.id.vipImg).setVisibility(userT.isVip ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.finishCount2)).setText(userT.finishCount + "");
+        ((TextView) findViewById(R.id.todayOrderCount)).setText(userT.todayfinishOrderCount + "");
+        ((TextView) findViewById(R.id.finishCount1)).setText(userT.finishCount + "");
         View todayFinishEntryBtn = findViewById(R.id.todayFinishEntryBtn);
-        ((TextView) findViewById(R.id.accountCount)).setText(FormatUtil.getMoneyString(user.accountCount));
+        ((TextView) findViewById(R.id.accountCount)).setText(FormatUtil.getMoneyString(userT.accountCount));
         View cancelOrderEntryBtn = findViewById(R.id.cancelOrderEntryBtn);
         TextView itemManageTxt1 = findViewById(R.id.itemManageTxt1);
         TextView itemManageTxt2 = findViewById(R.id.itemManageTxt2);
         TextView cancelOrderCountTxt = findViewById(R.id.cancelCount);
-        ((TextView) findViewById(R.id.itemCount)).setText(user.itemCount + "");
-        if (user.types.contains(User.Type.MALL)) {
+        ((TextView) findViewById(R.id.itemCount)).setText(userT.itemCount + "");
+        if (userT.types.contains(UserT.Type.MALL)) {
             ActionBarUtil.setTitle(mActivity, "商城商家中心", false);
             View unsendOrderEntryBtn = findViewById(R.id.unsendOrderEntryBtn);
             View unsendOrderEntryBtn2 = findViewById(R.id.unsendOrderEntryBtn2);
@@ -184,16 +182,16 @@ public class UserCenterActivity extends BaseActivity {
             findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener);
             findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener);
 
-            ((TextView) findViewById(R.id.unsendCount1)).setText(user.unSendCount + "");
-            ((TextView) findViewById(R.id.unsendCount2)).setText(user.unSendCount + "");
-            ((TextView) findViewById(R.id.unsendCount2)).setText(user.unSendCount + "");
-            ((TextView) findViewById(R.id.unpayCount)).setText(user.unPayCount + "");
-            ((TextView) findViewById(R.id.sendedCount)).setText(user.sendedCount + "");
-            ((TextView) findViewById(R.id.refundCount)).setText(user.refundCount + "");
-            ((TextView) findViewById(R.id.itemCount)).setText(user.itemCount + "");
+            ((TextView) findViewById(R.id.unsendCount1)).setText(userT.unSendCount + "");
+            ((TextView) findViewById(R.id.unsendCount2)).setText(userT.unSendCount + "");
+            ((TextView) findViewById(R.id.unsendCount2)).setText(userT.unSendCount + "");
+            ((TextView) findViewById(R.id.unpayCount)).setText(userT.unPayCount + "");
+            ((TextView) findViewById(R.id.sendedCount)).setText(userT.sendedCount + "");
+            ((TextView) findViewById(R.id.refundCount)).setText(userT.refundCount + "");
+            ((TextView) findViewById(R.id.itemCount)).setText(userT.itemCount + "");
             itemManageTxt1.setText("商品管理");
             itemManageTxt2.setText("当前商品");
-        } else if (user.types.contains(User.Type.HOTEL)) {
+        } else if (userT.types.contains(UserT.Type.HOTEL)) {
             ActionBarUtil.setTitle(mActivity, "酒店商家中心", false);
             View.OnClickListener finishOrderEntryListener2 = view -> {
                 Intent intent = new Intent(this, FinishHotelOrderListActivity.class);
@@ -204,7 +202,7 @@ public class UserCenterActivity extends BaseActivity {
             findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener2);
             todayFinishEntryBtn.setVisibility(View.VISIBLE);
             todayFinishEntryBtn.setOnClickListener(finishOrderEntryListener2);
-            ((TextView) findViewById(R.id.todayFinishCount)).setText(user.todayfinishOrderCount + "");
+            ((TextView) findViewById(R.id.todayFinishCount)).setText(userT.todayfinishOrderCount + "");
             View scanBtn = findViewById(R.id.scanBtn);
             scanBtn.setVisibility(View.VISIBLE);
             scanBtn.setOnClickListener(view -> ActivityUtils.startActivity(QrCodeActivity.class));
@@ -215,22 +213,22 @@ public class UserCenterActivity extends BaseActivity {
             cancelOrderEntryBtn.setVisibility(View.VISIBLE);
             cancelOrderEntryBtn.setOnClickListener(view ->
                     startActivity(new Intent(UserCenterActivity.this, CancelOrderListActivity.class)));
-            ((TextView) findViewById(R.id.unUserCount)).setText(user.unSendCount + "");
-            cancelOrderCountTxt.setText(user.cancelCount + "");
+            ((TextView) findViewById(R.id.unUserCount)).setText(userT.unSendCount + "");
+            cancelOrderCountTxt.setText(userT.cancelCount + "");
             itemManageTxt1.setText("房间管理");
             itemManageTxt2.setText("当前房间");
-        } else if (user.types.contains(User.Type.RESTUARANT)) {
+        } else if (userT.types.contains(UserT.Type.RESTAURANT)) {
             ActionBarUtil.setTitle(mActivity, "饭店商家中心", false);
             ((TextView) findViewById(R.id.todayOrderTxt)).setText("今日预约");
             todayFinishEntryBtn.setVisibility(View.VISIBLE);
             todayFinishEntryBtn.setOnClickListener(view ->
                     startActivity(new Intent(UserCenterActivity.this, DishOrderListActivityActivity.class)));
             findViewById(R.id.dateOrderEntryBtn).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.dateOrderCount)).setText(user.dateOrderCount + "");
+            ((TextView) findViewById(R.id.dateOrderCount)).setText(userT.dateOrderCount + "");
             cancelOrderEntryBtn.setVisibility(View.VISIBLE);
             itemManageTxt1.setText("菜品管理");
             itemManageTxt2.setText("当前菜品");
-            cancelOrderCountTxt.setText(user.cancelCount + "");
+            cancelOrderCountTxt.setText(userT.cancelCount + "");
             cancelOrderEntryBtn.setOnClickListener(view ->
                     startActivity(new Intent(UserCenterActivity.this, DishOrderListActivityActivity.class)));
             View.OnClickListener finishOrderEntryListener3 = view -> {

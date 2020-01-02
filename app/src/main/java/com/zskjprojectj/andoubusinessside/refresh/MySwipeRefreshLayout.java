@@ -527,7 +527,7 @@ public class MySwipeRefreshLayout extends ViewGroup implements NestedScrollingPa
     /**
      * Set the color resources used in the progress animation from color resources.
      * The first color will also be the color of the bar that grows in response
-     * to a user swipe gesture.
+     * to a userT swipe gesture.
      *
      * @param colorResIds
      */
@@ -542,7 +542,7 @@ public class MySwipeRefreshLayout extends ViewGroup implements NestedScrollingPa
 
     /**
      * Set the colors used in the progress animation. The first
-     * color will also be the color of the bar that grows in response to a user
+     * color will also be the color of the bar that grows in response to a userT
      * swipe gesture.
      *
      * @param colors

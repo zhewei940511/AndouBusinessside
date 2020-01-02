@@ -19,7 +19,7 @@ import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.http.ListData;
-import com.zskjprojectj.andoubusinessside.model.LoginUtil;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.GlideEngine;
@@ -43,7 +43,7 @@ public class SettingActivity extends BaseActivity {
                 .setMessage("确定退出登录吗?")
                 .setNegativeButton("取消", null)
                 .setPositiveButton("确定", (dialog, which) -> {
-                    LoginUtil.logout();
+                    LoginInfo.logout();
                     Intent intent = new Intent(mActivity, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

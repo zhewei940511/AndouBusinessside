@@ -14,6 +14,7 @@
         android:src="@mipmap/ic_network_error" />
 
     <TextView
+        android:id="@+id/msgTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"

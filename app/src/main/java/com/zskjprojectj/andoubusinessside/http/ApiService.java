@@ -3,6 +3,9 @@ package com.zskjprojectj.andoubusinessside.http;
 
 import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.model.User;
+import com.zskjprojectj.andoubusinessside.model.UserT;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -157,16 +160,21 @@ public interface ApiService {
 
     @POST("api/login/login_p")
     @FormUrlEncoded
-    Observable<BaseResult<User>> login(@Field("phone") String phone, @Field("password") String password);
+    Observable<BaseResult<UserT>> login(@Field("phone") String phone, @Field("password") String password);
 
     @POST("api/login/send")
     @FormUrlEncoded
     Observable<BaseResult<Object>> getCode(@Field("phone") String phone,
-                                                 @Field("type") String type);
+                                           @Field("type") String type);
 
     @POST("api/login/forget")
     @FormUrlEncoded
     Observable<BaseResult<Object>> resetPassword(@Field("phone") String phone,
                                                  @Field("verify") String code,
                                                  @Field("new_password") String new_password);
+
+    @POST("api/goods/merchants")
+    @FormUrlEncoded
+    Observable<BaseResult<List<User.Role>>> merchantsInfo(@Field("uid") String uid,
+                                                          @Field("token") String token);
 }

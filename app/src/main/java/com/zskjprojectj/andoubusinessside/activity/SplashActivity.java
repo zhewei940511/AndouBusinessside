@@ -7,7 +7,7 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.model.LoginUtil;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 
 public class SplashActivity extends BaseActivity {
 
@@ -17,7 +17,7 @@ public class SplashActivity extends BaseActivity {
         BarUtils.setStatusBarColor(mActivity, Color.WHITE);
         BarUtils.setStatusBarLightMode(mActivity,true);
         contentView.postDelayed(() -> {
-            if (LoginUtil.getToken().isEmpty()) {
+            if (LoginInfo.getToken().isEmpty()) {
                 ActivityUtils.startActivity(LoginActivity.class);
             } else {
                 ActivityUtils.startActivity(MainActivity.class);

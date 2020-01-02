@@ -2,7 +2,7 @@ package com.zskjprojectj.andoubusinessside.model;
 
 import com.blankj.utilcode.util.SPUtils;
 
-public class LoginUtil {
+public class LoginInfo {
     private static final String KEY_TOKEN = "KEY_TOKEN";
     private static final String KEY_UID = "KEY_UID";
 

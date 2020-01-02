@@ -3,6 +3,7 @@ package com.zskjprojectj.andoubusinessside.http;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
@@ -11,6 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
+import retrofit2.HttpException;
 
 public class HttpRxObservable {
     /**
@@ -33,7 +35,17 @@ public class HttpRxObservable {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> dismissNetworkError(activity))
-                .doOnError(throwable -> showNetworkError(activity, retrySubject))
+                .doOnError(throwable -> {
+                    if (throwable instanceof HttpException) {
+                        switch (((HttpException) throwable).code()) {
+                            case 500:
+                                showNetworkError(activity, retrySubject, "服务器错误,请点击刷新重试!");
+                                break;
+                        }
+                    } else {
+                        showNetworkError(activity, retrySubject, "暂无网络连接,请点击刷新重试!");
+                    }
+                })
                 .retryWhen(throwableObservable ->
                         throwableObservable.flatMap(throwable ->
                                 Observable.just(throwable).zipWith(retrySubject, (o, o2) -> o)));
@@ -45,16 +57,15 @@ public class HttpRxObservable {
                 .removeView(activity.findViewById(R.id.networkErrorContainer));
     }
 
-    private static void showNetworkError(BaseActivity activity, PublishSubject<Object> retrySubject) {
+    private static void showNetworkError(BaseActivity activity, PublishSubject<Object> retrySubject, String errorMsg) {
         if (activity == null) return;
-        View networkErrorContainer = activity.findViewById(R.id.networkErrorContainer);
-        if (networkErrorContainer == null) {
-            networkErrorContainer = LayoutInflater.from(activity).inflate(R.layout.layout_network_error, null);
-            ((ViewGroup) activity.findViewById(R.id.baseContentView)).addView(networkErrorContainer);
+        if (activity.findViewById(R.id.networkErrorContainer) == null) {
+            final View networkErrorContainer = LayoutInflater.from(activity).inflate(R.layout.layout_network_error, null);
+            ((TextView) networkErrorContainer.findViewById(R.id.msgTxt)).setText(errorMsg);
+            ViewGroup baseContentView = activity.findViewById(R.id.baseContentView);
+            baseContentView.postDelayed(() -> baseContentView.addView(networkErrorContainer), 1000);
+            networkErrorContainer.setOnClickListener(view -> retrySubject.onNext(new Object()));
         }
-        networkErrorContainer.setOnClickListener(view -> {
-            retrySubject.onNext(new Object());
-        });
     }
 
     /**
