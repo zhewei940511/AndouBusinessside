@@ -28,7 +28,7 @@
                 android:layout_height="58dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="75dp"
-                android:src="@mipmap/temp1" />
+                android:src="@mipmap/ic_placeholder" />
 
             <LinearLayout
                 android:id="@+id/shopInfoContainer"
@@ -113,17 +113,13 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="9dp"
                 android:layout_toEndOf="@id/avatar"
-                app:srb_clearRatingEnabled="true"
-                app:srb_clickable="true"
                 app:srb_drawableEmpty="@mipmap/ic_rate_02"
                 app:srb_drawableFilled="@mipmap/ic_rate_01"
-                app:srb_isIndicator="false"
-                app:srb_minimumStars="1"
+                app:srb_isIndicator="true"
                 app:srb_numStars="5"
                 app:srb_starHeight="13dp"
                 app:srb_starPadding="4dp"
-                app:srb_starWidth="14dp"
-                app:srb_stepSize="0.5" />
+                app:srb_starWidth="14dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -1020,7 +1016,7 @@
 
                 <LinearLayout
                     android:id="@+id/todayOrderEntryBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -1051,7 +1047,7 @@
 
                 <LinearLayout
                     android:id="@+id/unsendOrderEntryBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -1091,7 +1087,7 @@
 
                 <LinearLayout
                     android:id="@+id/todayFinishEntryBtn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -1131,7 +1127,7 @@
 
                 <LinearLayout
                     android:id="@+id/finishOrderEntryBtn2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"

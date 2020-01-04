@@ -5,17 +5,19 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
+import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
 
 public class OrderListActivity extends BaseActivity {
 
-    public static final String KEY_ORDER_TYPE = "KEY_ORDER_TYPE";
+    public static final String KEY_STATE = "KEY_STATE";
     private ArrayList<Fragment> fragments = new ArrayList<>();
 
     @Override
@@ -25,11 +27,11 @@ public class OrderListActivity extends BaseActivity {
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(4);
-        fragments.add(new OrderFragment(0));
-        fragments.add(new OrderFragment(1));
-        fragments.add(new OrderFragment(2));
-        fragments.add(new OrderFragment(3));
-        fragments.add(new OrderFragment(4));
+        fragments.add(new OrderFragment(Order.STATE.ALL));
+        fragments.add(new OrderFragment(Order.STATE.DAI_FU_KUAN));
+        fragments.add(new OrderFragment(Order.STATE.DAI_FA_HUO));
+        fragments.add(new OrderFragment(Order.STATE.YI_FA_HUO));
+        fragments.add(new OrderFragment(Order.STATE.YI_PING_JIA));
         tabLayout.setViewPager(viewPager
                 , new String[]{"全部", "待付款", "待发货", "已发货", "已评价"}
                 , this, fragments);
@@ -66,11 +68,17 @@ public class OrderListActivity extends BaseActivity {
 
             }
         });
-        tabLayout.setCurrentTab(getIntent().getIntExtra(KEY_ORDER_TYPE, 0));
+        tabLayout.setCurrentTab(getIntent().getIntExtra(KEY_STATE, 0));
     }
 
     @Override
     protected int getContentView() {
         return R.layout.activity_order_list;
+    }
+
+    public static void start(int state) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_STATE, state);
+        ActivityUtils.startActivity(bundle, OrderListActivity.class);
     }
 }

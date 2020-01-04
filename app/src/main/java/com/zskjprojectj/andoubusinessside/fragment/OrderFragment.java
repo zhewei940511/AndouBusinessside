@@ -18,7 +18,9 @@ import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.app.BaseFragment;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
 
 import java.util.Random;
@@ -28,7 +30,7 @@ import butterknife.BindView;
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
 
 public class OrderFragment extends BaseFragment {
-    private int state;
+    private Order.STATE state;
     private OrderListAdapter adapter;
 
     @BindView(R.id.refreshLayout)
@@ -37,9 +39,9 @@ public class OrderFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    public OrderFragment(int state) {
+    public OrderFragment(Order.STATE state) {
         this.state = state;
-        adapter = new OrderListAdapter(state, R.layout.layout_order_list_item);
+        adapter = new OrderListAdapter(state);
     }
 
     @Override
@@ -50,7 +52,7 @@ public class OrderFragment extends BaseFragment {
             Intent intent;
             switch (view1.getId()) {
                 case R.id.controlBtn:
-                    switch (state) {
+                    switch (state.stateInt) {
                         case 1:
                             intent = new Intent(getActivity(), EditPriceActivity.class);
                             intent.putExtra(KEY_ORDER, adapter.getItem(position));
@@ -84,7 +86,7 @@ public class OrderFragment extends BaseFragment {
                     }
                     break;
                 case R.id.orderInfoEntryBtn:
-                    if (state == 10) {
+                    if (state.stateInt == 10) {
                         intent = new Intent(getActivity(), HotelOrderDetailActivity.class);
                         intent.putExtra(KEY_ORDER, adapter.getItem(position));
                         startActivityForResult(intent, 666);
@@ -94,27 +96,14 @@ public class OrderFragment extends BaseFragment {
                     break;
             }
         });
-        PageLoadUtil.get((BaseActivity) getActivity(), recyclerView, adapter, refreshLayout
-                , ApiUtils.getApiService().testList()).load();
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
-        adapter.addData(getOrder(state));
+        PageLoadUtil<Order> pageLoadUtil = PageLoadUtil.get((BaseActivity) getActivity(), recyclerView, adapter, refreshLayout);
+        pageLoadUtil.observableProvider = () -> ApiUtils.getApiService().orderList(
+                LoginInfo.getUid(),
+                LoginInfo.getMerchantId(),
+                state.stateInt,
+                pageLoadUtil.page
+        );
+        pageLoadUtil.load();
     }
 
 
@@ -125,8 +114,8 @@ public class OrderFragment extends BaseFragment {
         //TODO 发货刷新列表项
     }
 
-    public static Order getOrder(int state) {
-        Order info = new Order();
+    public static OrderT getOrder(int state) {
+        OrderT info = new OrderT();
         switch (state) {
             case 1:
                 info.setState("待付款");

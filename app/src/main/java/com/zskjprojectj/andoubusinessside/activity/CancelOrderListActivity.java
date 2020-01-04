@@ -9,6 +9,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
+import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class CancelOrderListActivity extends BaseActivity {
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(1);
-        fragments.add(new OrderFragment(9));
-        fragments.add(new OrderFragment(8));
+        fragments.add(new OrderFragment(Order.STATE.YI_PING_JIA));
+        fragments.add(new OrderFragment(Order.STATE.YI_PING_JIA));
         tabLayout.setTabSpaceEqual(true);
         tabLayout.setViewPager(viewPager, new String[]{"待审核", "已取消"}, this, fragments);
     }

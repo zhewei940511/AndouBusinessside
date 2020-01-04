@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
@@ -33,7 +34,7 @@ public class OrderInfoActivity extends BaseActivity {
         progressBar.setVisibility(View.VISIBLE);
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1500);
         ActionBarUtil.setTitle(mActivity, "订单详情");
-        Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
+        OrderT info = (OrderT) getIntent().getSerializableExtra(KEY_ORDER);
         TextView controlBtn = findViewById(R.id.controlBtn);
         TextView payWayTxt = findViewById(R.id.payWayTxt);
         if ("待付款".equals(info.getState())) {

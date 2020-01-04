@@ -1,12 +1,16 @@
 package com.zskjprojectj.andoubusinessside.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
 
     public ArrayList<Role> roles;
 
-    public static class Role {
+    public static class Role implements Serializable {
+        public static final String KEY_TYPE = "KEY_TYPE";
+        public static final String KEY_ROLE = "KEY_ROLE";
+
         public String id;
         public String name;
         public String img;

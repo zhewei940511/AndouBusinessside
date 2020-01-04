@@ -10,8 +10,6 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
-import com.zskjprojectj.andoubusinessside.http.BaseObserver;
-import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.utils.TimerUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
@@ -79,31 +77,28 @@ public class ResetPasswordActivity extends BaseActivity {
 
     @OnClick(R.id.getCodeBtn)
     void onGetCodeBtnClick() {
-        HttpRxObservable.getObservable(ApiUtils.getApiService().getCode(mobileEdt.getText().toString(), "0"))
-                .subscribe(new BaseObserver<Object>(mActivity) {
-                    @Override
-                    public void onSuccess(BaseResult<Object> result) {
-                        ToastUtil.showToast(result.getMsg());
-                        timerUtil.start(() -> setGetCodeEnableState(mobileEdt.getText().toString()), 60);
-                    }
-                });
+        HttpRxObservable.getObservable(mActivity, true, false,
+                ApiUtils.getApiService().getCode(mobileEdt.getText().toString(), "0"),
+                result -> {
+                    ToastUtil.showToast(result.getMsg());
+                    timerUtil.start(() -> setGetCodeEnableState(mobileEdt.getText().toString()), 60);
+                })
+                .subscribe();
     }
 
     @OnClick(R.id.confirmBtn)
     void onConfirmBtnClick() {
         KeyboardUtils.hideSoftInput(mActivity);
-        HttpRxObservable.getObservable(ApiUtils.getApiService().resetPassword(
-                mobileEdt.getText().toString(),
-                codeEdt.getText().toString(),
-                passwordEdt.getText().toString()))
-                .subscribe(new BaseObserver<Object>(mActivity) {
-
-                    @Override
-                    public void onSuccess(BaseResult<Object> result) {
-                        ToastUtil.showToast(result.getMsg());
-                        finish();
-                    }
-                });
+        HttpRxObservable.getObservable(mActivity, true, false,
+                ApiUtils.getApiService().resetPassword(
+                        mobileEdt.getText().toString(),
+                        codeEdt.getText().toString(),
+                        passwordEdt.getText().toString()),
+                result -> {
+                    ToastUtil.showToast(result.getMsg());
+                    finish();
+                })
+                .subscribe();
     }
 
     @Override

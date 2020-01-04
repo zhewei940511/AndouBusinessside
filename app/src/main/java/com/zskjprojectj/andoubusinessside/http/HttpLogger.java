@@ -18,6 +18,8 @@ public class HttpLogger implements HttpLoggingInterceptor.Logger {
         if ((message.replace("\uFEFF", "").startsWith("{") && message.endsWith("}"))
                 || (message.startsWith("[") && message.endsWith("]"))) {
             message = JsonUtil.formatJson(JsonUtil.decodeUnicode(message));
+        } else if (message.split("=").length > 0 && message.split("&").length > 0) {
+            message = message.replace("&", "\n&");
         }
         mMessage.append(message.concat("\n"));
         // 请求或者响应结束，打印整条日志

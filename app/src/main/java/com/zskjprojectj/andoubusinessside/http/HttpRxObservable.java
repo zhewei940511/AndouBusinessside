@@ -1,15 +1,22 @@
 package com.zskjprojectj.andoubusinessside.http;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.common.internal.Throwables;
+import com.google.gson.stream.MalformedJsonException;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.activity.LoginActivity;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import retrofit2.HttpException;
@@ -23,19 +30,38 @@ public class HttpRxObservable {
      * 无管理生命周期,容易导致内存溢出
      */
     public static <T> Observable<? extends BaseResult<T>> getObservable(
-            Observable<? extends BaseResult<T>> apiObservable) {
-        return getObservable(null, apiObservable);
-    }
-
-    public static <T> Observable<? extends BaseResult<T>> getObservable(
-            BaseActivity activity,
-            Observable<? extends BaseResult<T>> apiObservable) {
+            BaseActivity activity, boolean showLoading, boolean showRetry,
+            Observable<? extends BaseResult<T>> apiObservable,
+            OnSuccessListener<T> onSuccessListener,
+            OnFailureListener onFailureListener) {
         final PublishSubject<Object> retrySubject = PublishSubject.create();
         return apiObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> dismissNetworkError(activity))
+                .doOnSubscribe(disposable -> {
+                    dismissNetworkError(activity);
+                    if (showLoading) {
+                        showProgressDialog(activity);
+                    }
+                })
                 .doOnError(throwable -> {
+                    dismissProgressDialog(activity);
+                    if (!showLoading && !showRetry) {
+                        if (onFailureListener != null) {
+                            onFailureListener.onFailure(throwable.getMessage());
+                        }
+                        return;
+                    }
+                    if (!showRetry) {
+                        if (throwable instanceof ApiException) {
+                            ToastUtil.showToast(((ApiException) throwable).getErrorCode() + " " + throwable.getMessage());
+                        } else if (throwable instanceof MalformedJsonException) {
+                            ToastUtil.showToast("500 服务器数据格式错误");
+                        } else {
+                            ToastUtil.showToast(throwable.getLocalizedMessage());
+                        }
+                        return;
+                    }
                     if (throwable instanceof HttpException) {
                         switch (((HttpException) throwable).code()) {
                             case 500:
@@ -43,12 +69,49 @@ public class HttpRxObservable {
                                 break;
                         }
                     } else {
+                        throwable.printStackTrace();
                         showNetworkError(activity, retrySubject, "暂无网络连接,请点击刷新重试!");
+                    }
+                })
+                .doOnNext((Consumer<BaseResult<T>>) result -> {
+                    dismissProgressDialog(activity);
+                    try {
+                        if (result.getCode().equals("200")) {
+                            onSuccessListener.onSuccess(result);
+                        } else if (result.getCode().equals("202")) {
+                            LoginActivity.start(activity);
+                        } else {
+                            throw Throwables.propagate(new ApiException(result.getCode(), result.getMsg()));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        throw Throwables.propagate(new ApiException(result.getCode(), result.getMsg()));
                     }
                 })
                 .retryWhen(throwableObservable ->
                         throwableObservable.flatMap(throwable ->
                                 Observable.just(throwable).zipWith(retrySubject, (o, o2) -> o)));
+    }
+
+    public interface OnSuccessListener<T> {
+        void onSuccess(BaseResult<T> result);
+    }
+
+    public interface OnFailureListener {
+        void onFailure(String msg);
+    }
+
+    public static <T> Observable<? extends BaseResult<T>> getObservable(
+            BaseActivity activity, boolean showLoading, boolean showRetry,
+            Observable<? extends BaseResult<T>> apiObservable,
+            OnSuccessListener<T> onSuccessListener) {
+        return getObservable(activity, showLoading, showRetry, apiObservable, onSuccessListener, null);
+    }
+
+    private static void dismissProgressDialog(BaseActivity activity) {
+        ViewGroup contentView = activity.findViewById(R.id.baseContentView);
+        View progressBarContainer = activity.findViewById(R.id.progressBarContainer);
+        contentView.removeView(progressBarContainer);
     }
 
     private static void dismissNetworkError(BaseActivity activity) {
@@ -68,6 +131,22 @@ public class HttpRxObservable {
         }
     }
 
+    private static void showProgressDialog(BaseActivity activity) {
+        setupProgressBar(activity);
+        ImageView progressBar = activity.findViewById(R.id.progressBar);
+        ((AnimationDrawable) progressBar.getDrawable()).start();
+    }
+
+    private static void setupProgressBar(BaseActivity activity) {
+        View progressBarContainer = activity.findViewById(R.id.progressBarContainer);
+        ViewGroup contentView = activity.findViewById(R.id.baseContentView);
+        if (progressBarContainer == null) {
+            progressBarContainer = LayoutInflater.from(activity).inflate(R.layout.layout_progress_bar, null);
+            contentView.addView(progressBarContainer);
+        }
+        progressBarContainer.setOnClickListener(view -> {
+        });
+    }
     /**
      * 获取被监听者
      * 备注:网络请求Observable构建

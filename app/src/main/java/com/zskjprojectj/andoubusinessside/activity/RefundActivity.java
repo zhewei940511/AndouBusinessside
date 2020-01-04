@@ -11,7 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
@@ -29,16 +29,16 @@ public class RefundActivity extends BaseActivity {
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1000);
         ActionBarUtil.setTitle(mActivity,"退货退款");
 
-        Order order = (Order) getIntent().getSerializableExtra(KEY_ORDER);
-        ((TextView) findViewById(R.id.numTxt)).setText(order.getNum());
-        ((TextView) findViewById(R.id.dateTxt)).setText(FormatUtil.getDateString1(order.getDate()));
-        ((TextView) findViewById(R.id.titleTxt)).setText(order.getTitle());
-        ((TextView) findViewById(R.id.specTxt)).setText(order.getSpec());
-        ((TextView) findViewById(R.id.countTxt)).setText(order.getCount() + "");
-        ((TextView) findViewById(R.id.priceTxt)).setText(FormatUtil.getMoneyString(order.getPrice()));
-        ((TextView) findViewById(R.id.stateTxt)).setText(order.getState());
+        OrderT orderT = (OrderT) getIntent().getSerializableExtra(KEY_ORDER);
+        ((TextView) findViewById(R.id.numTxt)).setText(orderT.getNum());
+        ((TextView) findViewById(R.id.dateTxt)).setText(FormatUtil.getDateString1(orderT.getDate()));
+        ((TextView) findViewById(R.id.titleTxt)).setText(orderT.getTitle());
+        ((TextView) findViewById(R.id.specTxt)).setText(orderT.getSpec());
+        ((TextView) findViewById(R.id.countTxt)).setText(orderT.getCount() + "");
+        ((TextView) findViewById(R.id.priceTxt)).setText(FormatUtil.getMoneyString(orderT.getPrice()));
+        ((TextView) findViewById(R.id.stateTxt)).setText(orderT.getState());
         Glide.with(this)
-                .load(order.getIcon())
+                .load(orderT.getIcon())
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(ScreenUtil.dp2px(this, 2))))
                 .into((ImageView) findViewById(R.id.iconImg));
         findViewById(R.id.confirmBtn).setOnClickListener(view -> {

@@ -1,8 +1,8 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -12,11 +12,8 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
-import com.zskjprojectj.andoubusinessside.http.BaseObserver;
-import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
-import com.zskjprojectj.andoubusinessside.model.UserT;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -43,12 +40,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnTextChanged(value = R.id.passwordEdt, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void afterPasswordTextChanged(Editable passwordEdt) {
+    void afterPasswordTextChanged() {
         setLoginBtnState();
     }
 
     @OnTextChanged(value = R.id.mobileEdt, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void afterMobileTextChanged(Editable mobileEdt) {
+    void afterMobileTextChanged() {
         setLoginBtnState();
     }
 
@@ -62,19 +59,17 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.loginBtn)
     void onLoginBtnClick() {
         KeyboardUtils.hideSoftInput(mActivity);
-        HttpRxObservable.getObservable(ApiUtils.getApiService().login(
-                mobileEdt.getText().toString(),
-                passwordEdt.getText().toString()))
-                .subscribe(new BaseObserver<UserT>(mActivity) {
-
-                    @Override
-                    public void onSuccess(BaseResult<UserT> result) {
-                        LoginInfo.saveUidAndToken(result.data.id, result.data.token);
-                        ActivityUtils.startActivity(MainActivity.class);
-                        ToastUtil.showToast(result.getMsg());
-                        finish();
-                    }
-                });
+        HttpRxObservable.getObservable(mActivity, true, false,
+                ApiUtils.getApiService().login(
+                        mobileEdt.getText().toString(),
+                        passwordEdt.getText().toString()),
+                result -> {
+                    LoginInfo.saveUidAndToken(result.data.id, result.data.token);
+                    ActivityUtils.startActivity(MainActivity.class);
+                    ToastUtil.showToast(result.getMsg());
+                    finish();
+                })
+                .subscribe();
     }
 
     @OnClick(R.id.backBtn)
@@ -92,5 +87,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected int getContentView() {
         return R.layout.activity_login;
+    }
+
+
+    public static void start(BaseActivity activity) {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        ActivityUtils.startActivity(intent);
     }
 }

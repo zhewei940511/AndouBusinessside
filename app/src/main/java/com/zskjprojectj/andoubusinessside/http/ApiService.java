@@ -1,6 +1,7 @@
 package com.zskjprojectj.andoubusinessside.http;
 
 
+import com.zskjprojectj.andoubusinessside.model.ADProvince;
 import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.model.UserT;
@@ -13,151 +14,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ApiService {
-    /**
-     * //     * 查询
-     * //
-     */
-//    @FormUrlEncoded
-//    @POST("cook/query")
-//    Observable<BaseResult <TestBean.ResultBean>> getinfo(@Field("key") String key, @Field("menu") String menu);
-//    /**
-//     * 注册
-//     *
-//     * @param code    设备码
-//     * @param invCode 邀请码【非必传】
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("/member")
-//    Observable<BaseResult<UserBean>> register(@Field("code") String code, @Field("invCode") String invCode);
-//
-//    /**
-//     * 广告
-//     */
-//    @FormUrlEncoded
-//    @POST("/gtad")
-//    Observable<BaseResult<List<AdvertisingBean>>> adver(@Field("type") String type, @Field("page") int page);
-//
-//    /**
-//     * 统计人数在线
-//     */
-//    @POST("/online")
-//    Observable<BaseResult<Object>> onlinenum();
-//
-//    /**
-//     * 版本更新
-//     */
-//    @POST("/version")
-//    Observable<BaseResult<AppVersionBean>> getversion();
-//
-//
-//    /**
-//     * 热门数据
-//     *
-//     * @param page
-//     * @param type
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("/vlists")
-//    Observable<BaseResult<List<VideoBean>>> getHotData(@Field("page") int page, @Field("type") String type);
-//
-//    /**
-//     * 广告数据
-//     *
-//     * @return
-//     */
-//    @POST("/indexport")
-//    Observable<BaseResult<HomeAdsBean>> getAdsData();
-//
-//    /**
-//     * 我的消息
-//     */
-//    @FormUrlEncoded
-//    @POST("/getNews")
-//    Observable<BaseResult<List<MessageBean>>> getnewsData(@Field("type") int type, @Field("page") int page);
-//
-//    /**
-//     * 联系客服，我的消息
-//     */
-//    @POST("/getminfo")
-//    Observable<BaseResult<TelphoneBean>> gettelData();
-//
-//    /**
-//     * 分享二维码接口
-//     */
-//    @POST("/recomment")
-//    Observable<BaseResult<ShareBean>> getshareData();
-//
-//
-//    /**
-//     * 获取关注
-//     *
-//     * @param type
-//     * @param page
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("/lists")
-//    Observable<BaseResult<List<VideoBean>>> getCollectList(@Field("type") String type, @Field("page") int page);
-//
-//    @FormUrlEncoded
-//    @POST("/collect")
-//    Observable<BaseResult<JSONObject>> collect(@Field("type") int type, @Field("id") String id, @Field("done") int done);
-//
-//
-//    /**
-//     * 获取直播列表
-//     *
-//     * @param page
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("/getVport")
-//    Observable<BaseResult<LiveBean>> liveListData(@Field("page") int page);
-//
-//    /**
-//     * 视频详情
-//     *
-//     * @param id
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("/vinfo")
-//    Observable<BaseResult<VideoDetailBean>> getVideoDetail(@Field("id") String id);
-//
-//    /**
-//     * 任务列表
-//     */
-//    @POST("/task")
-//    Observable<BaseResult<ShareTaskBean>> getTaskData();
-//
-//    /**
-//     * 任务记录
-//     */
-//    @FormUrlEncoded
-//    @POST("/invl")
-//    Observable<BaseResult<List<ShareRecordBean>>> getRecordData(@Field("page") int page);
-//
-//    /**
-//     * 充值方式
-//     */
-//    @POST("/getpw")
-//    Observable<BaseResult<List<VipPayBean>>> getVipData();
-//
-//    /**
-//     * 直播机构页面
-//     *
-//     * @param page
-//     * @param id
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("/pfminfo")
-//    Observable<BaseResult<PlatformBean>> getPlatformData(@Field("page") int page, @Field("pid") String id);
-    @POST("api/index/index")
-    Observable<BaseResult<ListData<Order>>> testList();
-
     @POST("api/login/login_p")
     @FormUrlEncoded
     Observable<BaseResult<UserT>> login(@Field("phone") String phone, @Field("password") String password);
@@ -175,6 +31,37 @@ public interface ApiService {
 
     @POST("api/goods/merchants")
     @FormUrlEncoded
-    Observable<BaseResult<List<User.Role>>> merchantsInfo(@Field("uid") String uid,
-                                                          @Field("token") String token);
+    Observable<BaseResult<List<User.Role>>> merchantsInfo(@Field("uid") String uid);
+
+    @POST("api/common/district")
+    Observable<BaseResult<List<ADProvince>>> districts();
+
+    @POST("api/merchant/information")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> uploadMerchantsInfo(@Field("uid") String uid,
+                                                       @Field("type_id") int type_id,
+                                                       @Field("name") String name,
+                                                       @Field("user_name") String user_name,
+                                                       @Field("tel") String tel,
+                                                       @Field("province_id") int province_id,
+                                                       @Field("city_id") int city_id,
+                                                       @Field("area_id") int area_id,
+                                                       @Field("address") String address,
+                                                       @Field("desc") String desc,
+                                                       @Field("banner_img") String bannerImg,
+                                                       @Field("logo_img") String logo_img,
+                                                       @Field("management_img") String management_img);
+
+    @POST("api/goods/centre")
+    @FormUrlEncoded
+    Observable<BaseResult<RoleInfoResponse>> roleInfo(@Field("uid") String uid,
+                                                      @Field("id") String id,
+                                                      @Field("merchant_type_id") int merchant_type_id);
+
+    @POST("api/goods/lists")
+    @FormUrlEncoded
+    Observable<BaseResult<ListData<Order>>> orderList(@Field("uid") String uid,
+                                                      @Field("id") String id,
+                                                      @Field("type") Integer type,
+                                                      @Field("page") int page);
 }

@@ -9,6 +9,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
+import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
@@ -24,8 +25,8 @@ public class RefundOrderListActivity extends BaseActivity {
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(1);
-        fragments.add(new OrderFragment(5));
-        fragments.add(new OrderFragment(6));
+        fragments.add(new OrderFragment(Order.STATE.YI_PING_JIA));
+        fragments.add(new OrderFragment(Order.STATE.YI_PING_JIA));
         tabLayout.setTabSpaceEqual(true);
         tabLayout.setViewPager(viewPager, new String[]{"待审核", "已退款"}, this, fragments);
     }

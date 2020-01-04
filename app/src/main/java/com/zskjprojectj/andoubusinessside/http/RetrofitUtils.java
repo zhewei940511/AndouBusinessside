@@ -36,7 +36,6 @@ public class RetrofitUtils {
                 .addInterceptor(chain -> {
                     Request request = chain.request()
                             .newBuilder()
-                            .addHeader("uid", LoginInfo.getUid())
                             .addHeader("token", LoginInfo.getToken())
                             .build();
                     return chain.proceed(request);

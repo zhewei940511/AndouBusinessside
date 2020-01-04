@@ -1,6 +1,9 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
 import com.bumptech.glide.Glide;
@@ -18,46 +24,109 @@ import com.willy.ratingbar.ScaleRatingBar;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
-import com.zskjprojectj.andoubusinessside.http.BaseObserver;
 import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
-import com.zskjprojectj.andoubusinessside.http.ListData;
-import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.http.RoleInfoResponse;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
+import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.model.UserT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
-import com.zskjprojectj.andoubusinessside.utils.UserUtil;
+import com.zskjprojectj.andoubusinessside.utils.UrlUtil;
 
-import java.util.Random;
-
+import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderListActivity.KEY_ORDER_TYPE;
+import static com.zskjprojectj.andoubusinessside.activity.OrderListActivity.KEY_STATE;
+import static com.zskjprojectj.andoubusinessside.model.User.Role.KEY_ROLE;
 
 public class UserCenterActivity extends BaseActivity {
-
-    public static final String KEY_USER = "KEY_USER";
 
     @OnClick(R.id.settingEntryBtn)
     void onSettingEntryBtn() {
         ActivityUtils.startActivity(SettingActivity.class);
     }
 
+    @BindView(R.id.unpayOrderListEntryBtn)
+    View unpayOrderListEntryBtn;
+    @BindView(R.id.unsendOrderEntryBtn)
+    View unsendOrderEntryBtn;
+    @BindView(R.id.unsendOrderEntryBtn2)
+    View unsendOrderEntryBtn2;
+
+    @BindView(R.id.itemManageTxt1)
+    TextView itemManageTxt1;
+    @BindView(R.id.itemManageTxt2)
+    TextView itemManageTxt2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarColor(mActivity, Color.TRANSPARENT);
         ActionBarUtil.getBackground(mActivity, false).setAlpha(0);
-        HttpRxObservable.getObservable(mActivity, ApiUtils.getApiService().testList())
-                .subscribe(new BaseObserver<ListData<Order>>(mActivity) {
-                    @Override
-                    public void onSuccess(BaseResult<ListData<Order>> result) {
+        initScrollView();
+        User.Role role = (User.Role) getIntent().getSerializableExtra(KEY_ROLE);
+        if (role.merchant_type_id == User.Role.Type.MALL.typeInt) {
+            ActionBarUtil.setTitle(mActivity, "商城商家中心", false);
+            itemManageTxt1.setText("商品管理");
+            itemManageTxt2.setText("当前商品");
+        } else if (role.merchant_type_id == User.Role.Type.HOTEL.typeInt) {
+            ActionBarUtil.setTitle(mActivity, "酒店商家中心", false);
+            itemManageTxt1.setText("房间管理");
+            itemManageTxt2.setText("当前房间");
+        } else if (role.merchant_type_id == User.Role.Type.RESTAURANT.typeInt) {
+            ActionBarUtil.setTitle(mActivity, "饭店商家中心", false);
+            itemManageTxt1.setText("菜品管理");
+            itemManageTxt2.setText("当前菜品");
+        }
+        HttpRxObservable.getObservable(mActivity, true, true, ApiUtils.getApiService().roleInfo(
+                LoginInfo.getUid(),
+                role.id,
+                role.merchant_type_id
+        ), new HttpRxObservable.OnSuccessListener<RoleInfoResponse>() {
+            @Override
+            public void onSuccess(BaseResult<RoleInfoResponse> result) {
+                Bitmap placeholder = BitmapFactory.decodeResource(mActivity.getResources(), R.mipmap.ic_placeholder);
+                RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(mActivity.getResources(), placeholder);
+                circularBitmapDrawable.setCircular(true);
+                Glide.with(mActivity)
+                        .load(UrlUtil.getImageUrl(result.data.info.logo_img))
+                        .apply(RequestOptions
+                                .circleCropTransform()
+                                .placeholder(circularBitmapDrawable))
+                        .into((ImageView) findViewById(R.id.avatar));
+                ((TextView) findViewById(R.id.name)).setText(result.data.info.name);
+                ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(result.data.info.stars_all);
 
-                    }
-                });
+
+                if (role.merchant_type_id == User.Role.Type.MALL.typeInt) {
+                    unpayOrderListEntryBtn.setVisibility(View.VISIBLE);
+                    unpayOrderListEntryBtn.setOnClickListener(view -> OrderListActivity.start(1));
+                    ((TextView) findViewById(R.id.unpayCount)).setText(result.data.payment);
+                    unsendOrderEntryBtn.setVisibility(View.VISIBLE);
+                    unsendOrderEntryBtn2.setVisibility(View.VISIBLE);
+                    View.OnClickListener unSendOrderListEntryBtnListener =
+                            view -> OrderListActivity.start(2);
+                    unsendOrderEntryBtn.setOnClickListener(unSendOrderListEntryBtnListener);
+                    unsendOrderEntryBtn2.setOnClickListener(unSendOrderListEntryBtnListener);
+                    ((TextView) findViewById(R.id.todayOrderCount)).setText(result.data.today);
+                    ((TextView) findViewById(R.id.unsendCount1)).setText(result.data.deliver);
+                    ((TextView) findViewById(R.id.unsendCount2)).setText(result.data.deliver);
+                    ((TextView) findViewById(R.id.finishCount2)).setText(result.data.affirm);
+                    ((TextView) findViewById(R.id.finishCount1)).setText(result.data.all);
+                    ((TextView) findViewById(R.id.itemCount)).setText(result.data.manage);
+                    ((TextView) findViewById(R.id.accountCount))
+                            .setText(FormatUtil.getMoneyString(result.data.balance.get(0).money));
+                } else if (role.merchant_type_id == User.Role.Type.HOTEL.typeInt) {
+
+                } else if (role.merchant_type_id == User.Role.Type.RESTAURANT.typeInt) {
+
+                }
+            }
+        }).subscribe();
         findViewById(R.id.todayOrderEntryBtn).setOnClickListener(view -> {
             Intent intent = new Intent(this, OrderListActivity.class);
-            intent.putExtra(KEY_ORDER_TYPE, 0);
+            intent.putExtra(KEY_STATE, 0);
             startActivity(intent);
         });
         findViewById(R.id.manageShopEntryBtn).setOnClickListener(view -> {
@@ -80,6 +149,10 @@ public class UserCenterActivity extends BaseActivity {
             Intent intent = new Intent(this, NoticeListActivity.class);
             startActivity(intent);
         });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void initScrollView() {
         ScrollView scrollView = findViewById(R.id.scrollView);
         final ViewTreeObserver.OnScrollChangedListener onScrollChangedListener = ()
                 -> ActionBarUtil.getBackground(mActivity, false).setAlpha((float) (scrollView.getScrollY() * 0.01));
@@ -96,75 +169,27 @@ public class UserCenterActivity extends BaseActivity {
                     observer = scrollView.getViewTreeObserver();
                     observer.addOnScrollChangedListener(onScrollChangedListener);
                 }
-
                 return false;
             }
         });
-        UserUtil.getInstance().userT.avatar = ("http://img4.imgtn.bdimg.com/it/u=2843285098,2906023234&fm=26&gp=0.jpg");
-        UserUtil.getInstance().userT.name = ("淘淘的淘宝店");
-        UserUtil.getInstance().userT.accountCount = (789.44F);
-        UserUtil.getInstance().userT.unSendCount = (78);
-        UserUtil.getInstance().userT.unPayCount = (18);
-        UserUtil.getInstance().userT.finishCount = (63);
-        UserUtil.getInstance().userT.itemCount = (123);
-        UserUtil.getInstance().userT.rate = (4);
-        UserUtil.getInstance().userT.refundCount = (12);
-        UserUtil.getInstance().userT.sendedCount = (123);
-        UserUtil.getInstance().userT.state = ("营业中");
-        UserUtil.getInstance().userT.todayOrderCount = (12);
-        UserUtil.getInstance().userT.todayfinishOrderCount = (new Random().nextInt(99));
-        UserUtil.getInstance().userT.unUseCount = (new Random().nextInt(99));
-        UserUtil.getInstance().userT.cancelCount = (new Random().nextInt(99));
-        UserUtil.getInstance().userT.isVip = (true);
-        bindView(UserUtil.getInstance().userT);
     }
 
-    private void bindView(UserT userT) {
-        Glide.with(mActivity)
-                .load(userT.avatar)
-                .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
-                .into((ImageView) findViewById(R.id.avatar));
-        ((TextView) findViewById(R.id.name)).setText(userT.name);
+    private void bindView(UserT userT, User.Role role) {
         ((TextView) findViewById(R.id.state)).setText(userT.state);
-        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(userT.rate);
         findViewById(R.id.vipImg).setVisibility(userT.isVip ? View.VISIBLE : View.GONE);
-        ((TextView) findViewById(R.id.finishCount2)).setText(userT.finishCount + "");
-        ((TextView) findViewById(R.id.todayOrderCount)).setText(userT.todayfinishOrderCount + "");
-        ((TextView) findViewById(R.id.finishCount1)).setText(userT.finishCount + "");
-        View todayFinishEntryBtn = findViewById(R.id.todayFinishEntryBtn);
-        ((TextView) findViewById(R.id.accountCount)).setText(FormatUtil.getMoneyString(userT.accountCount));
-        View cancelOrderEntryBtn = findViewById(R.id.cancelOrderEntryBtn);
-        TextView itemManageTxt1 = findViewById(R.id.itemManageTxt1);
-        TextView itemManageTxt2 = findViewById(R.id.itemManageTxt2);
-        TextView cancelOrderCountTxt = findViewById(R.id.cancelCount);
-        ((TextView) findViewById(R.id.itemCount)).setText(userT.itemCount + "");
-        if (userT.types.contains(UserT.Type.MALL)) {
-            ActionBarUtil.setTitle(mActivity, "商城商家中心", false);
-            View unsendOrderEntryBtn = findViewById(R.id.unsendOrderEntryBtn);
-            View unsendOrderEntryBtn2 = findViewById(R.id.unsendOrderEntryBtn2);
-            unsendOrderEntryBtn.setVisibility(View.VISIBLE);
-            unsendOrderEntryBtn2.setVisibility(View.VISIBLE);
-            View.OnClickListener unSendOrderListEntryBtnListener = view -> {
-                Intent intent = new Intent(this, OrderListActivity.class);
-                intent.putExtra(KEY_ORDER_TYPE, 2);
-                startActivity(intent);
-            };
-            unsendOrderEntryBtn.setOnClickListener(unSendOrderListEntryBtnListener);
-            unsendOrderEntryBtn2.setOnClickListener(unSendOrderListEntryBtnListener);
 
-            View unPayOrderEntryBtn = findViewById(R.id.unpayOrderListEntryBtn);
-            unPayOrderEntryBtn.setVisibility(View.VISIBLE);
-            unPayOrderEntryBtn.setOnClickListener(view -> {
-                Intent intent = new Intent(this, OrderListActivity.class);
-                intent.putExtra(KEY_ORDER_TYPE, 1);
-                startActivity(intent);
-            });
+        View todayFinishEntryBtn = findViewById(R.id.todayFinishEntryBtn);
+        View cancelOrderEntryBtn = findViewById(R.id.cancelOrderEntryBtn);
+
+        TextView cancelOrderCountTxt = findViewById(R.id.cancelCount);
+        if (role.merchant_type_id == User.Role.Type.MALL.typeInt) {
+
 
             View sendOrderEntryBtn = findViewById(R.id.sendedOrderEntryBtn);
             sendOrderEntryBtn.setVisibility(View.VISIBLE);
             sendOrderEntryBtn.setOnClickListener(view -> {
                 Intent intent = new Intent(this, OrderListActivity.class);
-                intent.putExtra(KEY_ORDER_TYPE, 3);
+                intent.putExtra(KEY_STATE, 3);
                 startActivity(intent);
             });
 
@@ -176,26 +201,21 @@ public class UserCenterActivity extends BaseActivity {
             });
             View.OnClickListener finishOrderEntryListener = view -> {
                 Intent intent = new Intent(this, OrderListActivity.class);
-                intent.putExtra(KEY_ORDER_TYPE, 4);
+                intent.putExtra(KEY_STATE, 4);
                 startActivity(intent);
             };
             findViewById(R.id.finishOrderEntryBtn).setOnClickListener(finishOrderEntryListener);
             findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener);
 
-            ((TextView) findViewById(R.id.unsendCount1)).setText(userT.unSendCount + "");
-            ((TextView) findViewById(R.id.unsendCount2)).setText(userT.unSendCount + "");
-            ((TextView) findViewById(R.id.unsendCount2)).setText(userT.unSendCount + "");
-            ((TextView) findViewById(R.id.unpayCount)).setText(userT.unPayCount + "");
+
             ((TextView) findViewById(R.id.sendedCount)).setText(userT.sendedCount + "");
             ((TextView) findViewById(R.id.refundCount)).setText(userT.refundCount + "");
             ((TextView) findViewById(R.id.itemCount)).setText(userT.itemCount + "");
-            itemManageTxt1.setText("商品管理");
-            itemManageTxt2.setText("当前商品");
-        } else if (userT.types.contains(UserT.Type.HOTEL)) {
-            ActionBarUtil.setTitle(mActivity, "酒店商家中心", false);
+
+        } else if (role.merchant_type_id == User.Role.Type.HOTEL.typeInt) {
             View.OnClickListener finishOrderEntryListener2 = view -> {
                 Intent intent = new Intent(this, FinishHotelOrderListActivity.class);
-                intent.putExtra(KEY_ORDER_TYPE, 4);
+                intent.putExtra(KEY_STATE, 4);
                 startActivity(intent);
             };
             findViewById(R.id.finishOrderEntryBtn2).setOnClickListener(finishOrderEntryListener2);
@@ -215,10 +235,8 @@ public class UserCenterActivity extends BaseActivity {
                     startActivity(new Intent(UserCenterActivity.this, CancelOrderListActivity.class)));
             ((TextView) findViewById(R.id.unUserCount)).setText(userT.unSendCount + "");
             cancelOrderCountTxt.setText(userT.cancelCount + "");
-            itemManageTxt1.setText("房间管理");
-            itemManageTxt2.setText("当前房间");
-        } else if (userT.types.contains(UserT.Type.RESTAURANT)) {
-            ActionBarUtil.setTitle(mActivity, "饭店商家中心", false);
+
+        } else if (role.merchant_type_id == User.Role.Type.RESTAURANT.typeInt) {
             ((TextView) findViewById(R.id.todayOrderTxt)).setText("今日预约");
             todayFinishEntryBtn.setVisibility(View.VISIBLE);
             todayFinishEntryBtn.setOnClickListener(view ->
@@ -226,8 +244,7 @@ public class UserCenterActivity extends BaseActivity {
             findViewById(R.id.dateOrderEntryBtn).setVisibility(View.VISIBLE);
             ((TextView) findViewById(R.id.dateOrderCount)).setText(userT.dateOrderCount + "");
             cancelOrderEntryBtn.setVisibility(View.VISIBLE);
-            itemManageTxt1.setText("菜品管理");
-            itemManageTxt2.setText("当前菜品");
+
             cancelOrderCountTxt.setText(userT.cancelCount + "");
             cancelOrderEntryBtn.setOnClickListener(view ->
                     startActivity(new Intent(UserCenterActivity.this, DishOrderListActivityActivity.class)));
@@ -244,5 +261,11 @@ public class UserCenterActivity extends BaseActivity {
     @Override
     protected int getContentView() {
         return R.layout.activity_user_center;
+    }
+
+    public static void start(User.Role role) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY_ROLE, role);
+        ActivityUtils.startActivity(bundle, UserCenterActivity.class);
     }
 }

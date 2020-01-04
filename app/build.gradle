@@ -104,4 +104,7 @@ dependencies {
 
     //PictureSelector
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.2'
+
+    //地址选择器
+    implementation 'com.github.chihane:JDAddressSelector:1.1.4'
 }

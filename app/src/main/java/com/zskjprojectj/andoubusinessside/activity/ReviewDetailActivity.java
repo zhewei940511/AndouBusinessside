@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
@@ -27,24 +27,24 @@ public class ReviewDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "评价详情");
-        Order order = (Order) getIntent().getSerializableExtra(KEY_ORDER);
-        findViewById(R.id.deleteReviewBtn).setOnClickListener(view -> showDeleteDialog(order));
-        order.setReviewAvatar("https://himg2.huanqiucdn.cn/attachment2010/2019/1214/20191214071048532.jpg");
-        order.setReviewContent("评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容");
-        order.setReviewDate(System.currentTimeMillis());
-        order.setReviewName("王杨");
-        order.setReviewRate(4);
+        OrderT orderT = (OrderT) getIntent().getSerializableExtra(KEY_ORDER);
+        findViewById(R.id.deleteReviewBtn).setOnClickListener(view -> showDeleteDialog(orderT));
+        orderT.setReviewAvatar("https://himg2.huanqiucdn.cn/attachment2010/2019/1214/20191214071048532.jpg");
+        orderT.setReviewContent("评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容");
+        orderT.setReviewDate(System.currentTimeMillis());
+        orderT.setReviewName("王杨");
+        orderT.setReviewRate(4);
         progressBar = findViewById(R.id.progressBar);
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1000);
 
-        ((TextView) findViewById(R.id.nameTxt)).setText(order.getReviewName());
-        ((TextView) findViewById(R.id.reviewContentTxt)).setText(order.getReviewContent());
-        ((TextView) findViewById(R.id.dateTxt)).setText(FormatUtil.getDateString2(order.getReviewDate()));
+        ((TextView) findViewById(R.id.nameTxt)).setText(orderT.getReviewName());
+        ((TextView) findViewById(R.id.reviewContentTxt)).setText(orderT.getReviewContent());
+        ((TextView) findViewById(R.id.dateTxt)).setText(FormatUtil.getDateString2(orderT.getReviewDate()));
         Glide.with(this)
-                .load(order.getReviewAvatar())
+                .load(orderT.getReviewAvatar())
                 .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
                 .into((ImageView) findViewById(R.id.avatarImg));
-        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(order.getReviewRate());
+        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(orderT.getReviewRate());
     }
 
     @Override
@@ -52,12 +52,12 @@ public class ReviewDetailActivity extends BaseActivity {
         return R.layout.activity_review_detail;
     }
 
-    private void showDeleteDialog(Order order) {
+    private void showDeleteDialog(OrderT orderT) {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_delete_review_dialog, null);
         AlertDialog dialog = new AlertDialog.Builder(this).setView(view).show();
         view.findViewById(R.id.closeBtn).setOnClickListener(view1 -> dialog.dismiss());
         view.findViewById(R.id.cancelBtn).setOnClickListener(view1 -> dialog.dismiss());
-        ((TextView) view.findViewById(R.id.reviewContentTxt)).setText(order.getReviewContent());
+        ((TextView) view.findViewById(R.id.reviewContentTxt)).setText(orderT.getReviewContent());
         view.findViewById(R.id.confirmBtn).setOnClickListener(view1 -> {
             dialog.dismiss();
             progressBar.setVisibility(View.VISIBLE);

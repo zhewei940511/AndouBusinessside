@@ -134,7 +134,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="X"
+                            android:text="x"
                             android:textColor="#ff969696"
                             android:textSize="12sp" />
 

@@ -9,106 +9,106 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".activity.NoticeListActivity">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingStart="65dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="65dp">
+            android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/hotelEntryBtn"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@mipmap/bg_user_entry"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingBottom="20dp"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:paddingStart="65dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="65dp">
 
-                <ImageView
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginTop="23dp"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/ic_hotel_01" />
+                <LinearLayout
+                    android:id="@+id/hotelEntryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@mipmap/bg_user_entry"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="酒店商家中心"
-                    android:textColor="#ff333333"
-                    android:textSize="14sp" />
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginTop="23dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_hotel_01" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="酒店商家中心"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/restaurantEntryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="-10dp"
+                    android:background="@mipmap/bg_user_entry"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginTop="23dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_restaurant" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="饭店商家中心"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mallEntryBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="-10dp"
+                    android:background="@mipmap/bg_user_entry"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_marginTop="23dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_mall" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="商城商家中心"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/restaurantEntryBtn"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="-10dp"
-                android:layout_weight="1"
-                android:background="@mipmap/bg_user_entry"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingBottom="20dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <ImageView
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginTop="23dp"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/ic_restaurant" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="饭店商家中心"
-                    android:textColor="#ff333333"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mallEntryBtn"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="-10dp"
-                android:layout_weight="1"
-                android:background="@mipmap/bg_user_entry"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingBottom="20dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <ImageView
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginTop="23dp"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/ic_mall" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="商城商家中心"
-                    android:textColor="#ff333333"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:id="@+id/joinEntryBtn"
@@ -128,8 +128,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F7F7F7"
+        android:descendantFocusability="blocksDescendants"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="266dp"

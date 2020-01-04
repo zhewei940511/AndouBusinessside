@@ -17,7 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
@@ -33,7 +33,7 @@ public class EditPriceActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "修改价格");
-        Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
+        OrderT info = (OrderT) getIntent().getSerializableExtra(KEY_ORDER);
         ((TextView) findViewById(R.id.titleTxt)).setText(info.getTitle());
         ((TextView) findViewById(R.id.countTxt)).setText(info.getCount() + "");
         ((TextView) findViewById(R.id.priceTxt)).setText(FormatUtil.getMoneyString(info.getPrice()));

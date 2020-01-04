@@ -8,6 +8,7 @@ import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
 import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class UnCheckInOrderListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "待入住订单");
-        OrderListAdapter adapter = new OrderListAdapter(7, R.layout.layout_order_list_item);
+        OrderListAdapter adapter = new OrderListAdapter(Order.STATE.YI_PING_JIA);
         adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
-        ArrayList<Order> data = new ArrayList<>();
+        ArrayList<OrderT> data = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             data.add(OrderFragment.getOrder(7));
         }
-        adapter.setNewData(data);
+//        adapter.setNewData(data);
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
             if (view.getId() == R.id.controlBtn) {
                 Intent intent = new Intent(UnCheckInOrderListActivity.this, HotelOrderDetailActivity.class);

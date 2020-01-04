@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
@@ -24,7 +24,7 @@ public class SendActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity,"去发货");
-        Order info = (Order) getIntent().getSerializableExtra(KEY_ORDER);
+        OrderT info = (OrderT) getIntent().getSerializableExtra(KEY_ORDER);
         ((TextView) findViewById(R.id.stateTxt)).setText(info.getState());
         View progressBar = findViewById(R.id.progressBar);
         progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1000);

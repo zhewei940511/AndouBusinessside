@@ -1,13 +1,15 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
-import com.zskjprojectj.andoubusinessside.http.BaseObserver;
-import com.zskjprojectj.andoubusinessside.http.BaseResult;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.User;
@@ -19,6 +21,8 @@ import java.util.List;
 import butterknife.BindView;
 
 public class JoinActivity extends BaseActivity {
+
+    public static final int REQUEST_CODE_JOIN = 666;
 
     @BindView(R.id.mallJoinEntryBtn)
     View mallJoinEntryBtn;
@@ -32,32 +36,44 @@ public class JoinActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "商家入驻");
         mallJoinEntryBtn.setOnClickListener(v ->
-                JoinInfoUploadActivity.start(JoinInfoUploadActivity.Type.MALL));
+                JoinInfoUploadActivity.start(mActivity, User.Role.Type.MALL, REQUEST_CODE_JOIN));
         hotelJoinEntryBtn.setOnClickListener(v ->
-                JoinInfoUploadActivity.start(JoinInfoUploadActivity.Type.HOTEL));
+                JoinInfoUploadActivity.start(mActivity, User.Role.Type.HOTEL, REQUEST_CODE_JOIN));
         restaurantJoinEntryBtn.setOnClickListener(v ->
-                JoinInfoUploadActivity.start(JoinInfoUploadActivity.Type.RESTAURANT));
-        HttpRxObservable.getObservable(mActivity, ApiUtils.getApiService().merchantsInfo(
-                LoginInfo.getUid(),
-                LoginInfo.getToken()
-        )).subscribe(new BaseObserver<List<User.Role>>(mActivity) {
-            @Override
-            public void onSuccess(BaseResult<List<User.Role>> result) {
-                if (ListUtil.isEmpty(result.data))
-                    return;
-                for (User.Role role : result.data) {
-                    if (role.merchant_type_id == User.Role.Type.MALL.typeInt) {
-                        mallJoinEntryBtn.setVisibility(View.GONE);
+                JoinInfoUploadActivity.start(mActivity, User.Role.Type.RESTAURANT, REQUEST_CODE_JOIN));
+        HttpRxObservable.getObservable(mActivity, true, false,
+                ApiUtils.getApiService().merchantsInfo(LoginInfo.getUid())
+                , result -> {
+                    if (!isRole(result.data, User.Role.Type.MALL)) {
+                        mallJoinEntryBtn.setVisibility(View.VISIBLE);
                     }
-                    if (role.merchant_type_id == User.Role.Type.HOTEL.typeInt) {
-                        hotelJoinEntryBtn.setVisibility(View.GONE);
+                    if (!isRole(result.data, User.Role.Type.HOTEL)) {
+                        hotelJoinEntryBtn.setVisibility(View.VISIBLE);
                     }
-                    if (role.merchant_type_id == User.Role.Type.RESTAURANT.typeInt) {
-                        restaurantJoinEntryBtn.setVisibility(View.GONE);
+                    if (!isRole(result.data, User.Role.Type.RESTAURANT)) {
+                        restaurantJoinEntryBtn.setVisibility(View.VISIBLE);
                     }
-                }
+                })
+                .subscribe();
+    }
+
+    private boolean isRole(List<User.Role> roles, User.Role.Type type) {
+        if (ListUtil.isEmpty(roles)) return false;
+        for (User.Role role : roles) {
+            if (role.merchant_type_id == type.typeInt) {
+                return true;
             }
-        });
+        }
+        return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_JOIN && resultCode == Activity.RESULT_OK) {
+            setResult(Activity.RESULT_OK);
+            finish();
+        }
     }
 
     @Override

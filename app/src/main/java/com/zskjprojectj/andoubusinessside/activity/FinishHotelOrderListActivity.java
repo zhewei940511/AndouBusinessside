@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
+import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 public class FinishHotelOrderListActivity extends BaseActivity {
@@ -13,7 +14,7 @@ public class FinishHotelOrderListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "已完成订单");
-        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new OrderFragment(10))
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new OrderFragment(Order.STATE.YI_PING_JIA))
                 .commitAllowingStateLoss();
     }
 

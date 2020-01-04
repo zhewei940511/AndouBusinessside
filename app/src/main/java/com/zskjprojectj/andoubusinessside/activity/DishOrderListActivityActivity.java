@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
-import com.zskjprojectj.andoubusinessside.model.Order;
+import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
@@ -49,13 +49,13 @@ public class DishOrderListActivityActivity extends BaseActivity {
         return R.layout.activity_cancel_dish_order_list_activity;
     }
 
-    class DishOrderListAdapter extends BaseQuickAdapter<Order, BaseViewHolder> {
+    class DishOrderListAdapter extends BaseQuickAdapter<OrderT, BaseViewHolder> {
         public DishOrderListAdapter(int layoutResId) {
             super(layoutResId);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, Order item) {
+        protected void convert(BaseViewHolder helper, OrderT item) {
             helper.addOnClickListener(R.id.orderDetailEntryBtn);
         }
     }
