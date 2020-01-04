@@ -13,19 +13,19 @@ public class OrderT implements Serializable {
     private String icon;
     private String title;
     private String spec;
-    private float price;
+    private double price;
     private int count;
-    private float total;
+    private double total;
     private Long date;
     private String receiver;
     private String mobile;
     private String addr;
-    private float score;
-    private float freight;
+    private double score;
+    private double freight;
     private String reviewName;
     private String reviewAvatar;
     private long reviewDate;
-    private float reviewRate;
+    private double reviewRate;
     private String reviewContent;
     private ArrayList<String> reviewPics;
 
@@ -53,11 +53,11 @@ public class OrderT implements Serializable {
         this.reviewDate = reviewDate;
     }
 
-    public float getReviewRate() {
+    public double getReviewRate() {
         return reviewRate;
     }
 
-    public void setReviewRate(float reviewRate) {
+    public void setReviewRate(double reviewRate) {
         this.reviewRate = reviewRate;
     }
 
@@ -117,11 +117,11 @@ public class OrderT implements Serializable {
         this.spec = spec;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -133,11 +133,11 @@ public class OrderT implements Serializable {
         this.count = count;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -173,19 +173,19 @@ public class OrderT implements Serializable {
         this.mobile = mobile;
     }
 
-    public float getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(float score) {
+    public void setScore(double score) {
         this.score = score;
     }
 
-    public float getFreight() {
+    public double getFreight() {
         return freight;
     }
 
-    public void setFreight(float freight) {
+    public void setFreight(double freight) {
         this.freight = freight;
     }
 }

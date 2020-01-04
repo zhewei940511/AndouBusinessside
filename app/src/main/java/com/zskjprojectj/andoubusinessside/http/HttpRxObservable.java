@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.common.internal.Throwables;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.stream.MalformedJsonException;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.activity.LoginActivity;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,33 +44,7 @@ public class HttpRxObservable {
                     }
                 })
                 .doOnError(throwable -> {
-                    dismissProgressDialog(activity);
-                    if (!showLoading && !showRetry) {
-                        if (onFailureListener != null) {
-                            onFailureListener.onFailure(throwable.getMessage());
-                        }
-                        return;
-                    }
-                    if (!showRetry) {
-                        if (throwable instanceof ApiException) {
-                            ToastUtil.showToast(((ApiException) throwable).getErrorCode() + " " + throwable.getMessage());
-                        } else if (throwable instanceof MalformedJsonException) {
-                            ToastUtil.showToast("500 服务器数据格式错误");
-                        } else {
-                            ToastUtil.showToast(throwable.getLocalizedMessage());
-                        }
-                        return;
-                    }
-                    if (throwable instanceof HttpException) {
-                        switch (((HttpException) throwable).code()) {
-                            case 500:
-                                showNetworkError(activity, retrySubject, "服务器错误,请点击刷新重试!");
-                                break;
-                        }
-                    } else {
-                        throwable.printStackTrace();
-                        showNetworkError(activity, retrySubject, "暂无网络连接,请点击刷新重试!");
-                    }
+                    handleError(throwable, activity, onFailureListener, showRetry, retrySubject);
                 })
                 .doOnNext((Consumer<BaseResult<T>>) result -> {
                     dismissProgressDialog(activity);
@@ -81,16 +54,47 @@ public class HttpRxObservable {
                         } else if (result.getCode().equals("202")) {
                             LoginActivity.start(activity);
                         } else {
-                            throw Throwables.propagate(new ApiException(result.getCode(), result.getMsg()));
+                            throw new ApiException(result.getCode(), result.getMsg());
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        throw Throwables.propagate(new ApiException(result.getCode(), result.getMsg()));
+                        handleError(e, activity, onFailureListener, showRetry, retrySubject);
                     }
                 })
                 .retryWhen(throwableObservable ->
                         throwableObservable.flatMap(throwable ->
-                                Observable.just(throwable).zipWith(retrySubject, (o, o2) -> o)));
+                                Observable.just(throwable).
+                                        zipWith(retrySubject, (o, o2) -> o)));
+    }
+
+    private static void handleError(Throwable throwable,
+                                    BaseActivity activity,
+                                    OnFailureListener onFailureListener,
+                                    boolean showRetry,
+                                    PublishSubject<Object> retrySubject) {
+        dismissProgressDialog(activity);
+        if (onFailureListener != null) {
+            onFailureListener.onFailure(throwable.getMessage());
+        }
+        String msg = convertErrorMsg(throwable);
+        if (showRetry) {
+            showNetworkError(activity, retrySubject, msg);
+        } else {
+            ToastUtils.showShort(msg);
+        }
+    }
+
+    private static String convertErrorMsg(Throwable throwable) {
+        if (throwable instanceof ApiException) {
+            return ((ApiException) throwable).getErrorCode() + " " + throwable.getMessage();
+        } else if (throwable instanceof MalformedJsonException) {
+            return "500 服务器数据格式错误";
+        } else if (throwable instanceof HttpException) {
+            if (((HttpException) throwable).code() == 500) {
+                return "500 服务器内部错误";
+            }
+        }
+        return "400 访问错误,请稍后重试!";
     }
 
     public interface OnSuccessListener<T> {
@@ -120,7 +124,8 @@ public class HttpRxObservable {
                 .removeView(activity.findViewById(R.id.networkErrorContainer));
     }
 
-    private static void showNetworkError(BaseActivity activity, PublishSubject<Object> retrySubject, String errorMsg) {
+    private static void showNetworkError(BaseActivity
+                                                 activity, PublishSubject<Object> retrySubject, String errorMsg) {
         if (activity == null) return;
         if (activity.findViewById(R.id.networkErrorContainer) == null) {
             final View networkErrorContainer = LayoutInflater.from(activity).inflate(R.layout.layout_network_error, null);

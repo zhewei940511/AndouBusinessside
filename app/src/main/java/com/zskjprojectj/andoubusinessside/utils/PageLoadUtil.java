@@ -33,6 +33,7 @@ public class PageLoadUtil<T> {
         this.activity = activity;
         this.adapter = adapter;
         this.refreshLayout = refreshLayout;
+        this.adapter.bindToRecyclerView(recyclerView);
         adapter.setLoadMoreView(new LoadMoreView() {
 
             @Override
@@ -95,7 +96,7 @@ public class PageLoadUtil<T> {
                             adapter.loadMoreComplete();
                         }
                     }
-                }, msg -> {
+                }, msg -> refreshLayout.postDelayed(() -> {
                     if (needRefresh) {
                         refreshLayout.finishRefresh();
                         adapter.setEmptyView(R.layout.layout_retry_view);
@@ -103,11 +104,12 @@ public class PageLoadUtil<T> {
                     } else {
                         adapter.loadMoreFail();
                     }
-                })
+                }, 500))
                 .subscribe();
     }
 
-    public void load() {
+    public void load(ObservableProvider<T> observableProvider) {
+        this.observableProvider = observableProvider;
         loadData(true);
     }
 

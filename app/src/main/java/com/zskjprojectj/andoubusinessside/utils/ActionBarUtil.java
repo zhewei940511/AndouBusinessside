@@ -48,6 +48,6 @@ public class ActionBarUtil {
     }
 
     public static void setBackEnable(BaseActivity activity, boolean enable) {
-        activity.findViewById(R.id.backBtn).setVisibility(enable ? View.VISIBLE : View.GONE);
+        activity.findViewById(R.id.backBtn).setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
     }
 }

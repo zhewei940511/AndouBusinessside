@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class BaseAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
-    public HashMap<T, Boolean> selectMap = new HashMap<>();
+    public final HashMap<T, Boolean> selectMap = new HashMap<>();
     public boolean isSelectedAll;
     public boolean isLoadMoreEnd;
     public OnSelectedStateChangedListener onSelectedStateChangedListener;

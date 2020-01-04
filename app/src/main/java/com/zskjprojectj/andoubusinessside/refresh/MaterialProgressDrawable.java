@@ -93,8 +93,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     private View mParent;
     private Animation mAnimation;
     float mRotationCount;
-    private double mWidth;
-    private double mHeight;
+    private float mWidth;
+    private float mHeight;
     boolean mFinishing;
 
     MaterialProgressDrawable(Context context, View parent) {
@@ -108,8 +108,8 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         setupAnimators();
     }
 
-    private void setSizeParameters(double progressCircleWidth, double progressCircleHeight,
-                                   double centerRadius, double strokeWidth, float arrowWidth, float arrowHeight) {
+    private void setSizeParameters(float progressCircleWidth, float progressCircleHeight,
+                                   float centerRadius, float strokeWidth, float arrowWidth, float arrowHeight) {
         final Ring ring = mRing;
         final DisplayMetrics metrics = mResources.getDisplayMetrics();
         final float screenDensity = metrics.density;
@@ -467,7 +467,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         private boolean mShowArrow;
         private Path mArrow;
         private float mArrowScale;
-        private double mRingCenterRadius;
+        private float mRingCenterRadius;
         private int mArrowWidth;
         private int mArrowHeight;
         private int mAlpha;
@@ -707,11 +707,11 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
          * @param centerRadius Inner radius in px of the circle the progress
          *            spinner arc traces.
          */
-        public void setCenterRadius(double centerRadius) {
+        public void setCenterRadius(float centerRadius) {
             mRingCenterRadius = centerRadius;
         }
 
-        public double getCenterRadius() {
+        public float getCenterRadius() {
             return mRingCenterRadius;
         }
 

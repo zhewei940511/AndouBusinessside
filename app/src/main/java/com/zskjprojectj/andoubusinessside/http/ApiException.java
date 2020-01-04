@@ -1,6 +1,6 @@
 package com.zskjprojectj.andoubusinessside.http;
 
-public class ApiException extends Throwable {
+public class ApiException extends Exception {
 
     /***
      * 数据错误类型

@@ -141,7 +141,8 @@
                 android:layout_height="25dp"
                 android:layout_alignParentBottom="true"
                 android:scaleType="centerInside"
-                android:src="@mipmap/ic_edit_01" />
+                android:src="@mipmap/ic_edit_01"
+                android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

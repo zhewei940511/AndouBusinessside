@@ -1,206 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
-    tools:context=".activity.EditPriceActivity">
+    android:background="#F7F7F7">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:orientation="vertical"
+        tools:context=".activity.EditPriceActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:orientation="horizontal"
-            android:paddingStart="15dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="20dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iconImg"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                tools:src="@mipmap/temp2" />
 
             <LinearLayout
+                android:id="@+id/goodsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:orientation="vertical">
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/billContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="20dp">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/titleTxt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:lines="2"
+                        android:text="运费"
                         android:textColor="#ff646464"
-                        android:textSize="12sp"
-                        tools:text="亲润孕妇化妆品套装BB霜遮瑕孕遮瑕孕遮B霜遮瑕孕遮瑕孕遮瑕B霜遮瑕孕遮瑕孕遮瑕瑕孕遮瑕孕妇护" />
+                        android:textSize="12sp" />
 
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp">
+                        android:text="+￥ "
+                        android:textColor="#ff1c1c1c"
+                        android:textSize="12sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="#fff34545"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/priceTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#fff34545"
-                            android:textSize="12sp"
-                            tools:text="288" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/freightTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#ff1c1c1c"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginTop="15dp">
 
                     <TextView
-                        android:id="@+id/specTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="共"
+                        android:textColor="#ff646464"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/countTxt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#ff646464"
+                        android:textSize="12sp" />
+
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:lines="2"
-                        android:textColor="#ff969696"
-                        android:textSize="12sp"
-                        tools:text="四件套" />
+                        android:text="个商品(合计)"
+                        android:textColor="#ff646464"
+                        android:textSize="12sp" />
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp">
+                        android:text="￥ "
+                        android:textColor="#ff1c1c1c"
+                        android:textSize="12sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="X"
-                            android:textColor="#ff969696"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/countTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#ff969696"
-                            android:textSize="12sp"
-                            tools:text="1" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/totalTxt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#ff1c1c1c"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:paddingStart="15dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="原价：￥ "
+                    android:textColor="#FA3231"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@id/totalTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#FA3231"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#F7F7F7" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <TextView
+                    android:id="@+id/totalTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="修改价格"
+                    android:textColor="#ff323232"
+                    android:textSize="12sp" />
+
+
+                <com.zskjprojectj.andoubusinessside.ui.CurrencyEditView
+                    android:id="@+id/editTotalTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="end"
+                    android:hint="请输入商品价格"
+                    android:inputType="numberDecimal"
+                    android:lines="1"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:singleLine="true"
+                    android:textColor="#ff646464"
+                    android:textColorHint="#b6b6b6"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_right_01" />
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/confirmBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/white"
-            android:paddingStart="15dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="原价：￥ "
-                android:textColor="#FA3231"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@id/totalTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#FA3231"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#F7F7F7" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp">
-
-            <TextView
-                android:id="@+id/totalTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="修改价格"
-                android:textColor="#ff323232"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/editTotalTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:gravity="end"
-                android:inputType="numberDecimal"
-                android:lines="1"
-                android:maxEms="10"
-                android:minWidth="100dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:singleLine="true"
-                android:text="0"
-                android:textColor="#969696"
-                android:textSize="12sp" />
-
-            <ImageView
-                android:layout_width="6dp"
-                android:layout_height="12dp"
-                android:layout_marginStart="10dp"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_right_01" />
-        </LinearLayout>
+            android:layout_height="45dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="45dp"
+            android:background="@drawable/sp_btn_01"
+            android:gravity="center"
+            android:text="修改价格"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/confirmBtn"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="145dp"
-        android:background="@drawable/sp_btn_01"
-        android:gravity="center"
-        android:text="修改价格"
-        android:textColor="@android:color/white"
-        android:textSize="13sp" />
-
-
-</RelativeLayout>
+</ScrollView>

@@ -1,5 +1,7 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.willy.ratingbar.ScaleRatingBar;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
@@ -44,7 +47,7 @@ public class ReviewDetailActivity extends BaseActivity {
                 .load(orderT.getReviewAvatar())
                 .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
                 .into((ImageView) findViewById(R.id.avatarImg));
-        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(orderT.getReviewRate());
+//        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(orderT.getReviewRate());
     }
 
     @Override
@@ -68,5 +71,11 @@ public class ReviewDetailActivity extends BaseActivity {
                 //TODO 删除后得逻辑是否显示已经删除
             }, 1000);
         });
+    }
+
+    public static void start(Activity activity, Order order, int requestCode) {
+        Intent intent = new Intent(activity, ReviewDetailActivity.class);
+        intent.putExtra(KEY_ORDER, order);
+        ActivityUtils.startActivityForResult(activity, intent, requestCode);
     }
 }

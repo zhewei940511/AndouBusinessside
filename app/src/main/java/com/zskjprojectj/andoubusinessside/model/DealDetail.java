@@ -2,7 +2,7 @@ package com.zskjprojectj.andoubusinessside.model;
 
 public class DealDetail {
     private String title;
-    private float total;
+    private double total;
     private long date;
 
     public String getTitle() {
@@ -13,11 +13,11 @@ public class DealDetail {
         this.title = title;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

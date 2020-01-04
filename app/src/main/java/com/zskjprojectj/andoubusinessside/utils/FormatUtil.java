@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class FormatUtil {
 
-    public static String getMoneyString(float money) {
+    public static String getMoneyString(double money) {
         DecimalFormat df = new DecimalFormat("#0.00 ");
         return df.format(money);
     }

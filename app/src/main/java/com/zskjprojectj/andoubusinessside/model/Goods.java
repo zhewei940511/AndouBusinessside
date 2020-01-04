@@ -4,7 +4,7 @@ public class Goods {
     private String title;
     private String icon;
     private String description;
-    private float price;
+    private double price;
     private String spec;
     private int count;
     private String state;
@@ -33,11 +33,11 @@ public class Goods {
         this.description = description;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

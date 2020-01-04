@@ -7,7 +7,6 @@ import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
-import com.zskjprojectj.andoubusinessside.model.Order;
 import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
@@ -21,11 +20,11 @@ public class UnCheckInOrderListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "待入住订单");
-        OrderListAdapter adapter = new OrderListAdapter(Order.STATE.YI_PING_JIA);
+        OrderListAdapter adapter = new OrderListAdapter();
         adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
         ArrayList<OrderT> data = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            data.add(OrderFragment.getOrder(7));
+            data.add(DishOrderListActivityActivity.getOrder(7));
         }
 //        adapter.setNewData(data);
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {

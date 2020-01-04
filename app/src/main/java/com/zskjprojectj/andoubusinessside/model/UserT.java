@@ -18,7 +18,7 @@ public class UserT implements Serializable {
     public int refundCount;
     public int goodsCount;
     public int itemCount;
-    public float accountCount;
+    public double accountCount;
     public String state;
     public boolean isVip;
     public ArrayList<Type> types = new ArrayList<>();

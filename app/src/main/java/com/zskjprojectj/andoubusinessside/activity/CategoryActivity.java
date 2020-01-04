@@ -10,15 +10,15 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.adapter.CategoryAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
+import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.Category;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
-
-import java.util.ArrayList;
 
 import static com.zskjprojectj.andoubusinessside.activity.EditInfoActivity.KEY_INFO;
 
@@ -49,14 +49,7 @@ public class CategoryActivity extends BaseActivity {
                     break;
             }
         });
-        ArrayList<Category> data = new ArrayList<>();
-        for (int i = -1; i < 8; i++) {
-            Category category = new Category();
-            category.name = "商品分类" + i;
-            category.id = i;
-            data.add(category);
-        }
-        adapter.setNewData(data);
+        adapter.addData(new Category(-1));
     }
 
     @Override
@@ -73,38 +66,20 @@ public class CategoryActivity extends BaseActivity {
                 ToastUtil.showToast("商品分类名称不能为空!");
                 return;
             }
-            dialog.dismiss();
-            contentView.postDelayed(() -> {
-                ToastUtil.showToast("添加成功!");
-                Category category = new Category();
-                category.name = name;
-                adapter.addData(category);
-            }, 1000);
+            HttpRxObservable.getObservable(mActivity, true, false,
+                    ApiUtils.getApiService().newCategory(
+                            LoginInfo.getUid(),
+                            LoginInfo.getMerchantId(),
+                            LoginInfo.getMerchantTypeId(),
+                            name
+                    ), result -> {
+                        dialog.dismiss();
+                        ToastUtil.showToast("添加成功!");
+                        Category category = new Category(1);
+                        category.name = name;
+                        adapter.addData(category);
+                    }).subscribe();
         });
-    }
-
-    class CategoryAdapter extends BaseQuickAdapter<Category, BaseViewHolder> {
-
-        public CategoryAdapter() {
-            super(R.layout.layout_goods_category_list_item);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, Category item) {
-            if (item.id == -1) {
-                helper.setVisible(R.id.categoryNameTxt, false)
-                        .setVisible(R.id.newCategoryBtn, true)
-                        .setVisible(R.id.deleteBtn, false)
-                        .addOnClickListener(R.id.newCategoryBtn);
-            } else {
-                helper.setVisible(R.id.categoryNameTxt, true)
-                        .setVisible(R.id.newCategoryBtn, false)
-                        .setVisible(R.id.deleteBtn, true)
-                        .setText(R.id.categoryNameTxt, item.name)
-                        .addOnClickListener(R.id.deleteBtn)
-                        .addOnClickListener(R.id.rootView);
-            }
-        }
     }
 
     public static void start(Activity activity, int requestCode) {

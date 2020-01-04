@@ -50,105 +50,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/goodsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:background="#fff8f8f8"
-            android:orientation="horizontal"
-            android:paddingStart="15dp"
-            android:paddingTop="17dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="5dp">
-
-            <ImageView
-                android:id="@+id/iconImg"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                tools:src="@mipmap/temp2" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/titleTxt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:lines="2"
-                        android:textColor="#ff646464"
-                        android:textSize="12sp"
-                        tools:text="亲润孕妇化妆品套装BB霜遮瑕孕遮瑕孕遮B霜遮瑕孕遮瑕孕遮瑕B霜遮瑕孕遮瑕孕遮瑕瑕孕遮瑕孕妇护" />
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="#fff34545"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/priceTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#fff34545"
-                            android:textSize="12sp"
-                            tools:text="288" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp">
-
-                    <TextView
-                        android:id="@+id/specTxt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:lines="2"
-                        android:textColor="#ff969696"
-                        android:textSize="12sp"
-                        tools:text="四件套" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="x"
-                            android:textColor="#ff969696"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/countTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#ff969696"
-                            android:textSize="12sp"
-                            tools:text="1" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
+            android:orientation="vertical" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -196,20 +101,18 @@
                 android:layout_width="76dp"
                 android:layout_height="26dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="15dp"
                 android:background="@drawable/sp_goods_detail02"
                 android:gravity="center"
                 android:text="订单详情"
-                tools:visibility="visible"
                 android:textColor="#979797"
-                android:textSize="11sp"
-                android:visibility="gone" />
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/controlBtn"
                 android:layout_width="76dp"
                 android:layout_height="26dp"
                 android:layout_gravity="end"
+                android:layout_marginStart="15dp"
                 android:background="@drawable/sp_goods_detail"
                 android:gravity="center"
                 android:text="查看详情"

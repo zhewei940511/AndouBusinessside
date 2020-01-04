@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
                         for (User.Role role : result.data) {
                             View.OnClickListener onUserCenterEntryBtnClickListener =
                                     view -> {
-                                        LoginInfo.saveMerchantId(role.id);
+                                        LoginInfo.saveMerchantTypeAndId(role.id, role.merchant_type_id);
                                         UserCenterActivity.start(role);
                                     };
                             if (role.merchant_type_id == User.Role.Type.MALL.typeInt) {

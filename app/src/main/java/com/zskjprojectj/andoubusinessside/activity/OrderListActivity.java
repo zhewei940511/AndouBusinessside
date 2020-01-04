@@ -1,7 +1,10 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -69,6 +72,16 @@ public class OrderListActivity extends BaseActivity {
             }
         });
         tabLayout.setCurrentTab(getIntent().getIntExtra(KEY_STATE, 0));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 666 && resultCode == Activity.RESULT_OK) {
+            for (Fragment fragment : fragments) {
+                ((OrderFragment) fragment).refresh();
+            }
+        }
     }
 
     @Override

@@ -1,29 +1,27 @@
 package com.zskjprojectj.andoubusinessside.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
-import com.chad.library.adapter.base.BaseViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.adapter.BaseAdapter;
+import com.zskjprojectj.andoubusinessside.adapter.ManageGoodsAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.model.Goods;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
+import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
+import com.zskjprojectj.andoubusinessside.model.Item;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.UserT;
-import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
-import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
+import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
 import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ManageGoodsActivity extends BaseActivity {
     ManageGoodsAdapter adapter = new ManageGoodsAdapter();
@@ -31,10 +29,20 @@ public class ManageGoodsActivity extends BaseActivity {
     @BindView(R.id.selectedAllCbx)
     CheckBox selectedAllCbx;
 
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
+
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
+    @OnClick(R.id.backBtn)
+    void onBackBtnClick() {
+        onBackPressed();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener =
                 (buttonView, isChecked) -> adapter.setSelectedAll(isChecked);
         adapter.onSelectedStateChangedListener = () -> {
@@ -43,20 +51,13 @@ public class ManageGoodsActivity extends BaseActivity {
             selectedAllCbx.setOnCheckedChangeListener(onCheckedChangeListener);
         };
         selectedAllCbx.setOnCheckedChangeListener(onCheckedChangeListener);
-        ArrayList<Goods> data = new ArrayList<>();
-        for (int i = 0; i < 48; i++) {
-            Goods goods = new Goods();
-            goods.setCount(new Random().nextInt());
-            goods.setDescription("这是商品描述吗？");
-            goods.setIcon("https://himg2.huanqiucdn.cn/attachment2010/2019/1214/20191214071048532.jpg");
-            goods.setPrice(new Random().nextFloat());
-            goods.setSpec("120g");
-            goods.setTitle("云南竹荪干货竹笙特级笙特级笙特级笙特级笙特级笙特级");
-            goods.setState("正常");
-            data.add(goods);
-        }
-        adapter.setNewData(data);
-        adapter.loadMoreEnd();
+        PageLoadUtil<Item> pageLoadUtil = PageLoadUtil.get(mActivity, recyclerView, adapter, refreshLayout);
+        pageLoadUtil.load(() -> ApiUtils.getApiService().itemList(
+                LoginInfo.getUid(),
+                LoginInfo.getMerchantId(),
+                LoginInfo.getMerchantTypeId(),
+                pageLoadUtil.page
+        ));
         findViewById(R.id.goodsCategoryEntryBtn)
                 .setOnClickListener(view -> CategoryActivity.start());
         findViewById(R.id.newGoodsBtn)
@@ -71,35 +72,38 @@ public class ManageGoodsActivity extends BaseActivity {
                 });
     }
 
+    @OnClick(R.id.deleteBtn)
+    void onDeleteBtnClick() {
+        new AlertDialog.Builder(mActivity)
+                .setTitle("删除商品")
+                .setMessage("确定删除这些商品吗？")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定", (dialog, which) ->
+                        HttpRxObservable.getObservable(mActivity, true, false
+                                , ApiUtils.getApiService().delItem(
+                                        LoginInfo.getUid(),
+                                        getSelectedIds()
+                                ), result -> {
+                                    for (Item item : adapter.selectMap.keySet()) {
+                                        if (adapter.selectMap.get(item)) {
+                                            adapter.remove(adapter.getData().indexOf(item));
+                                        }
+                                    }
+                                }).subscribe()).show();
+    }
+
+    private String getSelectedIds() {
+        StringBuilder builder = new StringBuilder();
+        for (Item item : adapter.selectMap.keySet()) {
+            if (adapter.selectMap.get(item)) {
+                builder.append(item.id).append(",");
+            }
+        }
+        return builder.substring(0, builder.length() - 1);
+    }
+
     @Override
     protected int getContentView() {
         return R.layout.activity_manage_goods;
-    }
-
-    public class ManageGoodsAdapter extends BaseAdapter<Goods> {
-
-        public ManageGoodsAdapter() {
-            super(R.layout.layout_goods_list_item);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, Goods item) {
-            helper.setText(R.id.titleTxt, item.getTitle())
-                    .setText(R.id.descriptionTxt, item.getDescription())
-                    .setText(R.id.priceTxt, FormatUtil.getMoneyString(item.getPrice()))
-                    .setText(R.id.specTxt, item.getSpec())
-                    .setText(R.id.countTxt, item.getCount() + "")
-                    .setChecked(R.id.checkbox, selectMap.get(item));
-            Glide.with(helper.itemView.getContext())
-                    .load(item.getIcon())
-                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(ScreenUtil.dp2px(helper.itemView.getContext(), 2))))
-                    .into((ImageView) helper.itemView.findViewById(R.id.iconImg));
-            helper.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setSelected(item, !selectMap.get(item));
-                }
-            });
-        }
     }
 }

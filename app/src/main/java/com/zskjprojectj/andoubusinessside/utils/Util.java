@@ -23,13 +23,13 @@ public class Util {
     }
 
     //处理图片像素
-    public static int dp2px(Resources resources, float dp) {
-        final float scale = resources.getDisplayMetrics().density;
+    public static int dp2px(Resources resources, double dp) {
+        final double scale = resources.getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 
-    public static float sp2px(Resources resources, float sp) {
-        final float scale = resources.getDisplayMetrics().scaledDensity;
+    public static double sp2px(Resources resources, double sp) {
+        final double scale = resources.getDisplayMetrics().scaledDensity;
         return sp * scale;
     }
 

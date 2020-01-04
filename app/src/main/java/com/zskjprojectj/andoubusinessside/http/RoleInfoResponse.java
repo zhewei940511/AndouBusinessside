@@ -18,9 +18,11 @@ public class RoleInfoResponse {
     public String all;
     public String affirm;
     public String manage;
+    public String cancel;
+    public String shipments;
     public List<Balance> balance;
 
     public class Balance {
-        public float money;
+        public double money;
     }
 }

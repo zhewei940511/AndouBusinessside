@@ -124,6 +124,7 @@
                         android:background="@android:color/transparent"
                         android:gravity="end"
                         android:hint="请输入商品价格"
+                        android:inputType="numberDecimal"
                         android:lines="1"
                         android:paddingTop="20dp"
                         android:paddingBottom="20dp"
