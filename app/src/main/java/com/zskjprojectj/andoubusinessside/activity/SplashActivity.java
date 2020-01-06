@@ -15,7 +15,7 @@ public class SplashActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarColor(mActivity, Color.WHITE);
-        BarUtils.setStatusBarLightMode(mActivity,true);
+        BarUtils.setStatusBarLightMode(mActivity, true);
         contentView.postDelayed(() -> {
             if (LoginInfo.getToken().isEmpty()) {
                 ActivityUtils.startActivity(LoginActivity.class);
