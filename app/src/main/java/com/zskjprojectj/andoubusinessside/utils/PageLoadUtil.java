@@ -25,7 +25,7 @@ public class PageLoadUtil<T> {
     private BaseQuickAdapter<T, BaseViewHolder> adapter;
     private SmartRefreshLayout refreshLayout;
     private BaseActivity activity;
-    public ObservableProvider<T> observableProvider;
+    private ObservableProvider<T> observableProvider;
     private View loadingView;
 
     private PageLoadUtil(BaseActivity activity, RecyclerView recyclerView, BaseQuickAdapter<T, BaseViewHolder> adapter

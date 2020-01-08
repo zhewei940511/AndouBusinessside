@@ -12,50 +12,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
-
-            <View
-                android:id="@+id/actionBarBackground"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#5ED3AE" />
-
-            <FrameLayout
-                android:id="@+id/backBtn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:paddingStart="15dp">
-
-                <ImageView
-                    android:layout_width="8.5dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_back_01" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/actionBarTitleTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="商品管理"
-                android:textColor="#ffffffff"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/goodsCategoryEntryBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="15dp"
-                android:gravity="center"
-                android:text="商品分类"
-                android:textColor="#ffffffff"
-                android:textSize="12sp" />
-        </FrameLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -76,7 +32,7 @@
                 android:layout_weight="10" />
 
             <TextView
-                android:id="@+id/takeOffBtn"
+                android:id="@+id/goodsOffBtn"
                 android:layout_width="60dp"
                 android:layout_height="28dp"
                 android:background="@drawable/sp_goods_detail"
@@ -91,7 +47,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/discontinueBtn"
+                android:id="@+id/goodsOnBtn"
                 android:layout_width="60dp"
                 android:layout_height="28dp"
                 android:background="@drawable/sp_goods_detail"

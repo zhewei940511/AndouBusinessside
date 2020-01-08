@@ -12,7 +12,7 @@ import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.Random;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class DishOrderListActivityActivity extends BaseActivity {
 

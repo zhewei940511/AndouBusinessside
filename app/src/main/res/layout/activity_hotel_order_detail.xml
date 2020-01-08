@@ -8,7 +8,6 @@
     tools:context=".activity.HotelOrderDetailActivity">
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -235,7 +234,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/countTxt2"
+                            android:id="@+id/countTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"

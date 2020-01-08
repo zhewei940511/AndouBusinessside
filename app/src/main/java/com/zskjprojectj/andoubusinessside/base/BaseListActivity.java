@@ -124,7 +124,7 @@ public abstract class BaseListActivity<D> extends BaseActivity implements BaseQu
      * @return
      */
     protected int getRecyclerId() {
-        return R.id.recyclerview;
+        return R.id.recyclerView;
     }
 
     /**

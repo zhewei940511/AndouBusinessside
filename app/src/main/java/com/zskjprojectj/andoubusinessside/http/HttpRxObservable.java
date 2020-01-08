@@ -15,6 +15,7 @@ import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.exceptions.Exceptions;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
@@ -42,26 +43,18 @@ public class HttpRxObservable {
                     if (showLoading) {
                         showProgressDialog(activity);
                     }
-                })
-                .doOnError(throwable -> {
-                    handleError(throwable, activity, onFailureListener, showRetry, retrySubject);
-                })
+                }).doOnError(throwable ->
+                        handleError(throwable, activity, onFailureListener, showRetry, retrySubject))
                 .doOnNext((Consumer<BaseResult<T>>) result -> {
                     dismissProgressDialog(activity);
-                    try {
-                        if (result.getCode().equals("200")) {
-                            onSuccessListener.onSuccess(result);
-                        } else if (result.getCode().equals("202")) {
-                            LoginActivity.start(activity);
-                        } else {
-                            throw new ApiException(result.getCode(), result.getMsg());
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        handleError(e, activity, onFailureListener, showRetry, retrySubject);
+                    if (result.getCode().equals("200")) {
+                        onSuccessListener.onSuccess(result);
+                    } else if (result.getCode().equals("202")) {
+                        LoginActivity.start(activity);
+                    } else {
+                        throw Exceptions.propagate(new ApiException(result.getCode(), result.getMsg()));
                     }
-                })
-                .retryWhen(throwableObservable ->
+                }).retryWhen(throwableObservable ->
                         throwableObservable.flatMap(throwable ->
                                 Observable.just(throwable).
                                         zipWith(retrySubject, (o, o2) -> o)));

@@ -1,68 +1,59 @@
 package com.zskjprojectj.andoubusinessside.fragment;
 
 import android.os.Bundle;
-import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.base.BaseFragment;
+import com.zskjprojectj.andoubusinessside.app.BaseFragment;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.model.DealDetail;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
-
-import java.util.ArrayList;
-import java.util.Random;
+import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
 
 public class DealDetailListFragment extends BaseFragment {
     private int state;
-    private DealDetailListAdapter adapter;
+    private DealDetailListAdapter adapter = new DealDetailListAdapter();
 
     public DealDetailListFragment(int state) {
         this.state = state;
-        adapter = new DealDetailListAdapter(state, R.layout.layout_deal_detail_list_item);
     }
 
     @Override
-    protected void initViews(View view, Bundle savedInstanceState) {
-        adapter.bindToRecyclerView(view.findViewById(R.id.recyclerview));
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        PageLoadUtil<DealDetail> pageLoadUtil = PageLoadUtil.get(mActivity,
+                view.findViewById(R.id.recyclerView),
+                adapter,
+                view.findViewById(R.id.refreshLayout));
+        pageLoadUtil.load(() -> ApiUtils.getApiService().balanceDetail(
+                LoginInfo.getUid(),
+                LoginInfo.getMerchantId(),
+                LoginInfo.getMerchantTypeId(),
+                state,
+                pageLoadUtil.page
+        ));
     }
 
     @Override
-    protected int getContentViewRes() {
+    protected int getContentView() {
         return R.layout.fragment_order_list;
     }
 
-    @Override
-    protected void getDataFromServer() {
-
-    }
-
-    @Override
-    protected void initData() {
-        ArrayList<DealDetail> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            DealDetail deal = new DealDetail();
-            deal.setDate(System.currentTimeMillis());
-            deal.setTitle(state == 0 ? "订单完成" : "提现完成");
-            deal.setTotal(new Random().nextFloat());
-            data.add(deal);
-        }
-        adapter.setNewData(data);
-    }
-
     class DealDetailListAdapter extends BaseQuickAdapter<DealDetail, BaseViewHolder> {
-        private int state;
 
-        public DealDetailListAdapter(int state, int layoutResId) {
-            super(layoutResId);
-            this.state = state;
+        public DealDetailListAdapter() {
+            super(R.layout.layout_deal_detail_list_item);
         }
 
         @Override
         protected void convert(BaseViewHolder helper, DealDetail item) {
-            helper.setText(R.id.titleTxt, item.getTitle())
-                    .setText(R.id.dateTxt, FormatUtil.getDateString2(item.getDate()))
-                    .setText(R.id.totalTxt, FormatUtil.getMoneyString(item.getTotal()));
+            helper.setText(R.id.titleTxt, item.msg)
+                    .setText(R.id.dateTxt, item.created)
+                    .setText(R.id.totalTxt, FormatUtil.getMoneyString(item.price));
         }
     }
 }

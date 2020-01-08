@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -75,7 +74,7 @@ public class UserCenterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BarUtils.setStatusBarColor(mActivity, Color.TRANSPARENT);
+        BarUtils.transparentStatusBar(mActivity);
         ActionBarUtil.getBackground(mActivity, false).setAlpha(0);
         initScrollView();
         role = (User.Role) getIntent().getSerializableExtra(KEY_ROLE);

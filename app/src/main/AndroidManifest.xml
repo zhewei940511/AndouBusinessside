@@ -14,6 +14,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
+        <activity android:name=".activity.SelectExpressActivity"></activity>
+
         <meta-data
             android:name="design_width_in_dp"
             android:value="375" />
@@ -124,7 +126,7 @@
             android:name=".activity.EditPriceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.OrderInfoActivity"
+            android:name=".activity.OrderDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.OrderListActivity"
@@ -136,4 +138,5 @@
             android:name=".activity.UserCenterActivity"
             android:screenOrientation="portrait" />
     </application>
+
 </manifest>

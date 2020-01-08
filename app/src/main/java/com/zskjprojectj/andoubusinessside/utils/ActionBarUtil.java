@@ -22,6 +22,13 @@ public class ActionBarUtil {
         titleTxt.setText(title);
     }
 
+    public static void setRightAction(BaseActivity activity, String actionStr, View.OnClickListener onClickListener) {
+        setupActionBar(activity, true);
+        TextView rightActionTxt = getRightActionTxt(activity);
+        rightActionTxt.setText(actionStr);
+        rightActionTxt.setOnClickListener(onClickListener);
+    }
+
     private static void setupActionBar(BaseActivity activity, boolean topOfContentView) {
         ViewGroup actionBarContainer = activity.findViewById(R.id.actionBarContainer);
         if (actionBarContainer.getChildCount() == 0) {
@@ -40,6 +47,10 @@ public class ActionBarUtil {
 
     private static TextView getTitleTxt(BaseActivity activity) {
         return activity.findViewById(R.id.actionBarTitleTxt);
+    }
+
+    private static TextView getRightActionTxt(BaseActivity activity) {
+        return activity.findViewById(R.id.rightActionTxt);
     }
 
     public static View getBackground(BaseActivity activity, boolean topOfContentView) {

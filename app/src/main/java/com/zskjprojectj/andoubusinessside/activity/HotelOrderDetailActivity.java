@@ -15,7 +15,7 @@ import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class HotelOrderDetailActivity extends BaseActivity {
     private View progressBar;
@@ -55,7 +55,7 @@ public class HotelOrderDetailActivity extends BaseActivity {
         ((TextView) findViewById(R.id.titleTxt)).setText(info.getTitle());
         ((TextView) findViewById(R.id.specTxt)).setText(info.getSpec());
         ((TextView) findViewById(R.id.countTxt1)).setText(info.getCount() + "");
-        ((TextView) findViewById(R.id.countTxt2)).setText(info.getCount() + "");
+//        ((TextView) findViewById(R.id.countTxt2)).setText(info.getCount() + "");
         ((TextView) findViewById(R.id.priceTxt)).setText(FormatUtil.getMoneyString(info.getPrice()));
         ((TextView) findViewById(R.id.totalTxt)).setText(FormatUtil.getMoneyString(info.getTotal()));
         ((TextView) findViewById(R.id.scoreTxt)).setText(FormatUtil.getMoneyString(info.getScore()));

@@ -15,7 +15,7 @@ import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class DateOrderDetailActivity extends BaseActivity {
     private View progressBar;

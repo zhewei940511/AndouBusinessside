@@ -23,7 +23,11 @@
                 android:id="@+id/goodsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="15dp" />
 
             <LinearLayout
                 android:id="@+id/billContainer"
@@ -37,39 +41,9 @@
                 android:paddingEnd="15dp"
                 android:paddingBottom="20dp">
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="运费"
-                        android:textColor="#ff646464"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+￥ "
-                        android:textColor="#ff1c1c1c"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/freightTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="#ff1c1c1c"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -79,7 +53,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/countTxt2"
+                        android:id="@+id/countTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -109,6 +83,36 @@
                         android:textColor="#ff1c1c1c"
                         android:textSize="12sp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="运费"
+                        android:textColor="#ff646464"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+￥ "
+                        android:textColor="#ff1c1c1c"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/freightTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#ff1c1c1c"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
 
             </LinearLayout>
 

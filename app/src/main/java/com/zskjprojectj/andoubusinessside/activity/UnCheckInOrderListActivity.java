@@ -6,13 +6,12 @@ import android.os.Bundle;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
 import com.zskjprojectj.andoubusinessside.model.OrderT;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class UnCheckInOrderListActivity extends BaseActivity {
 

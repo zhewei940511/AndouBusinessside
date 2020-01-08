@@ -1,5 +1,7 @@
 package com.zskjprojectj.andoubusinessside.model;
 
+import com.zskjprojectj.andoubusinessside.utils.ListUtil;
+
 import java.util.ArrayList;
 
 public class Item {
@@ -16,6 +18,7 @@ public class Item {
     public ArrayList<String> attr_value;
 
     public static String getSpec(ArrayList<String> attr_value) {
+        if (ListUtil.isEmpty(attr_value)) return "";
         StringBuilder builder = new StringBuilder();
         for (String value : attr_value) {
             builder.append(value).append("+");

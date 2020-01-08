@@ -39,6 +39,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "查看内容");
+        ActionBarUtil.setRightAction(mActivity, "设置",
+                v -> ActivityUtils.startActivity(SettingActivity.class));
         ActionBarUtil.setBackEnable(mActivity, false);
         loadMerchantsInfo();
     }

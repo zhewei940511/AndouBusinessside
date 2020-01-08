@@ -39,5 +39,15 @@
             android:textColor="#ffffffff"
             android:textSize="14sp"
             tools:text="全部订单" />
+
+        <TextView
+            android:id="@+id/rightActionTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="15dp"
+            android:textColor="#ffffffff"
+            android:textSize="12sp"
+            tools:text="全部订单" />
     </FrameLayout>
 </RelativeLayout>

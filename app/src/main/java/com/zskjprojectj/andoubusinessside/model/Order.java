@@ -9,13 +9,31 @@ public class Order implements Serializable {
     public String mname;
     public String logo_img;
     public String id;
+    public String pay_time;
     public int status;
+    public int pay_way;
     public String shipping_free;
     public String express_id;
     public String courier_num;
     public double order_money;
     public String created_at;
+    public String allnum;
+    public double goodsPay;
 
+    public Receiver userinfo;
+
+    public class Receiver implements Serializable {
+        public String name;
+        public String address;
+        public String mobile;
+        public String province;
+        public String city;
+        public String area;
+
+        public String getAddressDetail() {
+            return province + city + area + address;
+        }
+    }
 
     public ArrayList<Goods> details;
 
@@ -52,6 +70,32 @@ public class Order implements Serializable {
                 }
             }
             return ALL;
+        }
+    }
+
+    public enum PayWay {
+        NONE(0, "待付款"),
+        WEI_XIN(1, "微信"),
+        ZHI_FU_BAO(2, "支付宝"),
+        YIN_LIAN(3, "银联"),
+        YU_E_ZHI_FU(4, "余额支付"),
+        OTHER(5, "其他");
+
+        public int payWayInt;
+        public String payWayStr;
+
+        PayWay(int PayWayInt, String payWayStr) {
+            this.payWayInt = PayWayInt;
+            this.payWayStr = payWayStr;
+        }
+
+        public static PayWay findPayWay(int payWay) {
+            for (PayWay value : PayWay.values()) {
+                if (value.payWayInt == payWay) {
+                    return value;
+                }
+            }
+            return NONE;
         }
     }
 }

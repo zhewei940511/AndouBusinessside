@@ -220,29 +220,15 @@ public class JoinInfoUploadActivity extends BaseActivity {
                             address.county.id,
                             addressStr,
                             description,
-                            "banner_img",
-                            "logo_img",
-                            "management_img"
+                            (String) bannerImg.getTag(),
+                            (String) logoImg.getTag(),
+                            (String) licenseImg.getTag()
                     ), result -> {
                         ToastUtil.showToast(result.getMsg());
                         setResult(Activity.RESULT_OK);
                         finish();
                     }).subscribe();
         }
-    }
-
-    private MultipartBody.Part getPart(String name) {
-        ImageView imageView = null;
-        if ("logo_img".equals(name)) {
-            imageView = logoImg;
-        } else if ("banner_img".equals(name)) {
-            imageView = bannerImg;
-        } else if ("management_img".equals(name)) {
-            imageView = licenseImg;
-        }
-        File file = new File((String) imageView.getTag());
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file.getPath());
-        return MultipartBody.Part.createFormData(name, file.getName(), requestBody);
     }
 
     @Override
@@ -262,9 +248,18 @@ public class JoinInfoUploadActivity extends BaseActivity {
                 imageView = licenseImg;
                 break;
         }
-        imageView.setTag(path);
-        BitmapUtil.recycle(imageView);
-        imageView.setImageBitmap(BitmapFactory.decodeFile(path));
+        File file = new File(path);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        RequestBody uid = RequestBody.create(MediaType.parse("multipart/form-data"), LoginInfo.getUid());
+        ImageView finalImageView = imageView;
+        HttpRxObservable.getObservable(mActivity, true, false,
+                ApiUtils.getApiService().uploadImg(uid, body),
+                result -> {
+                    finalImageView.setTag(path);
+                    BitmapUtil.recycle(finalImageView);
+                    finalImageView.setImageBitmap(BitmapFactory.decodeFile(path));
+                }).subscribe();
     }
 
     @Override

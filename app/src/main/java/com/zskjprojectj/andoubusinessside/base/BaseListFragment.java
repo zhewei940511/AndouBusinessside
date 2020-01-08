@@ -131,7 +131,7 @@ public abstract class BaseListFragment<D> extends BaseFragment implements BaseQu
      * @return
      */
     protected int getRecyclerId() {
-        return R.id.recyclerview;
+        return R.id.recyclerView;
     }
 
     /**

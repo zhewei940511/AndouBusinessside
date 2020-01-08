@@ -17,7 +17,7 @@ import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class RefundActivity extends BaseActivity {
     private View progressBar;

@@ -24,6 +24,18 @@ public class LoginInfo {
         return SPUtils.getInstance().getInt(KEY_MERCHANT_TYPE_ID, 0);
     }
 
+    public static String getType() {
+        if (LoginInfo.getMerchantTypeId() == User.Role.Type.MALL.typeInt) {
+            return "2";
+        } else if (LoginInfo.getMerchantTypeId() == User.Role.Type.RESTAURANT.typeInt) {
+            return "1";
+        } else if (LoginInfo.getMerchantTypeId() == User.Role.Type.HOTEL.typeInt) {
+            return "3";
+        } else {
+            return "";
+        }
+    }
+
     public static void saveUidAndToken(String uid, String token) {
         SPUtils.getInstance().put(KEY_TOKEN, token);
         SPUtils.getInstance().put(KEY_UID, uid);

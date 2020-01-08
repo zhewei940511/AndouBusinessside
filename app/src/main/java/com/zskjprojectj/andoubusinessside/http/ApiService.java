@@ -2,9 +2,10 @@ package com.zskjprojectj.andoubusinessside.http;
 
 
 import com.zskjprojectj.andoubusinessside.model.ADProvince;
+import com.zskjprojectj.andoubusinessside.model.DealDetail;
 import com.zskjprojectj.andoubusinessside.model.Item;
 import com.zskjprojectj.andoubusinessside.model.Order;
-import com.zskjprojectj.andoubusinessside.model.OrderDetail;
+import com.zskjprojectj.andoubusinessside.model.Review;
 import com.zskjprojectj.andoubusinessside.model.Shop;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.model.UserT;
@@ -12,9 +13,13 @@ import com.zskjprojectj.andoubusinessside.model.UserT;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ApiService {
     @POST("api/login/login_p")
@@ -71,10 +76,10 @@ public interface ApiService {
 
     @POST("api/goods/ordersDetails")
     @FormUrlEncoded
-    Observable<BaseResult<OrderDetail>> orderDetail(@Field("uid") String uid,
-                                                    @Field("id") String id,
-                                                    @Field("merchant_type_id") int merchant_type_id,
-                                                    @Field("order_sn") String order_id);
+    Observable<BaseResult<Order>> orderDetail(@Field("uid") String uid,
+                                              @Field("id") String id,
+                                              @Field("merchant_type_id") int merchant_type_id,
+                                              @Field("order_sn") String order_id);
 
     @POST("api/goods/manage")
     @FormUrlEncoded
@@ -122,6 +127,54 @@ public interface ApiService {
     @FormUrlEncoded
     Observable<BaseResult<Object>> delItem(@Field("uid") String uid,
                                            @Field("id") String id);
+
+    @POST("api/goods/affirm")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> refund(@Field("uid") String uid,
+                                          @Field("id") String id);
+
+    @POST("api/goods/putaway")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> goodsOn(@Field("uid") String uid,
+                                           @Field("id") String id);
+
+    @POST("api/goods/soldOut")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> goodsOff(@Field("uid") String uid,
+                                            @Field("id") String id);
+
+    @POST("api/goods/water")
+    @FormUrlEncoded
+    Observable<BaseResult<ListData<DealDetail>>> balanceDetail(@Field("uid") String uid,
+                                                               @Field("id") String id,
+                                                               @Field("merchant_type_id") int merchant_type_id,
+                                                               @Field("status") int status,
+                                                               @Field("page") int page);
+
+    @POST("api/goods/quit")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> logout(@Field("uid") String uid);
+
+    @POST("api/common/express")
+    @FormUrlEncoded
+    Observable<BaseResult<List<Express>>> express(@Field("uid") String uid);
+
+    @POST("api/goods/uploads")
+    @Multipart
+    Observable<BaseResult<String>> uploadImg(@Part("uid") RequestBody uid, @Part MultipartBody.Part file);
+
+    @POST("api/goods/observer")
+    @FormUrlEncoded
+    Observable<BaseResult<Review>> reviewDetail(@Field("uid") String uid,
+                                                @Field("merchant_type_id") String merchant_type_id,
+                                                @Field("order_id") String order_id,
+                                                @Field("type") String type);
+
+    @POST("api/goods/delete")
+    @FormUrlEncoded
+    Observable<BaseResult<Object>> delReview(@Field("uid") String uid,
+                                             @Field("merchant_type_id") String merchant_type_id,
+                                             @Field("id") String id);
 
 
 }

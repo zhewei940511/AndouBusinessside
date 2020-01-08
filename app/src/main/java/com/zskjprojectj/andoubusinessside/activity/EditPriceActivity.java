@@ -23,7 +23,7 @@ import com.zskjprojectj.andoubusinessside.utils.UiUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class EditPriceActivity extends BaseActivity {
 
@@ -39,7 +39,8 @@ public class EditPriceActivity extends BaseActivity {
         order = (Order) getIntent().getSerializableExtra(KEY_ORDER);
         ((TextView) findViewById(R.id.freightTxt)).setText(order.shipping_free);
         ((TextView) findViewById(R.id.totalTxt)).setText(FormatUtil.getMoneyString(order.order_money));
-        ((TextView) findViewById(R.id.totalTxt2)).setText(FormatUtil.getMoneyString(order.order_money));
+        ((TextView) findViewById(R.id.totalTxt2)).setText(FormatUtil.getMoneyString(order.goodsPay));
+        ((TextView) findViewById(R.id.countTxt)).setText(order.allnum);
         editTotalTxt.setText(FormatUtil.getMoneyString(order.order_money));
         editTotalTxt.setSelection(editTotalTxt.getText().length());
         UiUtil.bindOrderGoods(order, findViewById(R.id.goodsContainer));

@@ -13,6 +13,8 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
+import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.GlideEngine;
@@ -35,11 +37,14 @@ public class SettingActivity extends BaseActivity {
                 .setTitle("退出登录")
                 .setMessage("确定退出登录吗?")
                 .setNegativeButton("取消", null)
-                .setPositiveButton("确定", (dialog, which) -> {
-                    LoginInfo.logout();
-                    LoginActivity.start(mActivity);
-                    finish();
-                })
+                .setPositiveButton("确定", (dialog, which) ->
+                        HttpRxObservable.getObservable(mActivity, true, false,
+                                ApiUtils.getApiService().logout(LoginInfo.getUid()),
+                                result -> {
+                                    LoginInfo.logout();
+                                    LoginActivity.start(mActivity);
+                                    finish();
+                                }).subscribe())
                 .show();
     }
 

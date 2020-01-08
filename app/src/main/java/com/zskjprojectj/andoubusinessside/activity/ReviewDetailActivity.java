@@ -12,42 +12,55 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.willy.ratingbar.ScaleRatingBar;
 import com.zskjprojectj.andoubusinessside.R;
+import com.zskjprojectj.andoubusinessside.adapter.BaseAdapter;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zskjprojectj.andoubusinessside.http.ApiUtils;
+import com.zskjprojectj.andoubusinessside.http.RequestUtil;
+import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.Order;
-import com.zskjprojectj.andoubusinessside.model.OrderT;
+import com.zskjprojectj.andoubusinessside.model.Review;
 import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
-import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
+import com.zskjprojectj.andoubusinessside.utils.ScreenUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
+import com.zskjprojectj.andoubusinessside.utils.UrlUtil;
 
-import static com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity.KEY_ORDER;
+import static com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity.KEY_ORDER;
 
 public class ReviewDetailActivity extends BaseActivity {
-    private View progressBar;
+
+    ReviewImgAdapter adapter = new ReviewImgAdapter();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBarUtil.setTitle(mActivity, "评价详情");
-        OrderT orderT = (OrderT) getIntent().getSerializableExtra(KEY_ORDER);
-        findViewById(R.id.deleteReviewBtn).setOnClickListener(view -> showDeleteDialog(orderT));
-        orderT.setReviewAvatar("https://himg2.huanqiucdn.cn/attachment2010/2019/1214/20191214071048532.jpg");
-        orderT.setReviewContent("评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容");
-        orderT.setReviewDate(System.currentTimeMillis());
-        orderT.setReviewName("王杨");
-        orderT.setReviewRate(4);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.postDelayed(() -> progressBar.setVisibility(View.GONE), 1000);
-
-        ((TextView) findViewById(R.id.nameTxt)).setText(orderT.getReviewName());
-        ((TextView) findViewById(R.id.reviewContentTxt)).setText(orderT.getReviewContent());
-        ((TextView) findViewById(R.id.dateTxt)).setText(FormatUtil.getDateString2(orderT.getReviewDate()));
-        Glide.with(this)
-                .load(orderT.getReviewAvatar())
-                .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
-                .into((ImageView) findViewById(R.id.avatarImg));
-//        ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(orderT.getReviewRate());
+        adapter.bindToRecyclerView(findViewById(R.id.recyclerView));
+        Order order = (Order) getIntent().getSerializableExtra(KEY_ORDER);
+        RequestUtil.request(mActivity, true, true,
+                () -> ApiUtils.getApiService().reviewDetail(
+                        LoginInfo.getUid(),
+                        LoginInfo.getMerchantId(),
+                        order.order_sn,
+                        LoginInfo.getType()
+                ), result -> {
+                    ((TextView) findViewById(R.id.nameTxt)).setText(result.data.name);
+                    ((TextView) findViewById(R.id.reviewContentTxt)).setText(result.data.content);
+                    ((TextView) findViewById(R.id.dateTxt)).setText(result.data.created_at);
+                    Glide.with(mActivity)
+                            .load(UrlUtil.getImageUrl(result.data.avator))
+                            .apply(RequestOptions.circleCropTransform().placeholder(R.mipmap.temp1))
+                            .into((ImageView) findViewById(R.id.avatarImg));
+                    adapter.setNewData(result.data.image);
+                    ((ScaleRatingBar) findViewById(R.id.ratingBar)).setRating(result.data.stars);
+                    findViewById(R.id.deleteReviewBtn).setOnClickListener(v ->
+                            showDeleteDialog(result.data));
+                });
     }
 
     @Override
@@ -55,21 +68,24 @@ public class ReviewDetailActivity extends BaseActivity {
         return R.layout.activity_review_detail;
     }
 
-    private void showDeleteDialog(OrderT orderT) {
+    private void showDeleteDialog(Review review) {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_delete_review_dialog, null);
         AlertDialog dialog = new AlertDialog.Builder(this).setView(view).show();
         view.findViewById(R.id.closeBtn).setOnClickListener(view1 -> dialog.dismiss());
         view.findViewById(R.id.cancelBtn).setOnClickListener(view1 -> dialog.dismiss());
-        ((TextView) view.findViewById(R.id.reviewContentTxt)).setText(orderT.getReviewContent());
+        ((TextView) view.findViewById(R.id.reviewContentTxt)).setText(review.content);
         view.findViewById(R.id.confirmBtn).setOnClickListener(view1 -> {
             dialog.dismiss();
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.postDelayed(() -> {
-                progressBar.setVisibility(View.GONE);
-                ToastUtil.showToast("删除成功");
-                finish();
-                //TODO 删除后得逻辑是否显示已经删除
-            }, 1000);
+            RequestUtil.request(mActivity, true, false,
+                    () -> ApiUtils.getApiService().delReview(
+                            LoginInfo.getUid(),
+                            LoginInfo.getMerchantId(),
+                            review.id
+                    ), result -> {
+                        ToastUtil.showToast(result.getMsg());
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    });
         });
     }
 
@@ -77,5 +93,21 @@ public class ReviewDetailActivity extends BaseActivity {
         Intent intent = new Intent(activity, ReviewDetailActivity.class);
         intent.putExtra(KEY_ORDER, order);
         ActivityUtils.startActivityForResult(activity, intent, requestCode);
+    }
+
+    class ReviewImgAdapter extends BaseAdapter<String> {
+        public ReviewImgAdapter() {
+            super(R.layout.layout_review_img);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, String item) {
+            Glide.with(mActivity)
+                    .load(item)
+                    .apply(RequestOptions
+                            .bitmapTransform(new RoundedCorners(ScreenUtil.dp2px(mActivity, 5)))
+                            .placeholder(R.mipmap.ic_placeholder))
+                    .into((ImageView) helper.itemView.findViewById(R.id.img));
+        }
     }
 }

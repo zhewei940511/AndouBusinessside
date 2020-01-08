@@ -2,16 +2,16 @@ package com.zskjprojectj.andoubusinessside.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.DealDetailListFragment;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 
 import java.util.ArrayList;
 
@@ -20,9 +20,8 @@ public class WalletActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View progress = findViewById(R.id.progressBar);
-        progress.postDelayed(() -> progress.setVisibility(View.GONE), 1000);
+        BarUtils.transparentStatusBar(mActivity);
+        ActionBarUtil.setTitle(mActivity, "我的钱包", false);
         SlidingTabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(4);

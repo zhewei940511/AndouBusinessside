@@ -3,6 +3,8 @@ package com.zskjprojectj.andoubusinessside.http;
 import com.blankj.utilcode.util.LogUtils;
 import com.zskjprojectj.andoubusinessside.utils.JsonUtil;
 
+import java.net.URLDecoder;
+
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class HttpLogger implements HttpLoggingInterceptor.Logger {
@@ -24,7 +26,7 @@ public class HttpLogger implements HttpLoggingInterceptor.Logger {
         mMessage.append(message.concat("\n"));
         // 请求或者响应结束，打印整条日志
         if (message.startsWith("<-- END HTTP")) {
-            LogUtils.d(mMessage.toString());
+            LogUtils.d(URLDecoder.decode(mMessage.toString()));
         }
     }
 }

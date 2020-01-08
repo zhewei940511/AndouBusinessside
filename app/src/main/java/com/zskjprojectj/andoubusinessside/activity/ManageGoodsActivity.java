@@ -3,6 +3,7 @@ package com.zskjprojectj.andoubusinessside.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -17,7 +18,9 @@ import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.Item;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.UserT;
+import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
+import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 
 import butterknife.BindView;
@@ -35,14 +38,11 @@ public class ManageGoodsActivity extends BaseActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @OnClick(R.id.backBtn)
-    void onBackBtnClick() {
-        onBackPressed();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBarUtil.setTitle(mActivity, "商品管理");
+        ActionBarUtil.setRightAction(mActivity, "商品分类", v -> CategoryActivity.start());
         CompoundButton.OnCheckedChangeListener onCheckedChangeListener =
                 (buttonView, isChecked) -> adapter.setSelectedAll(isChecked);
         adapter.onSelectedStateChangedListener = () -> {
@@ -58,8 +58,6 @@ public class ManageGoodsActivity extends BaseActivity {
                 LoginInfo.getMerchantTypeId(),
                 pageLoadUtil.page
         ));
-        findViewById(R.id.goodsCategoryEntryBtn)
-                .setOnClickListener(view -> CategoryActivity.start());
         findViewById(R.id.newGoodsBtn)
                 .setOnClickListener(view -> {
                     if (UserUtil.getInstance().userT.currentType == UserT.Type.MALL) {
@@ -74,6 +72,11 @@ public class ManageGoodsActivity extends BaseActivity {
 
     @OnClick(R.id.deleteBtn)
     void onDeleteBtnClick() {
+        String selectedIds = getSelectedIds();
+        if (TextUtils.isEmpty(selectedIds)) {
+            ToastUtil.showToast("请选择要删除的商品!");
+            return;
+        }
         new AlertDialog.Builder(mActivity)
                 .setTitle("删除商品")
                 .setMessage("确定删除这些商品吗？")
@@ -89,6 +92,63 @@ public class ManageGoodsActivity extends BaseActivity {
                                             adapter.remove(adapter.getData().indexOf(item));
                                         }
                                     }
+                                    adapter.setSelectedAll(false);
+                                }).subscribe()).show();
+    }
+
+    @OnClick(R.id.goodsOnBtn)
+    void onGoodsOnBtnClick() {
+        String selectedIds = getSelectedIds();
+        if (TextUtils.isEmpty(selectedIds)) {
+            ToastUtil.showToast("请选择要上架的商品!");
+            return;
+        }
+        new AlertDialog.Builder(mActivity)
+                .setTitle("上架商品")
+                .setMessage("确定上架这些商品吗？")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定", (dialog, which) ->
+                        HttpRxObservable.getObservable(mActivity, true, false
+                                , ApiUtils.getApiService().goodsOn(
+                                        LoginInfo.getUid(),
+                                        getSelectedIds()
+                                ), result -> {
+                                    for (Item item : adapter.selectMap.keySet()) {
+                                        if (adapter.selectMap.get(item)) {
+                                            item.is_sale = Item.STATE_ON;
+                                            adapter.notifyItemChanged(adapter.getData().indexOf(item));
+                                        }
+                                    }
+                                    adapter.setSelectedAll(false);
+                                    ToastUtil.showToast(result.getMsg());
+                                }).subscribe()).show();
+    }
+
+    @OnClick(R.id.goodsOffBtn)
+    void onGoodsOffBtnClick() {
+        String selectedIds = getSelectedIds();
+        if (TextUtils.isEmpty(selectedIds)) {
+            ToastUtil.showToast("请选择要下架的商品!");
+            return;
+        }
+        new AlertDialog.Builder(mActivity)
+                .setTitle("下架商品")
+                .setMessage("确定下架这些商品吗？")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定", (dialog, which) ->
+                        HttpRxObservable.getObservable(mActivity, true, false
+                                , ApiUtils.getApiService().goodsOff(
+                                        LoginInfo.getUid(),
+                                        getSelectedIds()
+                                ), result -> {
+                                    for (Item item : adapter.selectMap.keySet()) {
+                                        if (adapter.selectMap.get(item)) {
+                                            item.is_sale = Item.STATE_OFF;
+                                            adapter.notifyItemChanged(adapter.getData().indexOf(item));
+                                        }
+                                    }
+                                    adapter.setSelectedAll(false);
+                                    ToastUtil.showToast(result.getMsg());
                                 }).subscribe()).show();
     }
 
@@ -98,6 +158,9 @@ public class ManageGoodsActivity extends BaseActivity {
             if (adapter.selectMap.get(item)) {
                 builder.append(item.id).append(",");
             }
+        }
+        if (TextUtils.isEmpty(builder)) {
+            return "";
         }
         return builder.substring(0, builder.length() - 1);
     }

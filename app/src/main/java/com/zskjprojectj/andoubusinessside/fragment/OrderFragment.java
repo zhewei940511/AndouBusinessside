@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.activity.EditPriceActivity;
-import com.zskjprojectj.andoubusinessside.activity.OrderInfoActivity;
+import com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.ReviewDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.SendActivity;
 import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
@@ -65,17 +65,17 @@ public class OrderFragment extends BaseFragment {
 //                            startActivity(intent);
 //                            break;
                         default:
-                            OrderInfoActivity.start(getActivity(), order, 666);
+                            OrderDetailActivity.start(getActivity(), order, 666);
                             break;
                     }
                     break;
                 case R.id.orderInfoEntryBtn:
-//                    if (state.stateInt == 10) {
+//                    if (state.payWayInt == 10) {
 //                        intent = new Intent(getActivity(), HotelOrderDetailActivity.class);
 //                        intent.putExtra(KEY_ORDER, adapter.getItem(position));
 //                        startActivityForResult(intent, 666);
 //                    } else {
-                    OrderInfoActivity.start(getActivity(), adapter.getItem(position), 666);
+                    OrderDetailActivity.start(getActivity(), adapter.getItem(position), 666);
 //                    }
                     break;
             }
