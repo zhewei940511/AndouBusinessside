@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".app.BaseActivity">
+    tools:context="com.zhuosongkj.android.library.app.BaseActivity">
 
     <FrameLayout
         android:id="@+id/contentViewContainer"
@@ -18,27 +18,6 @@
             android:id="@+id/baseContentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <FrameLayout
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:alpha="0.5"
-                android:background="#5ED3AE"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <ProgressBar
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center" />
-            </FrameLayout>
-        </FrameLayout>
     </FrameLayout>
 
     <FrameLayout

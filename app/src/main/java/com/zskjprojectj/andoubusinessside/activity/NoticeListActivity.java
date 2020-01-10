@@ -6,9 +6,9 @@ import android.os.Bundle;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.model.Notice;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
 
 import java.util.ArrayList;

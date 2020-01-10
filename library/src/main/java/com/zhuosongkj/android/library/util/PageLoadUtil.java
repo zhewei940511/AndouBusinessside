@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside.utils;
+package com.zhuosongkj.android.library.util;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
@@ -11,21 +11,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.http.BaseResult;
-import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
-import com.zskjprojectj.andoubusinessside.http.ListData;
-import com.zskjprojectj.andoubusinessside.ui.RefreshHeaderView;
-
-import io.reactivex.Observable;
+import com.zhuosongkj.android.library.R;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.model.ListData;
+import com.zhuosongkj.android.library.ui.RefreshHeaderView;
 
 public class PageLoadUtil<T> {
     public int page;
     private BaseQuickAdapter<T, BaseViewHolder> adapter;
     private SmartRefreshLayout refreshLayout;
     private BaseActivity activity;
-    private ObservableProvider<T> observableProvider;
+    private RequestUtil.ObservableProvider<ListData<T>> observableProvider;
     private View loadingView;
 
     private PageLoadUtil(BaseActivity activity, RecyclerView recyclerView, BaseQuickAdapter<T, BaseViewHolder> adapter
@@ -76,8 +72,7 @@ public class PageLoadUtil<T> {
         if (needRefresh) {
             page = 1;
         }
-        HttpRxObservable.getObservable(activity, false, false,
-                observableProvider.getObservable()
+        RequestUtil.request(activity, false, false, observableProvider
                 , result -> {
                     adapter.setEmptyView(R.layout.layout_empty_view);
                     page += 1;
@@ -104,11 +99,10 @@ public class PageLoadUtil<T> {
                     } else {
                         adapter.loadMoreFail();
                     }
-                }, 500))
-                .subscribe();
+                }, 500));
     }
 
-    public void load(ObservableProvider<T> observableProvider) {
+    public void load(RequestUtil.ObservableProvider<ListData<T>> observableProvider) {
         this.observableProvider = observableProvider;
         loadData(true);
     }
@@ -116,9 +110,5 @@ public class PageLoadUtil<T> {
     public static <T> PageLoadUtil<T> get(BaseActivity activity, RecyclerView recyclerView
             , BaseQuickAdapter<T, BaseViewHolder> adapter, SmartRefreshLayout refreshLayout) {
         return new PageLoadUtil<>(activity, recyclerView, adapter, refreshLayout);
-    }
-
-    public interface ObservableProvider<T> {
-        Observable<BaseResult<ListData<T>>> getObservable();
     }
 }

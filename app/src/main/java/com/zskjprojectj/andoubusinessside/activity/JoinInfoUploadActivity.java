@@ -15,8 +15,10 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
+import com.zhuosongkj.android.library.util.RequestUtil;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.ADArea;
@@ -26,7 +28,6 @@ import com.zskjprojectj.andoubusinessside.model.Address;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.User;
 import com.zskjprojectj.andoubusinessside.ui.AddressBottomDialog;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.BitmapUtil;
 import com.zskjprojectj.andoubusinessside.utils.GlideEngine;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
@@ -235,7 +236,10 @@ public class JoinInfoUploadActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
-        String path = PictureSelector.obtainMultipleResult(data).get(0).getPath();
+        final StringBuilder path = new StringBuilder(PictureSelector.obtainMultipleResult(data).get(0).getAndroidQToPath());
+        if (TextUtils.isEmpty(path)) {
+            path.append(PictureSelector.obtainMultipleResult(data).get(0).getPath());
+        }
         ImageView imageView = null;
         switch (requestCode) {
             case REQUEST_CODE_SELECT_LOGO:
@@ -248,18 +252,19 @@ public class JoinInfoUploadActivity extends BaseActivity {
                 imageView = licenseImg;
                 break;
         }
-        File file = new File(path);
+        File file = new File(path.toString());
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("img", file.getName(), requestFile);
         RequestBody uid = RequestBody.create(MediaType.parse("multipart/form-data"), LoginInfo.getUid());
         ImageView finalImageView = imageView;
-        HttpRxObservable.getObservable(mActivity, true, false,
-                ApiUtils.getApiService().uploadImg(uid, body),
+
+        RequestUtil.request(mActivity, true, false,
+                () -> ApiUtils.getApiService().uploadImg(uid, body),
                 result -> {
-                    finalImageView.setTag(path);
+                    finalImageView.setTag(path.toString());
                     BitmapUtil.recycle(finalImageView);
-                    finalImageView.setImageBitmap(BitmapFactory.decodeFile(path));
-                }).subscribe();
+                    finalImageView.setImageBitmap(BitmapFactory.decodeFile(path.toString()));
+                });
     }
 
     @Override

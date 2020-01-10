@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside.utils;
+package com.zhuosongkj.android.library.util;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +7,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.R;
+import com.zhuosongkj.android.library.app.BaseActivity;
 
 public class ActionBarUtil {
 

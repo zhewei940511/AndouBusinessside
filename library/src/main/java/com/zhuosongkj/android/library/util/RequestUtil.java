@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside.http;
+package com.zhuosongkj.android.library.util;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.stream.MalformedJsonException;
-import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.activity.LoginActivity;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.R;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.exception.ApiException;
+import com.zhuosongkj.android.library.model.BaseResult;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -45,7 +46,7 @@ public class RequestUtil {
                         if (result.getCode().equals("200")) {
                             onSuccessListener.onSuccess(result);
                         } else if (result.getCode().equals("202")) {
-                            LoginActivity.start(activity);
+//                            LoginActivity.start(activity);
                         } else {
                             throw Exceptions.propagate(new ApiException(result.getCode(), result.getMsg()));
                         }
@@ -96,7 +97,7 @@ public class RequestUtil {
                 return "500 服务器内部错误";
             }
         }
-        return "400 访问错误,请稍后重试!";
+        return throwable.getLocalizedMessage() + "访问错误,请稍后重试!";
     }
 
     public interface OnSuccessListener<T> {

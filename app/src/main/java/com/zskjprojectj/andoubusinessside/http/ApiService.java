@@ -1,6 +1,8 @@
 package com.zskjprojectj.andoubusinessside.http;
 
 
+import com.zhuosongkj.android.library.model.BaseResult;
+import com.zhuosongkj.android.library.model.ListData;
 import com.zskjprojectj.andoubusinessside.model.ADProvince;
 import com.zskjprojectj.andoubusinessside.model.DealDetail;
 import com.zskjprojectj.andoubusinessside.model.Item;

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
 
 public class EditPriceSuccessActivity extends BaseActivity {
 

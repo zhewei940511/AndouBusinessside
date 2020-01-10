@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside.adapter;
+package com.zhuosongkj.android.library.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.utils.TimerUtil;

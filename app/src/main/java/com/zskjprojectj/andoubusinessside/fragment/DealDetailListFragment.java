@@ -7,12 +7,12 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseFragment;
+import com.zhuosongkj.android.library.app.BaseFragment;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.model.DealDetail;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.utils.FormatUtil;
-import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
+import com.zhuosongkj.android.library.util.PageLoadUtil;
 
 public class DealDetailListFragment extends BaseFragment {
     private int state;

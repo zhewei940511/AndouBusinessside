@@ -6,20 +6,21 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseFragment;
+import com.zhuosongkj.android.library.util.PageLoadUtil;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.activity.EditPriceActivity;
 import com.zskjprojectj.andoubusinessside.activity.OrderDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.ReviewDetailActivity;
 import com.zskjprojectj.andoubusinessside.activity.SendActivity;
 import com.zskjprojectj.andoubusinessside.adapter.OrderListAdapter;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.app.BaseFragment;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.Order;
-import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
 
 import butterknife.BindView;
+
 
 public class OrderFragment extends BaseFragment {
     private Order.STATE state;

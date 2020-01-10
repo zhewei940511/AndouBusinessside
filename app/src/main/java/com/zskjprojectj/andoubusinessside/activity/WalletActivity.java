@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.blankj.utilcode.util.BarUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.DealDetailListFragment;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
 
 import java.util.ArrayList;
 

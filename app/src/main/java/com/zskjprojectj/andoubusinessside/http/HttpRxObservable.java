@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.stream.MalformedJsonException;
+import com.zhuosongkj.android.library.model.BaseResult;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.activity.LoginActivity;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.exception.ApiException;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

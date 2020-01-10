@@ -9,8 +9,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.king.zxing.CaptureHelper;
 import com.king.zxing.ViewfinderView;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
+import com.zhuosongkj.android.library.app.BaseActivity;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
 
 import butterknife.BindView;
 

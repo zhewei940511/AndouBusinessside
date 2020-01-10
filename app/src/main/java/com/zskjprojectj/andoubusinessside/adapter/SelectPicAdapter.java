@@ -2,6 +2,7 @@ package com.zskjprojectj.andoubusinessside.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -65,7 +66,11 @@ public class SelectPicAdapter extends BaseQuickAdapter<SelectPicAdapter.SelectPi
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             for (LocalMedia localMedia : selectList) {
                 SelectPic selectPic = new SelectPic();
-                selectPic.path = localMedia.getPath();
+                final StringBuilder path = new StringBuilder(localMedia.getAndroidQToPath());
+                if (TextUtils.isEmpty(path)) {
+                    path.append(PictureSelector.obtainMultipleResult(data).get(0).getPath());
+                }
+                selectPic.path = path.toString();
                 addData(selectPic);
             }
             checkAddBtn();

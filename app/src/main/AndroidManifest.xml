@@ -48,7 +48,7 @@
             android:name=".activity.QrCodeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.BaseActivity"
+            android:name="com.zhuosongkj.android.library.app.BaseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"

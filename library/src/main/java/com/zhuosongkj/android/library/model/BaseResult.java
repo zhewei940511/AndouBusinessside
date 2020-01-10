@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside.http;
+package com.zhuosongkj.android.library.model;
 
 public class BaseResult<T> {
 

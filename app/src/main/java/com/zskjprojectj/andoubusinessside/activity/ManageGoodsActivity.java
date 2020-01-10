@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.adapter.ManageGoodsAdapter;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.Item;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.UserT;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
-import com.zskjprojectj.andoubusinessside.utils.PageLoadUtil;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
+import com.zhuosongkj.android.library.util.PageLoadUtil;
 import com.zskjprojectj.andoubusinessside.utils.ToastUtil;
 import com.zskjprojectj.andoubusinessside.utils.UserUtil;
 

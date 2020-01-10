@@ -8,12 +8,12 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
+import com.zhuosongkj.android.library.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.http.ApiUtils;
 import com.zskjprojectj.andoubusinessside.http.HttpRxObservable;
 import com.zskjprojectj.andoubusinessside.model.LoginInfo;
 import com.zskjprojectj.andoubusinessside.model.User;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
 import com.zskjprojectj.andoubusinessside.utils.ListUtil;
 
 import java.util.List;

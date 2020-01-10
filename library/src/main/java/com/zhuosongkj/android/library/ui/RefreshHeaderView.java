@@ -1,4 +1,4 @@
-package com.zskjprojectj.andoubusinessside.ui;
+package com.zhuosongkj.android.library.ui;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
@@ -16,7 +16,7 @@ import com.scwang.smartrefresh.layout.api.RefreshKernel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.zskjprojectj.andoubusinessside.R;
+import com.zhuosongkj.android.library.R;
 
 public class RefreshHeaderView extends LinearLayout implements RefreshHeader {
 

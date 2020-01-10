@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
+import com.zhuosongkj.android.library.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.R;
-import com.zskjprojectj.andoubusinessside.app.BaseActivity;
 import com.zskjprojectj.andoubusinessside.fragment.OrderFragment;
 import com.zskjprojectj.andoubusinessside.model.Order;
-import com.zskjprojectj.andoubusinessside.utils.ActionBarUtil;
+import com.zhuosongkj.android.library.util.ActionBarUtil;
 
 import java.util.ArrayList;
+
 
 public class CancelOrderListActivity extends BaseActivity {
     private ArrayList<Fragment> fragments = new ArrayList<>();

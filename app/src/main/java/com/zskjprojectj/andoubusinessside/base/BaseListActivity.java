@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.JsonParseException;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.http.BaseHandleObserver;
-import com.zskjprojectj.andoubusinessside.http.BaseResult;
+import com.zhuosongkj.android.library.model.BaseResult;
 import com.zskjprojectj.andoubusinessside.refresh.MySwipeRefreshLayout;
 import com.zskjprojectj.andoubusinessside.view.EmptyView;
 
@@ -98,10 +98,7 @@ public abstract class BaseListActivity<D> extends BaseActivity implements BaseQu
             swipeRefreshLayout.setColorSchemeResources(R.color.holo_blue_bright, R.color.holo_green_light, R.color.holo_orange_light, R.color.holo_red_light);
             if (swipeRefreshLayout != null) {
                 swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        refresh();
-                    }
+
                 });
             }
         } catch (Exception e) {

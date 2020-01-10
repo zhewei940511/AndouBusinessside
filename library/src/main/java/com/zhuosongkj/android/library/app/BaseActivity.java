@@ -1,24 +1,18 @@
-package com.zskjprojectj.andoubusinessside.app;
+package com.zhuosongkj.android.library.app;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.zskjprojectj.andoubusinessside.R;
+import com.zhuosongkj.android.library.R;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    @BindView(R.id.rootView)
     protected ViewGroup rootView;
-
-    @BindView(R.id.progressBar)
-    View progressBar;
 
     protected ViewGroup contentView;
     protected BaseActivity mActivity;
@@ -30,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
         contentView = findViewById(R.id.baseContentView);
         LayoutInflater.from(mActivity).inflate(getContentView(), contentView);
+        rootView = findViewById(R.id.rootView);
         ButterKnife.bind(mActivity);
     }
 
