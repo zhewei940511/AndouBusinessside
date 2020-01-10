@@ -236,9 +236,9 @@ public class JoinInfoUploadActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
-        final StringBuilder path = new StringBuilder(PictureSelector.obtainMultipleResult(data).get(0).getAndroidQToPath());
+        String path = PictureSelector.obtainMultipleResult(data).get(0).getAndroidQToPath();
         if (TextUtils.isEmpty(path)) {
-            path.append(PictureSelector.obtainMultipleResult(data).get(0).getPath());
+            path = PictureSelector.obtainMultipleResult(data).get(0).getPath();
         }
         ImageView imageView = null;
         switch (requestCode) {
@@ -252,18 +252,19 @@ public class JoinInfoUploadActivity extends BaseActivity {
                 imageView = licenseImg;
                 break;
         }
-        File file = new File(path.toString());
+        File file = new File(path);
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("img", file.getName(), requestFile);
         RequestBody uid = RequestBody.create(MediaType.parse("multipart/form-data"), LoginInfo.getUid());
         ImageView finalImageView = imageView;
 
+        String finalPath = path;
         RequestUtil.request(mActivity, true, false,
                 () -> ApiUtils.getApiService().uploadImg(uid, body),
                 result -> {
-                    finalImageView.setTag(path.toString());
+                    finalImageView.setTag(finalPath);
                     BitmapUtil.recycle(finalImageView);
-                    finalImageView.setImageBitmap(BitmapFactory.decodeFile(path.toString()));
+                    finalImageView.setImageBitmap(BitmapFactory.decodeFile(finalPath));
                 });
     }
 

@@ -66,11 +66,11 @@ public class SelectPicAdapter extends BaseQuickAdapter<SelectPicAdapter.SelectPi
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             for (LocalMedia localMedia : selectList) {
                 SelectPic selectPic = new SelectPic();
-                final StringBuilder path = new StringBuilder(localMedia.getAndroidQToPath());
+                String path = localMedia.getAndroidQToPath();
                 if (TextUtils.isEmpty(path)) {
-                    path.append(PictureSelector.obtainMultipleResult(data).get(0).getPath());
+                    path = PictureSelector.obtainMultipleResult(data).get(0).getPath();
                 }
-                selectPic.path = path.toString();
+                selectPic.path = path;
                 addData(selectPic);
             }
             checkAddBtn();
