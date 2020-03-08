@@ -2,11 +2,13 @@ package com.zhuosongkj.android.library.app;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bugtags.library.Bugtags;
 import com.zhuosongkj.android.library.R;
 
 import butterknife.ButterKnife;
@@ -27,7 +29,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         rootView = findViewById(R.id.rootView);
         ButterKnife.bind(mActivity);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bugtags.onResume(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Bugtags.onPause(this);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        Bugtags.onDispatchTouchEvent(this, event);
+        return super.dispatchTouchEvent(event);
+    }
     @LayoutRes
     protected abstract int getContentView();
 }

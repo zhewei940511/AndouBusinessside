@@ -1,22 +1,39 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.bugtags.library.plugin'
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zskjprojectj.andoubusinessside"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "0.5.2"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         //  buildConfigField "String", "API_HOST", "\"http://lv.qingheliying.cn\""//API Host
         // buildConfigField "String", "API_HOST", "\"http://apis.juhe.cn/cook/\""
         buildConfigField "String", "API_HOST", "\"http://andou.zhuosongkj.com/\""
     }
+    signingConfigs {
+        debugConfig {
+            storeFile file('andou.jks')
+            storePassword "123456"
+            keyAlias "andou"
+            keyPassword "123456"
+        }
+        release {
+            storeFile file('andou.jks')
+            storePassword "123456"
+            keyAlias "andou"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
     allprojects {
@@ -39,7 +56,12 @@ android {
         }
     }
 }
-
+bugtags {
+    //自动上传符号表功能配置，如果需要根据 build varint 配置，请参考帮助中心->符号表->Android 符号表->配置自动上传符号表
+    appKey "fe9d0bd31e3b494987858e14f13bb402"  //这里是你的 appKey
+    appSecret "APP_SECRET"    //这里是你的 appSecret，管理员在设置页可以查看
+    mappingUploadEnabled true
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -83,6 +105,7 @@ dependencies {
     //chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    implementation 'com.github.SheHuan:NiceDialog:1.2.0'
     //utils
 
     //下拉刷新
@@ -103,4 +126,8 @@ dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
+    implementation 'com.bugtags.library:bugtags-lib:latest.integration'
+
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
 }

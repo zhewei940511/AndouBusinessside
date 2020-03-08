@@ -3,13 +3,14 @@ package com.zskjprojectj.andoubusinessside.base;
 import android.app.Application;
 import android.widget.ImageView;
 
+import com.bugtags.library.Bugtags;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.tencent.bugly.Bugly;
 import com.zskjprojectj.andoubusinessside.BuildConfig;
 import com.zskjprojectj.andoubusinessside.R;
 import com.zskjprojectj.andoubusinessside.http.ApiService;
 import com.zskjprojectj.andoubusinessside.utils.SharedPreferencesManager;
-
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -27,6 +28,8 @@ public class BaseApplication extends Application {
         SharedPreferencesManager.init(application);
         initHttp();
         Logger.addLogAdapter(new AndroidLogAdapter());
+        Bugtags.start("fe9d0bd31e3b494987858e14f13bb402", this, Bugtags.BTGInvocationEventBubble);
+        Bugly.init(getApplicationContext(), "00eade2039", BuildConfig.DEBUG);
     }
 
     public static BaseApplication getInstance() {
